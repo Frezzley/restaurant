@@ -1,0 +1,64 @@
+<?php
+require_once BASE . 'lib\DbConnection.php';
+
+use Model\User;
+/**
+ * Created by IntelliJ IDEA.
+ * User: adi
+ * Date: 14.10.2015
+ * Time: 14:33
+ */
+class DbHandler
+{
+    /**
+     * @var $db mysqli
+     */
+    private $db;
+    public function __construct() {
+        $db = DbConnection::getConnection();
+    }
+
+    public function createUser(User $user) {
+            $bla = $user->getFirstName();
+            $bla2 = $user->getLastName();
+            $sql = "INSERT INTO user (Lastname, Firstname) VALUES ({$bla2}, {$bla}, )";
+
+            if ($this->db->query($sql) === TRUE) {
+                echo "New record created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . $this->db->error;
+            }
+
+            $this->db->close();
+
+        }
+
+public function updateuser(User $user){
+
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "UPDATE user SET lastname='Doe' WHERE id=2";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
+}
+
+$conn->close();
+
+
+
+}
+}
+?>
