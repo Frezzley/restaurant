@@ -1,5 +1,5 @@
 <?php
-
+namespace Lib;
 /**
  * Created by IntelliJ IDEA.
  * User: adi
@@ -20,7 +20,8 @@ public $connectionstatus;
             $servername = "localhost";
             $username = "root";
             $password = "semabit12345";
-            self::$connection =  new mysqli($servername, $username, $password);//new self();
+            $dbname = "restaurant";
+            self::$connection =  new \mysqli($servername, $username, $password, $dbname);//new self();
             if (self::$connection->connect_error) {
                 die("Connection failed: " . self::$conn->connect_error);
                 $connectionstatus = false;

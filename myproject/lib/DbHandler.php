@@ -1,4 +1,5 @@
 <?php
+namespace Lib;
 require_once BASE . 'lib\DbConnection.php';
 
 
@@ -17,13 +18,13 @@ class DbHandler
      */
     private $db;
     public function __construct() {
-        $db = DbConnection::getConnection();
+        $this->db = DbConnection::getConnection();
     }
 
     public function createUser(User $user) {
             $newFirst = $user->getFirstName();
             $newLast = $user->getName();
-            $sql = "INSERT INTO user (Lastname, Firstname) VALUES ({$newLast}, {$newFirst}, )";
+            $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
 
             if ($this->db->query($sql) === TRUE) {
                 echo "New record created successfully";
