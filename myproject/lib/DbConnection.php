@@ -8,13 +8,14 @@
  */
 class DbConnection
 {
-
+public $connectionstatus;
     private function __construct() {}
     private function __clone(){}
 
     private static $connection;
 
     public static function getConnection() {
+
         if(self::$connection == null) {
             $servername = "localhost";
             $username = "root";
@@ -22,8 +23,10 @@ class DbConnection
             self::$connection =  new mysqli($servername, $username, $password);//new self();
             if (self::$connection->connect_error) {
                 die("Connection failed: " . self::$conn->connect_error);
+                $connectionstatus = false;
             }
             echo "Connected successfully";
+            $connectionstatus = true;
         }
         return self::$connection;
     }
@@ -31,16 +34,12 @@ class DbConnection
     public function connectdatabase()
     {
 
-
 // Create connection
         //$conn = new mysqli($servername, $username, $password);
 
-
 // Check connection
 
-
     }
-
 
 
 

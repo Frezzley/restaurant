@@ -53,30 +53,14 @@ class User
 
 
 
-
-
-
-
-
-
-    function create_array()
-    {
-/*
-        $personid=array($user[i]
-        );
-
-        echo $persons[1];*/
-    }
-
     function create_person()
     {
 
         $user = [
-            "id" => "1",
-            "LastName" => "max",
+
+            "LastName" => getFirstname(),
             "FirstName" => "max",
-            "Preferences" => "chinese",
-            "Daily_Preference" => "taco"
+
         ];
 
         create_user($user);

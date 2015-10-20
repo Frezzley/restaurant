@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 /**
  * Created by IntelliJ IDEA.
  * User: adi
@@ -8,9 +8,11 @@
  */
 class Controller{
 
+
     function Create_Table()
     {
-            create_user();
+          $newuser = create_user();
+        createUser($newuser);
     }
 
 

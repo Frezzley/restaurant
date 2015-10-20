@@ -1,6 +1,8 @@
 <?php
 require_once BASE . 'lib\DbConnection.php';
 
+
+
 use Model\User;
 /**
  * Created by IntelliJ IDEA.
@@ -19,9 +21,9 @@ class DbHandler
     }
 
     public function createUser(User $user) {
-            $bla = $user->getFirstName();
-            $bla2 = $user->getLastName();
-            $sql = "INSERT INTO user (Lastname, Firstname) VALUES ({$bla2}, {$bla}, )";
+            $newFirst = $user->getFirstName();
+            $newLast = $user->getName();
+            $sql = "INSERT INTO user (Lastname, Firstname) VALUES ({$newLast}, {$newFirst}, )";
 
             if ($this->db->query($sql) === TRUE) {
                 echo "New record created successfully";
@@ -30,7 +32,6 @@ class DbHandler
             }
 
             $this->db->close();
-
         }
 
 public function updateuser(User $user){
@@ -46,8 +47,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+    $parts = array_filter(explode('/', $user));
 
-$sql = "UPDATE user SET lastname='Doe' WHERE id=2";
+/*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+    $sql = "UPDATE user SET $parts";
+
 
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";

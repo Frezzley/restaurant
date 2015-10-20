@@ -1,24 +1,45 @@
 <?php
-namespace view;
+namespace View;
 
-abstract class Create {
-  function render() {
+class Create {
+  function render()
+  {
 
 
-
-    $html='
+      $html = '<html><form method="post" action="/user/create">
     <div>
-    Id: <input type="int" name="id" value="' . $Lastname . '">
-        LastName: <input type="text" name="lastname" value="<?php echo $Lastname;?>">
-        FirstName: <input type="text" name="firstname" value="<?php echo $Firstname;?>">
-        Preferences: <input type="text" name="preferences" value="<?php echo $Preferences;?>">
-        Daily_Preference: <input type="text" name="Daily_Preference" value="<?php echo $Daily_Preference;?>">
-</div>';
+    <label for="Firstname">
+    Vorname
+    </label>
+    <div>
+    </div>
+    <input id="Firstname" name="Firstname" required>
+    </div>
+
+    <div>
+    <label for="Lastname" >
+    Nachname
+    </label>
+    <div>
+    </div>
+    <input id="Lastname" name="Lastname" required>
+    </div>
+
+
+    <button type="submit" name="submit-button" value="Submit">
+    Senden!
+    </button>
+
+
+
+</body>
+</html>';
+
 
       echo $html;
+  }
 
-      $newuser = array(ID=>value,"Lastname"=>$Lastname,"Firstname"=>$Firstname,'Preferences'=>$Preferences,'Daily_Preferences'=>$Daily_Preferences);
-      return $newuser;
-    }
+
+
+
 }
-?>
