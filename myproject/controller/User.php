@@ -24,18 +24,14 @@ class User extends Controller {
     if(!empty($_POST)) {
         $user = new Model\User();
 
+        $user->setFirstName($_POST['Firstname']);
+        $user->setName($_POST['Lastname']);
+
         /**
          * @var $dbHandler DbHandler
          */
         $dbHandler = new Lib\DbHandler();
         $dbHandler->createUser($user);
-
-        !empty($dbHandler->getUser($id)) ? $dbHandler->getUser($id) : $this->Create($id);
-
-        $user->setFirstName($_POST['Firstname']);
-        $user->setName($_POST['Lastname']);
-
-
 
     } else {
         $view = new View\CreateUser();

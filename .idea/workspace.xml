@@ -52,8 +52,8 @@
       <file leaf-file-name="Edit.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myproject/views/User/Edit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.730769">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.3846154">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <marker date="1445843445509" expanded="true" signature="448:912" placeholder="..." />
                 <marker date="1445843445509" expanded="true" signature="488:905" placeholder="..." />
@@ -82,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myproject/controller/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5294118">
-              <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+            <state vertical-scroll-proportion="-17.0">
+              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
               <folding>
                 <element signature="e#29#38#0#PHP" expanded="true" />
               </folding>
@@ -104,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Router.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Router.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myproject/lib/Router.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.307692">
-              <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.7941176">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="e#6#32#0#PHP" expanded="true" />
               </folding>
@@ -568,12 +568,12 @@
       <workItem from="1445521806954" duration="637000" />
       <workItem from="1445580485657" duration="14021000" />
       <workItem from="1445602604377" duration="16000" />
-      <workItem from="1445842706245" duration="3888000" />
+      <workItem from="1445842706245" duration="4074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90866000" />
+    <option name="totallyTimeSpent" value="91052000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -630,16 +630,6 @@
           <url>file://$PROJECT_DIR$/myproject/views/User/Detail.php</url>
           <line>21</line>
           <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/myproject/controller/User.php</url>
-          <line>95</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/myproject/controller/User.php</url>
-          <line>29</line>
-          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="74" />
@@ -1138,37 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myproject/views/User/Edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <marker date="1445843445509" expanded="true" signature="448:912" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="488:905" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="490:505" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="490:546" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="490:596" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="490:646" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="517:545" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="657:673" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="657:806" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="684:691" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="684:712" placeholder="..." />
-            <marker date="1445843445509" expanded="true" signature="870:896" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myproject/lib/Router.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.307692">
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <folding>
-            <element signature="e#6#32#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myproject/lib/DbHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.884615">
@@ -1193,12 +1152,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/views/User/Edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3846154">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <marker date="1445843445509" expanded="true" signature="448:912" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="488:905" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="490:505" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="490:546" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="490:596" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="490:646" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="517:545" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="657:673" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="657:806" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="684:691" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="684:712" placeholder="..." />
+            <marker date="1445843445509" expanded="true" signature="870:896" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myproject/controller/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5294118">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
           <folding>
             <element signature="e#29#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/lib/Router.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7941176">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#32#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
