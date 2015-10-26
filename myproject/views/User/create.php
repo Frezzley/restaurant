@@ -25,6 +25,24 @@ class CreateUser {
     <input id="Lastname" name="Lastname" required>
     </div>
 
+    <div>
+    <label for="Preferences">
+    Preferenzen
+    </label>
+    <div>
+    </div>
+    <input id="Preferences" name="Preferences" required>
+    </div>
+
+    <div>
+    <label for="DailyPreference">
+    Taegliche Preferenz
+    </label>
+    <div>
+    </div>
+    <input id="DailyPreference" name="DailyPreference" required>
+    </div>
+
 
     <button type="submit" name="submit-button" value="Submit">
     Senden!
@@ -38,8 +56,6 @@ class CreateUser {
 
       echo $html;
   }
-
-
 
 
 }

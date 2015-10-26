@@ -26,19 +26,14 @@ public $connectionstatus;
                 die("Connection failed: " . self::$conn->connect_error);
                 $connectionstatus = false;
             }
-            echo "Connected successfully";
             $connectionstatus = true;
         }
         return self::$connection;
     }
 
-    public function connectdatabase()
+    public function ConnectDatabase()
     {
 
-// Create connection
-        //$conn = new mysqli($servername, $username, $password);
-
-// Check connection
 
     }
 

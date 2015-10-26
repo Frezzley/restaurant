@@ -8,8 +8,31 @@ namespace Model;
  */
 class User
 {
+    private $id;
     private $name;
     private $firstName;
+    private $Preferences;
+    private $DailyPreference;
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $Id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed
@@ -44,26 +67,32 @@ class User
     }
 
 
-
-    function create_user($information){
-        $user_id = array("1", "2");
-        array_push($stack,$information );
-
+    public function getPreferences()
+    {
+        return $this->Preferences;
     }
 
-
-
-    function create_person()
+    /**
+     * @param mixed $Preferences
+     */
+    public function setPreferences($Preferences)
     {
+        $this->Preferences = $Preferences;
+    }
 
-        $user = [
+    /**
+     * @return mixed
+     */
+    public function getDailyPreference()
+    {
+        return $this->DailyPreference;
+    }
 
-            "LastName" => getFirstname(),
-            "FirstName" => "max",
-
-        ];
-
-        create_user($user);
-
+    /**
+     * @param mixed $DailyPreference
+     */
+    public function setDailyPreference($DailyPreference)
+    {
+        $this->DailyPreference = $DailyPreference;
     }
 }
