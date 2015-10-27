@@ -32,7 +32,7 @@ class DbHandler
            return false;
         }
 
-        return true;
+        return $this->db->insert_id;
     }
 
     public function updateUser(User $user)
@@ -58,15 +58,13 @@ class DbHandler
         if ($result->num_rows > 0) {
             $newuser = new User();
             while ($row = $result->fetch_assoc()) {
+                $newuser->setId($row['Id']);
                $newuser->setFirstName($row['FirstName']);
                 $newuser->setName($row['LastName']);
             }
-            return $newuser;
+
         }
-        else
-        {
-            echo error;
-        }
+        return $newuser;
 
     }
 

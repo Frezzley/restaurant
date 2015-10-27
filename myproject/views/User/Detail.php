@@ -19,8 +19,10 @@ class DetailUser
 
     public function render()
     {
-        $user = $this->vars;
-        return $user->getFirstName();
+       $user = $this->vars;
+
+     /*   $user = $this->vars;*/
+        return $user->getFirstName() . $user->getName();
 
     }
 }

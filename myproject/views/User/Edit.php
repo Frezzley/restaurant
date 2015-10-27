@@ -17,15 +17,13 @@ class EditUser
         $this->vars = $params;
     }
 
-
-
     function render()
     {
-
         $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
         $user = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
 
-        $html = '<html><form method="post" action="/user/edit">
+        $html = '<html><form method="post" action="/user/edit/' . $user->getId() . ' ">
+   ' . $error . '
 
     <label for="Firstname">
     firstname:
@@ -43,16 +41,9 @@ class EditUser
     <button type="submit" name="submit-button" value="Submit">
     Senden!
     </button>
-</body>
-</html>';
-
-
+    </body>
+    </html>';
         echo $html;
     }
-
-
-
-
-
 }
 ?>

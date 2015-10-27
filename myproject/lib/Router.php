@@ -20,7 +20,7 @@ class Router
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';
         require_once BASE . 'lib\DbConnection.php';
-       /* $handler = new DbHandler(); */
+        /* $handler = new DbHandler(); */
 
         if(file_exists(BASE . 'controller' . DS . ucfirst($this->controller) . '.php')) {
             require_once BASE . 'controller' . DS . 'Controller.php';
@@ -35,7 +35,8 @@ class Router
                 //$controllerObject->$this->function();
             }
         }
-        else{
+        else
+        {
             require_once ('./myproject/404.html');
             }
         }
