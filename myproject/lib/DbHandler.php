@@ -68,6 +68,32 @@ class DbHandler
 
     }
 
+    public function getUsers()
+    {
+
+
+        $sql = "SELECT Id, FirstName, LastName FROM user";
+        $result = $this->db->query($sql);
+        $list = null;
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+             //   echo "Id: " . $row["Id"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
+
+                $list [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
+            }
+        } else {
+            echo "0 results";
+
+        }
+
+        return $list;
+
+    }
+
+
+
     public function __destruct() {
         $this->db->close();
         $this->db = null;

@@ -97,4 +97,23 @@ class User extends Controller
 
         }
     }
+
+    public function index ()
+    {
+        $dbHandler = new Lib\DbHandler();
+        $list = $dbHandler->getUsers();
+        $view = new View\ShowUsers();
+        $view->setVars($list);
+        echo $view->render();
+
+
+
+    }
+
+
+
+
+
+
+
 }
