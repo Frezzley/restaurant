@@ -12,7 +12,8 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
-require_once BASE . 'model\user.php';
+require_once BASE . 'model\Model.php';
+require_once BASE . 'model\User.php';
 
 /**
  * Created by IntelliJ IDEA.

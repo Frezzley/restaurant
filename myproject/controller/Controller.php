@@ -6,7 +6,7 @@ namespace Controller;
  * Date: 14.10.2015
  * Time: 10:30
  */
-class Controller{
+abstract class Controller{
 
 
     function Create_Table()
@@ -15,6 +15,7 @@ class Controller{
         createUser($newuser);
     }
 
+    abstract function create();
 
 }
 

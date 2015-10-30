@@ -84,19 +84,42 @@ class DbHandler
 
         if ($result->num_rows > 0) {
             // output data of each row
-            while($row = $result->fetch_assoc()) {
+
+            foreach ($result as $row){
+            $user = new User;
+               $name = $row[LastName];
+                $Firstname = $row[FirstName];
+                $ID = $row[Id];
+                $user->setName($name);
+                $user->setFirstName($Firstname);
+                $user->setId($ID);
+
+                $list[]= $user;
+
+            }
+        }
+        return $list;
+
+
+      /*      while($row = $result->fetch_assoc()) {
              //   echo "Id: " . $row["Id"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
 
-                $listitem [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
+
+
+               // $listitem [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
                 //$listitem = [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
-                array_push($list, $listitem);
-                $listitem = null;
+               // array_push($list, $listitem);
+               // $listitem = null;
+
+
+
+
             }
         } else {
             echo "0 results";
             $listitem = null;
         }
-
+*/
         return $list;
 
     }
