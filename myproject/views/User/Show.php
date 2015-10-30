@@ -21,12 +21,12 @@ class ShowUsers
     {
         $list = $this->vars;
 
+        print_r($list);
+      /*  foreach($list[0] as $row)
+        {
 
-        foreach($list[0] as $row) {
             echo $row . "\n";
-        }
-
+        }*/
         //return $user->getFirstName() . $user->getName();
-
     }
 }

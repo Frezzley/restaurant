@@ -68,24 +68,33 @@ class DbHandler
 
     }
 
+    /**
+     * @return null
+     */
     public function getUsers()
     {
 
 
         $sql = "SELECT Id, FirstName, LastName FROM user";
         $result = $this->db->query($sql);
-        $list = null;
+        //$list = null;
+        $listitem = null;
+       $list = array();
+        //$listitem = array();
 
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
              //   echo "Id: " . $row["Id"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
 
-                $list [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
+                $listitem [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
+                //$listitem = [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
+                array_push($list, $listitem);
+                $listitem = null;
             }
         } else {
             echo "0 results";
-
+            $listitem = null;
         }
 
         return $list;

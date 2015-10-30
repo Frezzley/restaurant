@@ -9,6 +9,7 @@ require_once BASE . 'controller' . DS . 'Controller.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\user.php';
@@ -101,6 +102,8 @@ class User extends Controller
     public function index ()
     {
         $dbHandler = new Lib\DbHandler();
+
+        //objekte in ein array
         $list = $dbHandler->getUsers();
         $view = new View\ShowUsers();
         $view->setVars($list);
