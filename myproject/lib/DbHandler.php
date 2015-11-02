@@ -136,7 +136,8 @@ public function getRestaurant($id)
     {
         $newFood = $restaurant->getFood();
         $newName = $restaurant->getName();
-        $sql = "INSERT INTO restaurant (Name, Food) VALUES ('{$newName}', '{$newFood}')";
+        $newPrice = $restaurant->getPrice();
+        $sql = "INSERT INTO restaurant (Name, Food, Rrice) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
 
         if ($this->db->query($sql) === FALSE) {
             return false;

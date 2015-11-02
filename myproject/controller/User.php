@@ -31,7 +31,6 @@ class User extends Controller
 
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
-
             /**
              * @var $dbHandler DbHandler
              */
@@ -59,8 +58,6 @@ class User extends Controller
             header('Location: /user/create');
             exit;
         }
-
-
         /**
          * @var $dbHandler DbHandler
          */

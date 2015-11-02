@@ -30,10 +30,9 @@ public function create(){
             $restaurant->setName($_POST['Name']);
             $restaurant->setPrice($_POST['Price']);
 
-
             /**
              * @var $dbHandler DbHandler
-             */
+            */
             $dbHandler = new Lib\DbHandler();
             $result = $dbHandler->createRestaurant($restaurant);
             if($result)
@@ -47,17 +46,15 @@ public function create(){
             echo $view->render();
             return $view;
         }
-
 }
- public $id = 1;
 
     /**
      * @param $id
      */
     public function edit($id){
 
-            $dbHandler = new Lib\DbHandler();
-            $restaurant = $dbHandler->getRestaurant($id);
+        $dbHandler = new Lib\DbHandler();
+        $restaurant = $dbHandler->getRestaurant($id);
             if (!empty($_POST)) {
                 $restaurant->setFood($_POST['Food']);
                 $restaurant->setName($_POST['Name']);
@@ -79,7 +76,7 @@ public function create(){
                 } else {
                     header('Location: /restaurant/create');
                     exit;
-                }
             }
+        }
     }
 }

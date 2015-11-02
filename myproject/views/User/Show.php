@@ -24,7 +24,12 @@ class ShowUsers
     public function render()
     {
         $list = $this->vars;
+
+        ?> <ul>
+        <?php
+
         foreach ($list as $user) {
+  ?> <li><?php
             //  print_r($list);
             $ID = $user->getId();
             $Name = $user->getName();
@@ -48,6 +53,15 @@ class ShowUsers
                   echo $row . "\n";
               }*/
             //return $user->getFirstName() . $user->getName();
-        }
+            ?> </li><?php
+            }
+      ?>
+
+
+
+        <li>  <input type="button" value="Neu" onclick="window.location.href='/user/create'" /></li>
+
+    </ul>
+        <?php
     }
 }
