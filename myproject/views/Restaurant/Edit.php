@@ -19,7 +19,7 @@ class EditRestaurant
     function render()
     {
         $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
-        $user = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
+        $restaurant = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
 
         $html = '<html><form method="post" action="/restaurant/edit/' . $restaurant->getId() . ' ">
    ' . $error . '
@@ -27,14 +27,14 @@ class EditRestaurant
     <label for="Food">
     firstname:
     </label>
-    <input id="Food" name="Food" value="' . $user->getFood() .'" required>
+    <input id="Food" name="Food" value="' . $restaurant->getFood() .'" required>
     </div>
 
     <div>
     <label for="Name" >
     lastname:
     </label>
-    <input id="Name" name="Name" value="' . $user->getName() .'" required>
+    <input id="Name" name="Name" value="' . $restaurant->getName() .'" required>
     </div>
 
     <button type="submit" name="submit-button" value="Submit">

@@ -11,7 +11,10 @@ namespace Controller;
 use View;
 use Model;
 use Lib;
+
+require_once BASE . 'controller' . DS . 'Controller.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Create.php';
+require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\Model.php';
@@ -25,6 +28,8 @@ public function create(){
 
             $restaurant->setFood($_POST['Food']);
             $restaurant->setName($_POST['Name']);
+            $restaurant->setPrice($_POST['Price']);
+
 
             /**
              * @var $dbHandler DbHandler
@@ -33,7 +38,7 @@ public function create(){
             $result = $dbHandler->createRestaurant($restaurant);
             if($result)
             {
-             //   header('Location: /restaurant/detail/' . $result);
+                header('Location: /restaurant/detail/' . $result);
                 exit;
             };
 
@@ -43,9 +48,12 @@ public function create(){
             return $view;
         }
 
-
 }
  public $id = 1;
+
+    /**
+     * @param $id
+     */
     public function edit($id){
 
             $dbHandler = new Lib\DbHandler();
@@ -65,18 +73,13 @@ public function create(){
                 }
             } else {
                 if ($restaurant != null) {
-                    $view = new View\EditUser();
-                    $view->setVars(array("User" => $restaurant));
+                    $view = new View\EditRestaurant();
+                    $view->setVars(array("Restaurant" => $restaurant));
                     echo $view->render();
                 } else {
                     header('Location: /restaurant/create');
                     exit;
                 }
-
             }
-
-
-
-
     }
 }

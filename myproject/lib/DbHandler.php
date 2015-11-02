@@ -2,8 +2,9 @@
 namespace Lib;
 require_once BASE . 'lib\DbConnection.php';
 
-use Controller\Restaurant;
+//use Controller\Restaurant;
 use Model\User;
+use Model\Restaurant;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,18 +66,14 @@ class DbHandler
                 $newuser->setDailyPreference($row["Daily_Preference"]);
                 $newuser->setPreferences($row["Preferences"]);
             }
-
         }
         return $newuser;
-
     }
-
     /**
      * @return null
      */
     public function getUsers()
     {
-
 
       //  $sql = "SELECT Id, FirstName, LastName FROM user";
         $sql = "SELECT * FROM user";
@@ -88,7 +85,6 @@ class DbHandler
 
         if ($result->num_rows > 0) {
             // output data of each row
-
             foreach ($result as $row){
             $user = new User;
                $name = $row["LastName"];
@@ -96,7 +92,6 @@ class DbHandler
                 $ID = $row["Id"];
               //  $getDailyPreference = $row["Daily_Preference"];
               //  $Preferences = $row["Preferences"];
-
                 $user->setName($name);
                 $user->setFirstName($FirstName);
                 $user->setId($ID);
@@ -106,7 +101,6 @@ class DbHandler
             }
         }
         return $list;
-
       /*      while($row = $result->fetch_assoc()) {
              //   echo "Id: " . $row["Id"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
                // $listitem [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
@@ -118,21 +112,8 @@ class DbHandler
             echo "0 results";
             $listitem = null;
         }
-*/
-       // return $list;
+        return $list;*/
     }
-
-
-
-    public function __destruct() {
-        $this->db->close();
-        $this->db = null;
-    }
-
-
-
-
-
 
 public function getRestaurant($id)
 {
@@ -147,13 +128,11 @@ public function getRestaurant($id)
             $newrestaurant->setFood($row['Food']);
             $newrestaurant->setPrice($row['Price']);
         }
-
     }
     return $newrestaurant;
 
 }
-
-    public function createRestaurant(Restaurant $restaurant)
+    public function createRestaurant (Restaurant $restaurant)
     {
         $newFood = $restaurant->getFood();
         $newName = $restaurant->getName();
@@ -166,6 +145,10 @@ public function getRestaurant($id)
         return $this->db->insert_id;
     }
 
+    public function __destruct() {
+        $this->db->close();
+        $this->db = null;
+    }
 
 }
 ?>

@@ -30,15 +30,6 @@ public $connectionstatus;
         }
         return self::$connection;
     }
-
-    public function ConnectDatabase()
-    {
-
-
-    }
-
-
-
+    public function ConnectDatabase(){}
 }
-
 ?>

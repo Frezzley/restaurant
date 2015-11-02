@@ -9,10 +9,15 @@ namespace Controller;
 abstract class Controller{
 
 
+    /**
+     *
+     */
     function Create_Table()
     {
           $newuser = create_user();
         createUser($newuser);
+        $newrestaurant = create_restaurant();
+        createRestaurant($newrestaurant);
     }
 
     abstract function create();
@@ -20,9 +25,5 @@ abstract class Controller{
 
   //  abstract function edit();
 }
-
-
-
-
 ?>
 
