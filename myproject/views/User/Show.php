@@ -8,10 +8,14 @@
 
 namespace View;
 
+require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
+
 
 class ShowUsers
 {
     private $vars;
+
     public function setVars($params)
     {
         $this->vars = $params;
@@ -20,13 +24,30 @@ class ShowUsers
     public function render()
     {
         $list = $this->vars;
+        foreach ($list as $user) {
+            //  print_r($list);
+            $ID = $user->getId();
+            $Name = $user->getName();
+            $FirstName = $user->getFirstName();
+           // $ID = $user['Id'];
 
-        print_r($list);
-      /*  foreach($list[0] as $row)
-        {
+            //$ID = $list[0];
+            echo $ID . " " . $FirstName . " " . $Name;
 
-            echo $row . "\n";
-        }*/
-        //return $user->getFirstName() . $user->getName();
+            ?>
+
+        <input type="button" value="Bearbeiten" onclick="window.location.href='/user/edit/<?php echo $ID ?>'" />
+       <input type="button" value="Detail Ansicht" onclick="window.location.href='/user/detail/<?php echo $ID ?>'" />
+
+            <?php
+
+            echo "\n";
+            echo "<br>";
+            /*  foreach($list[0] as $row)
+              {
+                  echo $row . "\n";
+              }*/
+            //return $user->getFirstName() . $user->getName();
+        }
     }
 }

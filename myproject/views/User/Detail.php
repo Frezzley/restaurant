@@ -22,7 +22,8 @@ class DetailUser
        $user = $this->vars;
 
      /*   $user = $this->vars;*/
-        return $user->getFirstName() . $user->getName();
+        return "ID: " . $user->getId() . "<br>" ."Vorname: " . $user->getFirstName() . "<br>" ."Nachname: " . $user->getName() . "<br>" ."Preferenzen: " . $user->getPreferences() . "<br>" ."Taegliche Preferenzen: " . $user->getDailyPreference() ;
+
 
     }
 }
