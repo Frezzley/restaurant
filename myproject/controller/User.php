@@ -41,7 +41,6 @@ class User extends Controller
                header('Location: /user/detail/' . $result);
                exit;
            };
-
         } else {
             $view = new View\CreateUser();
             echo $view->render();
@@ -63,7 +62,9 @@ class User extends Controller
          */
         $view = new View\DetailUser();
         $view->setVars($user);
+        ?><div><?php
         echo $view->render();
+        ?></div><?php
     }
 
 

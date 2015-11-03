@@ -25,7 +25,7 @@ class ShowUsers
     {
         $list = $this->vars;
 
-        ?> <ul>
+        ?> <ul class="list-inline">
         <?php
 
         foreach ($list as $user) {

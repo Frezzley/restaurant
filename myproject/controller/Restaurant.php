@@ -15,6 +15,8 @@ use Lib;
 require_once BASE . 'controller' . DS . 'Controller.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
+require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Show.php';
+require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Detail.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\Model.php';
@@ -79,4 +81,40 @@ public function create(){
             }
         }
     }
+
+
+    public function index ()
+    {
+        $dbHandler = new Lib\DbHandler();
+
+        //objekte in ein array
+        $list = $dbHandler->getRestaurants();
+        $view = new View\ShowRestaurant();
+        $view->setVars($list);
+        echo $view->render();
+
+
+
+    }
+
+    public function detail($id)
+    {
+        $dbHandler = new Lib\DbHandler();
+        $restaurant = $dbHandler->getRestaurant($id);
+        if(empty($restaurant))
+        {
+            header('Location: /restaurant/create');
+            exit;
+        }
+        /**
+         * @var $dbHandler DbHandler
+         */
+        $view = new View\DetailRestaurant();
+        $view->setVars($restaurant);
+
+        ?><div><?php
+        echo $view->render();
+        ?></div><?php
+    }
+
 }

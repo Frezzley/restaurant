@@ -124,20 +124,19 @@ public function getRestaurant($id)
         $newrestaurant = new Restaurant();
         while ($row = $result->fetch_assoc()) {
             $newrestaurant->setId($row['Id']);
-            $newrestaurant->setName($row['LastName']);
+            $newrestaurant->setName($row['Name']);
             $newrestaurant->setFood($row['Food']);
             $newrestaurant->setPrice($row['Price']);
         }
     }
     return $newrestaurant;
-
 }
     public function createRestaurant (Restaurant $restaurant)
     {
         $newFood = $restaurant->getFood();
         $newName = $restaurant->getName();
         $newPrice = $restaurant->getPrice();
-        $sql = "INSERT INTO restaurant (Name, Food, Rrice) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
+        $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
 
         if ($this->db->query($sql) === FALSE) {
             return false;
@@ -145,6 +144,35 @@ public function getRestaurant($id)
 
         return $this->db->insert_id;
     }
+
+    public function getRestaurants()
+    {
+
+        $sql = "SELECT * FROM restaurant";
+        $result = $this->db->query($sql);
+        //$list = null;
+        $listitem = null;
+        $list = array();
+
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            foreach ($result as $row){
+                $restaurant = new Restaurant;
+                $name = $row["Name"];
+                $FirstName = $row["Food"];
+                $ID = $row["Id"];
+
+                $restaurant->setName($name);
+                $restaurant->setFood($FirstName);
+                $restaurant->setId($ID);
+
+                $list[]= $restaurant;
+            }
+        }
+        return $list;
+    }
+
 
     public function __destruct() {
         $this->db->close();

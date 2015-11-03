@@ -31,13 +31,23 @@ class Router
             if(method_exists($controllerObject, $this->function)) {
                 //call_user_func(array($controllerObject, $this->function));
                 $controllerObject->{$this->function}($this->id);
-              //  $controllerObject->{$this->function}();
+              //$controllerObject->{$this->function}();
                 //$controllerObject->$this->function();
             }
         }
+         elseif($this->controller == 'home')
+        {
+            require_once BASE . 'views\Home.php';
+
+        }
+        elseif($this->controller == '')
+        {
+            header('Location: \home');
+        }
         else
         {
-            require_once ('./myproject/404.html');
+            require_once BASE . '404.html';
+
             }
         }
 }
