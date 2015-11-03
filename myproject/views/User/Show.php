@@ -38,9 +38,7 @@ class ShowUsers
 
             //$ID = $list[0];
             echo $ID . " " . $FirstName . " " . $Name;
-
             ?>
-
         <input type="button" value="Bearbeiten" onclick="window.location.href='/user/edit/<?php echo $ID ?>'" />
        <input type="button" value="Detail Ansicht" onclick="window.location.href='/user/detail/<?php echo $ID ?>'" />
 

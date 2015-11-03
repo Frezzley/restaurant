@@ -173,6 +173,21 @@ public function getRestaurant($id)
         return $list;
     }
 
+    public function updateRestaurant(Restaurant $restaurant)
+    {
+        $id = $restaurant->getId();
+        $name = $restaurant->getName();
+        $food = $restaurant->getFood();
+
+        /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+        $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
+
+        if ($this->db->query($sql) === FALSE) {
+            return false;
+        }
+        return true;
+    }
+
 
     public function __destruct() {
         $this->db->close();

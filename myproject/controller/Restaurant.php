@@ -90,11 +90,17 @@ public function create(){
         //objekte in ein array
         $list = $dbHandler->getRestaurants();
         $view = new View\ShowRestaurant();
-        $view->setVars($list);
+       // $view->setVars($list);
+
+    ?>    <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Panel heading</div>
+  <div class="panel-body">
+        <?php
+         $view->setVars($list);
+        ?><!-- </div>--> <?php
         echo $view->render();
-
-
-
+    ?></div><?php
     }
 
     public function detail($id)
@@ -112,9 +118,17 @@ public function create(){
         $view = new View\DetailRestaurant();
         $view->setVars($restaurant);
 
-        ?><div><?php
-        echo $view->render();
-        ?></div><?php
+        $html = '        <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Panel heading</div>
+        <div class="panel-body">
+        </div>
+
+        <!-- Table -->
+        <table class="table"> ' .  $view->render() . ' </table>';
+
+
+        echo $html;
     }
 
 }
