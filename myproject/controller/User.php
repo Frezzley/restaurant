@@ -15,6 +15,7 @@ require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\Model.php';
 require_once BASE . 'model\User.php';
+require_once BASE . 'model\Restaurant.php';
 
 /**
  * Created by IntelliJ IDEA.
@@ -110,12 +111,13 @@ class User extends Controller
         echo $view->render();
     }
 
-    public function editmore(){
+    public function editmore($ID){
         $dbHandler = new Lib\DbHandler();
         //objekte in ein array
-        $list = $dbHandler->getUsers();
-        $view = new View\render();
-        $view->setVars($list);
-        echo $view->render();
+        $user = $dbHandler->getUser($ID);
+        $restaurants = $dbHandler->getRestaurants();
+
+        $view = new View\Editmore();
+        echo $view->render($user, $restaurants);
     }
 }

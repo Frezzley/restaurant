@@ -39,6 +39,7 @@ class Router
         {
             require_once BASE . 'views\Home.php';
 
+
         }
         elseif($this->controller == '')
         {

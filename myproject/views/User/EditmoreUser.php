@@ -12,24 +12,25 @@ namespace View;
 class Editmore
 {
 
-public function setVars($params)
-{
-$this->vars = $params;
-}
+//public function setVars($params)
+//{
+//$this->vars = $params;
+//}
 
-public function render()
+public function render($user, $restaurants)
 {
-$list = $this->vars;
+    $this->restaurants = $restaurants;
+//$list = $this->vars;
 
 ?> <ul class="list-inline">
     <?php
 
-    foreach ($list as $restaurant) {
+    foreach ($restaurants as $restaurant) {
     ?> <li><?php
         //  print_r($list);
-        $ID = $restaurant->getId();
+      //  $ID = $restaurant->getId();
 
-        $Name = $restaurant->Name();
+        $Name = $restaurant->getName();
         echo $Name;
         ?>
 <ul>
@@ -53,14 +54,17 @@ $list = $this->vars;
     </li>
     <li>
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Wie oft möchtest du da hin gehen
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Täglich</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">jeden 2. Tag</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">jeden 3. Tag</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2x pro Woche</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro Woche</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Wochen</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro Monat</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Monate</a></li>
             </ul>
         </div>
 
