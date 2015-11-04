@@ -10,7 +10,7 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
-require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUser.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserPreferences.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\Model.php';

@@ -12,15 +12,15 @@ public function index(){ */
     $food = "Döner";
     $forecast = "Migros";
    ?>
+
+
+<div class="container">
+
     <div class="jumbotron">
         <h1>Today, we are eating <?php echo $food?> (Tendency)</h1>
         <p>Coming up... (Forecast)</p>
         <p><?php echo $forecast ?></p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Details</a></p>
     </div>
-<?php
-/*}
-}
-*/
-?>
 
+</div>

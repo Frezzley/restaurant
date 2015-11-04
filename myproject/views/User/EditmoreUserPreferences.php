@@ -33,10 +33,11 @@ public function render($user, $restaurants)
         $Name = $restaurant->getName();
         echo $Name;
         ?>
+
 <ul>
     <li>
-        <form>
-            <ul>
+        <form class="col-md-12">
+            <ul >
                 <li><input type="radio" name="restaurant_rating" value="No Go" ></li>
                 No Go
                 <li> <input type="radio" name="restaurant_rating" value="I can eat it"></li>
@@ -53,28 +54,31 @@ public function render($user, $restaurants)
         </form>
     </li>
     <li>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Wie oft möchtest du da hin gehen
+    <div class="col-md-12">
+        <div class="dropdown"> <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Wie oft möchtest du da hin gehen>
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Täglich</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">jeden 2. Tag</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">jeden 3. Tag</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2x pro Woche</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro Woche</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Wochen</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro Monat</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Monate</a></li>
+                <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">Täglich</a></li>
+                <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">jeden 2. Tag</a></li>
+                <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">jeden 3. Tag</a></li>
+                <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">2x pro Woche</a></li>
+                <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">1x pro Woche</a></li>
+                <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Wochen</a></li>
+                <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">1x pro Monat</a></li>
+                <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">1x pro 2 Monate</a></li>
             </ul>
         </div>
-
+</div>
     </li>
-        </ul>
+</ul>
         </li>
 <?php  }
-    ?>  </ul><?php
+    ?>  </ul>
+    </div>
+    <?php
 
     }
+
 }
 ?>
 
