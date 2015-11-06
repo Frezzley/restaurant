@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title><?= "Restaurant" ?></title>
     <?php //->load->helper('url'); ?>
+    <?php //require_once( 'C:\Users\adi\Documents\Projekte\restaurant-administration\myproject\Layout.php' )?>
+    <link href="/myproject/css/changes.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap.css.map" rel="stylesheet" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -36,7 +38,8 @@
     </div>
 </buttons>
 !--->
-
+<?php  $parts = array_filter(explode('/', $_SERVER['REQUEST_URI']))
+?>
 <body>
 
 <!-- Static navbar -->
@@ -53,25 +56,57 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Home</a></li>
-                <li><a href="/user/index">Benutzer</a></li>
-                <li><a href="/restaurant/index">Restaurant</a></li>
+
+                <?php if (!empty($parts[1])) { ?>
+
+                    <li <?php echo $parts[1] == "home" ? 'class="active"' : '' ?>><a href="/home">Home</a></li>
+                    <li <?php echo $parts[1] == "user" ? 'class="active"' : '' ?>><a href="/user">Benutzer</a></li>
+                    <li <?php echo $parts[1] == "restaurant" ? 'class="active"' : '' ?>><a
+                            href="/restaurant">Restaurant</a></li>
+                    <?php
+                }
+                    else
+                    { ?>
+                        <li class="active"><a href="/home">Home</a></li>
+                        <li><a href="/user">Benutzer</a></li>
+                        <li><a href="/restaurant">Restaurant</a></li>
+                <?php } ?>
+
+
+
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Neu <span class="caret"></span></a>
+                    <a  href="<?php echo $parts[1]=="user" ? '"/user/create/"' : '' || $parts[1]=="restaurant" ? '"/restaurant/create/"' : ''?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Neu <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/user/create/">User</a></li>
-                        <li><a href="/restaurant/create/#">Restaurant</a></li>
-
-
+                        <li><a href="/restaurant/create/">Restaurant</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Log in</a></li>
+                <li><a href="user/login/">Log in</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
-
 </body>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

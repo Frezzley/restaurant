@@ -11,6 +11,7 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserPreferences.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'Login.php';
 require_once BASE . 'lib\DbConnection.php';
 require_once BASE . 'lib\DbHandler.php';
 require_once BASE . 'model\Model.php';
@@ -119,5 +120,14 @@ class User extends Controller
 
         $view = new View\Editmore();
         echo $view->render($user, $restaurants);
+    }
+
+
+    public function login()
+    {
+
+        $view = new View\LogIn();
+        echo $view->render();
+
     }
 }

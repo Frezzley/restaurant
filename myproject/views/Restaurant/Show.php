@@ -25,31 +25,41 @@ class ShowRestaurant
     {
         $list = $this->vars;
 
-        ?> <ul>
-        <?php
-
-        foreach ($list as $restaurant) {
-            ?> <li><?php
-            //  print_r($list);
-            $ID = $restaurant->getId();
-            $Name = $restaurant->getName();
-            $Food = $restaurant->getFood();
-
-            echo $ID . " " . $Name . " " . $Food;?>
-
-            <input type="button" value="Bearbeiten" onclick="window.location.href='/restaurant/edit/<?php echo $ID ?>'" />
-            <input type="button" value="Detail Ansicht" onclick="window.location.href='/restaurant/detail/<?php echo $ID ?>'" />
-
-            <?php
-            echo "\n";
-            echo "<br>";
-            ?> </li><?php
-        }
         ?>
+        <ul class="list-inline">
+            <?php
+            $htmlhead = '
+<body>
+<div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <div class="col-md-1"></div>
+        <div class="col-xs-12 col-sm-12 col-md-10">
+            <div class="row">';
+            echo $htmlhead;
+            echo ' <div class="introduction"> Hier finden Sie alle bei uns Registrierten Restaurants. </div>';
 
-        <li>  <input type="button" value="Neu" onclick="window.location.href='/restaurant/create'" /></li>
+            foreach ($list as $restaurant) {
+                ?>
+                <li><?php
+                //  print_r($list);
+                $ID = $restaurant->getId();
+                $Name = $restaurant->getName();
+                $htmlcontent = '<div>
+                    <h2>' . $ID . ' </h2>
 
-    </ul>
+                    <p>' . $Name . '</p>
+
+                    <p><a class="btn btn-default" href=" ' . '/restaurant/edit/' . $ID . '"' . ' role="button">Bearbeiten</a></p>
+                    <p><a class="btn btn-default" href=" ' . '/restaurant/detail/' . $ID . '"' . ' role="button">Detail</a></p>
+                </div>';
+                ?>
+                <li class="col-xs-6 col-md-4 col-lg-2"><?php echo $htmlcontent; ?></li><?php
+            }
+            ?>
+
+           <!-- <li><input type="button" value="Neu" onclick="window.location.href='/restaurant/create'"/></li>-->
+
+        </ul>
         <?php
-    }
-}
+
+    }}

@@ -92,15 +92,15 @@ public function create(){
         $view = new View\ShowRestaurant();
        // $view->setVars($list);
 
-    ?>    <div class="panel panel-default">
+    ?>   <!-- <div class="panel panel-default"> -->
   <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
-  <div class="panel-body">
+  <!--<div class="panel-heading">Panel heading</div>
+  <div class="panel-body"> -->
         <?php
          $view->setVars($list);
         ?><!-- </div>--> <?php
         echo $view->render();
-    ?></div><?php
+    ?><!--</div>--><?php
     }
 
     public function detail($id)
@@ -118,17 +118,16 @@ public function create(){
         $view = new View\DetailRestaurant();
         $view->setVars($restaurant);
 
-        $html = '        <div class="panel panel-default">
+      /*  $html = '      <!--  <div class="panel panel-default"> -->
         <!-- Default panel contents -->
-        <div class="panel-heading">Panel heading</div>
+      <!--  <div class="panel-heading">Panel heading</div>
         <div class="panel-body">
-        </div>
+        </div> -->
 
         <!-- Table -->
-        <table class="table"> ' .  $view->render() . ' </table>';
-
-
-        echo $html;
+       <!-- <table class="table"> ' .  $view->render() . ' </table>';-->
+*/
+        $view->render();
+       // echo $html;
     }
-
 }

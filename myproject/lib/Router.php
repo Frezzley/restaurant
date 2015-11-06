@@ -15,7 +15,9 @@ class Router
 
     public function __construct($params) {
         $parts = array_filter(explode('/', $params));
-        $this->controller = $parts[1];
+
+
+        $this->controller = !empty($parts[1]) ? $parts[1] : "home";
         $this->function = !empty($parts[2]) ? $parts[2] : "index";
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';

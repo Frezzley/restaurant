@@ -17,9 +17,11 @@ class Editmore
 //$this->vars = $params;
 //}
 
-public function render($user, $restaurants)
+public function render(/*$user, $restaurants*/)
 {
-    $this->restaurants = $restaurants;
+
+$restaurants = array("auto", "bla2", "42");
+   $this->restaurants = $restaurants;
 //$list = $this->vars;
 
 ?> <ul class="list-inline">
@@ -30,7 +32,7 @@ public function render($user, $restaurants)
         //  print_r($list);
       //  $ID = $restaurant->getId();
 
-        $Name = $restaurant->getName();
+   //     $Name = $restaurant->getName();
         echo $Name;
         ?>
 
