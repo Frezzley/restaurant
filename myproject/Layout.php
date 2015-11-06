@@ -10,6 +10,20 @@
     <link href="/myproject/css/changes.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap.css.map" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.structure.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+    <link href="/myproject/css/bootstrap-theme.css.map" rel="stylesheet" type="text/css"/>
+
+
+    <script > <!--// jquery fehlt noch --> </script>
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -88,8 +102,8 @@
         </div>
     </div>
 </nav>
-</body>
 <div class="container">
+
 
 
 

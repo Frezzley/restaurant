@@ -18,29 +18,20 @@ class LogIn
 {
     function render()
     {
-        $html = '<html><form method="post" action="/user/editmore/">
-
-
-
-    <div>
-    <label for="Lastname" >
-    lastname:
-    </label>
-    <input id="Lastname" name="Lastname" value="Nachname" required>
+        $html = '<form role="form">
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="email">
     </div>
-
-
-        <label for="Password">
-    Password:
-    </label>
-    <input id="Password" type="password" name="Password" required>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd">
     </div>
-
-    <button type="submit" name="submit-button" value="Submit">
-    Senden!
-    </button>
-    </body>
-    </html>';
-        echo $html;
+    <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>';
+        return $html;
     }
 }

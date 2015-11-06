@@ -22,28 +22,80 @@ class EditUser
         $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
         $user = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
 
-        $html = '<html><form method="post" action="/user/edit/' . $user->getId() . ' ">
-   ' . $error . '
 
-    <label for="Firstname">
-    firstname:
-    </label>
-    <input id="Firstname" name="Firstname" value="' . $user->getFirstName() .'" required>
+
+        $html='<form class="form-horizontal" method="post" action="/user/edit/'. $user->getId() . '">
+
+
+<div class="form-group">
+    <label for="inputFirstName" class="col-sm-2 control-label">Vorame</label>
+    <div class="col-sm-10">
+      <input type="text" name="Firstname" class="form-control" id="inputFirstName" placeholder="' . $user->getFirstName() .'">
     </div>
-
-    <div>
-    <label for="Lastname" >
-    lastname:
-    </label>
-    <input id="Lastname" name="Lastname" value="' . $user->getName() .'" required>
+  </div>
+  <div class="form-group">
+    <label for="inputName" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" name="Lastname" class="form-control" id="inputName" placeholder="' . $user->getName() .'">
     </div>
+  </div>
+  <div class="form-group">
+    <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="' . $user->getPreferences() .'">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Update</button>
+    </div>
+  </div>
+</form>';
 
-    <button type="submit" name="submit-button" value="Submit">
-    Senden!
-    </button>
-    </body>
-    </html>';
         echo $html;
+
+        $htmljquery='
+  <title>jQuery UI Autocomplete - Remote datasource</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+  <script>
+  $(function() {
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#birds" ).autocomplete({
+      source: "search.php",
+      minLength: 2,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          "Nothing selected, input was " + this.value );
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+
+<div class="ui-widget">
+  <label for="birds">Birds: </label>
+  <input id="birds">
+</div>
+
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>';
+        echo $htmljquery;
     }
 }
 ?>

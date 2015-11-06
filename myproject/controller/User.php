@@ -71,7 +71,6 @@ class User extends Controller
         ?></div><?php
     }
 
-
     public function edit($id)
     {
         $dbHandler = new Lib\DbHandler();
@@ -79,6 +78,8 @@ class User extends Controller
         if (!empty($_POST)) {
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
+            $user->setPreferences($_POST['Preferences']);
+
             if ($dbHandler->updateUser($user) == false) {
                 $error = "Error";
                 $values = array("User" => $user, "Error" => $error);

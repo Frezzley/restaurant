@@ -20,3 +20,4 @@ define('BASE', realpath($_SERVER["DOCUMENT_ROOT"]) . DS . 'myproject' . DS);
 require_once ('./myproject/lib/Router.php');
 require_once BASE . 'Layout.php';
 $router = new Router($_SERVER['REQUEST_URI']);
+require_once BASE . 'LayoutFooter.php';
