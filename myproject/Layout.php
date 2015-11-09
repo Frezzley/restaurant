@@ -18,7 +18,7 @@
     <link href="/myproject/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="/myproject/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
-    <link href="/myproject/css/bootstrap-theme.css.map" rel="stylesheet" type="text/css"/>
+   <!-- <link href="/myproject/css/bootstrap-theme.css.map" rel="stylesheet" type="text/css"/>-->
 
 
     <script > <!--// jquery fehlt noch --> </script>
@@ -89,7 +89,7 @@
 
 
                 <li class="dropdown">
-                    <a  href="<?php echo $parts[1]=="user" ? '"/user/create/"' : '' || $parts[1]=="restaurant" ? '"/restaurant/create/"' : ''?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Neu <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Neu <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/user/create/">User</a></li>
                         <li><a href="/restaurant/create/">Restaurant</a></li>

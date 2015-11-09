@@ -17,7 +17,7 @@ class EditUser
         $this->vars = $params;
     }
 
-    function render()
+    function render($list)
     {
         $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
         $user = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
@@ -59,10 +59,11 @@ class EditUser
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <style>
   .ui-autocomplete-loading {
-    background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+    // background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
   }
   </style>
   <script>
@@ -72,7 +73,7 @@ class EditUser
       $( "#log" ).scrollTop( 0 );
     }
 
-    $( "#birds" ).autocomplete({
+    $( "#restaurants" ).autocomplete({
       source: "search.php",
       minLength: 2,
       select: function( event, ui ) {
@@ -87,15 +88,97 @@ class EditUser
 <body>
 
 <div class="ui-widget">
-  <label for="birds">Birds: </label>
-  <input id="birds">
+  <label for="restaurants">Restaurants: </label>
+  <input id="restaurants">
 </div>
 
 <div class="ui-widget" style="margin-top:2em; font-family:Arial">
   Result:
   <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
 </div>';
-        echo $htmljquery;
+      //  echo $htmljquery;
+
+        $testjquery ='<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<title></title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+
+<script>
+    $(function () {            }
+<!--<body>-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+        $(function() {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme",
+
+
+               ' . foreach ($list as $restaurant) {
+                           $Name = $restaurant->getName();
+                           $htmlcontent = '"' . $Name . '",';
+                           echo $htmlcontent;
+                             } . '
+            ];
+            $( "#tags" ).autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
+
+
+</body>
+</html>
+';
+        echo $testjquery;
+
+
+
+
+
     }
 }
 ?>
