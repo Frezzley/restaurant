@@ -16,9 +16,11 @@ class Router
     public function __construct($params) {
         $parts = array_filter(explode('/', $params));
 
-
         $this->controller = !empty($parts[1]) ? $parts[1] : "home";
         $this->function = !empty($parts[2]) ? $parts[2] : "index";
+            if($parts[1] == 'ajax') {
+              $this->function = "restaurantList";
+            }
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';
         require_once BASE . 'lib\DbConnection.php';
@@ -28,6 +30,11 @@ class Router
             require_once BASE . 'controller' . DS . 'Controller.php';
             require_once BASE . 'controller' . DS . ucfirst($this->controller) . '.php';
             $c = "Controller\\" .ucfirst($this->controller);
+            if($this->controller != 'ajax') {
+                require_once BASE . 'Layout.php';
+                require_once BASE . 'LayoutFooter.php';
+            }
+
             $controllerObject = new $c();
 
             if(method_exists($controllerObject, $this->function)) {
@@ -36,6 +43,8 @@ class Router
               //$controllerObject->{$this->function}();
                 //$controllerObject->$this->function();
             }
+            //require_once BASE . 'LayoutFooter.php';
+
         }
          elseif($this->controller == 'home')
         {

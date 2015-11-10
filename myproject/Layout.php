@@ -21,42 +21,15 @@
    <!-- <link href="/myproject/css/bootstrap-theme.css.map" rel="stylesheet" type="text/css"/>-->
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
-
-    <script > <!--// jquery fehlt noch --> </script>
-
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 </head>
-<!--<body>--
-<buttons>
-    <div class="btn-group">
-        <td><a class="btn btn-info" href="/home">Home</a></td>
-    </div>
-    <div class="btn-group">
-        <td><a class="btn btn-warning" href="/user/index">Benutzer</a></td>
-    </div>
-    <div class="btn-group">
-        <td><a class="btn btn-danger" href="/restaurant/index">Restaurant</a></td>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-primary">Neu</button>
-        <button type="button" class="btn btn-primary dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="/user/create/">User</a></li>
-            <li><a href="/restaurant/create/">Restaurant</a></li>
-        </ul>
-    </div>
-</buttons>
-!--->
 <?php  $parts = array_filter(explode('/', $_SERVER['REQUEST_URI']))
 ?>
 <body>
@@ -108,3 +81,4 @@
     </div>
 </nav>
 <div class="container">
+    <script src="/myproject/js/application.js"></script>

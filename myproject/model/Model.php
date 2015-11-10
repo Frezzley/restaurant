@@ -9,7 +9,7 @@
 namespace Model;
 
 
-class Model
+abstract class Model implements \JsonSerializable
 {
     protected $id;
     protected $name;
@@ -45,4 +45,6 @@ class Model
     {
         $this->name = $name;
     }
+
+    abstract function jsonSerialize();
 }
