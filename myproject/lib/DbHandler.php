@@ -42,9 +42,10 @@ class DbHandler
         $id = $user->getId();
         $name = $user->getName();
         $firstName = $user->getFirstName();
+        $Preferences = $user->getPreferences();
 
         /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}' WHERE Id = {$id};";
+        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id};";
 
         if ($this->db->query($sql) === FALSE) {
             return false;

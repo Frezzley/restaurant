@@ -93,7 +93,9 @@ class User extends Controller
         } else {
             if ($user != null) {
                 $view = new View\EditUser();
-                $view->setVars(array("User" => $user));
+                $list = $dbHandler->getRestaurants();
+
+                $view->setVars(array("User" => $user),$list);
                 echo $view->render();
             } else {
                 header('Location: /user/create');

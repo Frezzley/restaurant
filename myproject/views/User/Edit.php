@@ -12,12 +12,14 @@ namespace View;
 class EditUser
 {
     private $vars;
-    public function setVars($params)
+    private $restaurants;
+    public function setVars($params, $list)
     {
         $this->vars = $params;
+        $this->restaurants = $list;
     }
 
-    function render($list)
+    function render()
     {
         $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
         $user = array_key_exists("User",$this->vars) ? $this->vars["User"]: null;
@@ -54,58 +56,50 @@ class EditUser
 
         echo $html;
 
-        $htmljquery='
-  <title>jQuery UI Autocomplete - Remote datasource</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <style>
-  .ui-autocomplete-loading {
-    // background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
-  }
-  </style>
-  <script>
-  $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
+                                                                        $htmljquery='
+                                                                  <title>jQuery UI Autocomplete - Remote datasource</title>
+                                                                  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+                                                                  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+                                                                  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                                                                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                                                                  <link rel="stylesheet" href="/resources/demos/style.css">
+                                                                  <style>
+                                                                  .ui-autocomplete-loading {
+                                                                    // background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+                                                                  }
+                                                                  </style>
+                                                                  <script>
+                                                                  $(function() {
+                                                                    function log( message ) {
+                                                                      $( "<div>" ).text( message ).prependTo( "#log" );
+                                                                      $( "#log" ).scrollTop( 0 );
+                                                                    }
 
-    $( "#restaurants" ).autocomplete({
-      source: "search.php",
-      minLength: 2,
-      select: function( event, ui ) {
-        log( ui.item ?
-          "Selected: " + ui.item.value + " aka " + ui.item.id :
-          "Nothing selected, input was " + this.value );
-      }
-    });
-  });
-  </script>
-</head>
-<body>
+                                                                    $( "#restaurants" ).autocomplete({
+                                                                      source: "search.php",
+                                                                      minLength: 2,
+                                                                      select: function( event, ui ) {
+                                                                        log( ui.item ?
+                                                                          "Selected: " + ui.item.value + " aka " + ui.item.id :
+                                                                          "Nothing selected, input was " + this.value );
+                                                                      }
+                                                                    });
+                                                                  });
+                                                                  </script>
+                                                                </head>
+                                                                <body>
 
-<div class="ui-widget">
-  <label for="restaurants">Restaurants: </label>
-  <input id="restaurants">
-</div>
+                                                                <div class="ui-widget">
+                                                                  <label for="restaurants">Restaurants: </label>
+                                                                  <input id="restaurants">
+                                                                </div>
 
-<div class="ui-widget" style="margin-top:2em; font-family:Arial">
-  Result:
-  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-</div>';
-      //  echo $htmljquery;
+                                                                <div class="ui-widget" style="margin-top:2em; font-family:Arial">
+                                                                  Result:
+                                                                  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+                                                                </div>';
+        $testjquery1 ='
 
-        $testjquery ='<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-
-<title></title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -114,71 +108,30 @@ class EditUser
 
 <script>
     $(function () {            }
-<!--<body>-->
-<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>jQuery UI Autocomplete - Default functionality</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script>
         $(function() {
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "BASIC",
-                "C",
-                "C++",
-                "Clojure",
-                "COBOL",
-                "ColdFusion",
-                "Erlang",
-                "Fortran",
-                "Groovy",
-                "Haskell",
-                "Java",
-                "JavaScript",
-                "Lisp",
-                "Perl",
-                "PHP",
-                "Python",
-                "Ruby",
-                "Scala",
-                "Scheme",
-
-
-               ' . foreach ($list as $restaurant) {
-                           $Name = $restaurant->getName();
-                           $htmlcontent = '"' . $Name . '",';
-                           echo $htmlcontent;
-                             } . '
+            var availableRestaurants = [';
+        $testjquery2 ='
             ];
-            $( "#tags" ).autocomplete({
-                source: availableTags
+            $( "#inputRestaurant" ).autocomplete({
+                source: availableRestaurants
             });
         });
     </script>
-</head>
-<body>
-
-<div class="ui-widget">
-    <label for="tags">Tags: </label>
-    <input id="tags">
-</div>
-
-
-</body>
-</html>
 ';
-        echo $testjquery;
-
-
-
-
-
+        echo $testjquery1;
+        foreach ($this->restaurants as $restaurant) {
+            $Name = $restaurant->getName();
+            $fillinrestaurant = '"' . $Name . '",';
+            echo $fillinrestaurant;
+        }
+        echo $testjquery2;
     }
 }
 ?>

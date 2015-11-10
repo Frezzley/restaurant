@@ -31,7 +31,6 @@ public function create(){
             $restaurant->setFood($_POST['Food']);
             $restaurant->setName($_POST['Name']);
             $restaurant->setPrice($_POST['Price']);
-
             /**
              * @var $dbHandler DbHandler
             */
@@ -42,14 +41,12 @@ public function create(){
                 header('Location: /restaurant/detail/' . $result);
                 exit;
             };
-
         } else {
             $view = new View\CreateRestaurant();
             echo $view->render();
             return $view;
         }
 }
-
     /**
      * @param $id
      */
