@@ -19,7 +19,13 @@ class Router
         $this->controller = !empty($parts[1]) ? $parts[1] : "home";
         $this->function = !empty($parts[2]) ? $parts[2] : "index";
             if($parts[1] == 'ajax') {
-              $this->function = "restaurantList";
+
+                $variables = array_filter(explode('2/', $parts[2]));
+                $input = $variables[2];
+                If ($input != null){
+                    echo $input;
+                }
+
             }
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';
