@@ -1,6 +1,7 @@
 <?php
 use Controller\Controller;
 use Controller\User;
+
 /**
  * Created by IntelliJ IDEA.
  * User: adi
@@ -13,59 +14,54 @@ class Router
     private $function;
     private $id;
 
-    public function __construct($params) {
+    public function __construct($params)
+    {
         $parts = array_filter(explode('/', $params));
 
         $this->controller = !empty($parts[1]) ? $parts[1] : "home";
         $this->function = !empty($parts[2]) ? $parts[2] : "index";
-            if($parts[1] == 'ajax') {
+        if ($this->controller == 'ajax') {
 
-                $variables = array_filter(explode('2/', $parts[2]));
-                $input = $variables[2];
-                If ($input != null){
-                    echo $input;
-                }
-
+            $variables = array_filter(explode('/', $parts[2]));
+            $input = $variables[2];
+            if ($input != null) {
+                echo $input;
             }
+
+        }
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';
         require_once BASE . 'lib\DbConnection.php';
         /* $handler = new DbHandler(); */
 
-        if(file_exists(BASE . 'controller' . DS . ucfirst($this->controller) . '.php')) {
+        if (file_exists(BASE . 'controller' . DS . ucfirst($this->controller) . '.php')) {
             require_once BASE . 'controller' . DS . 'Controller.php';
             require_once BASE . 'controller' . DS . ucfirst($this->controller) . '.php';
-            $c = "Controller\\" .ucfirst($this->controller);
-            if($this->controller != 'ajax') {
+            $c = "Controller\\" . ucfirst($this->controller);
+            if ($this->controller != 'ajax') {
                 require_once BASE . 'Layout.php';
                 require_once BASE . 'LayoutFooter.php';
             }
 
             $controllerObject = new $c();
 
-            if(method_exists($controllerObject, $this->function)) {
+            if (method_exists($controllerObject, $this->function)) {
                 //call_user_func(array($controllerObject, $this->function));
                 $controllerObject->{$this->function}($this->id);
-              //$controllerObject->{$this->function}();
+                //$controllerObject->{$this->function}();
                 //$controllerObject->$this->function();
             }
             //require_once BASE . 'LayoutFooter.php';
 
-        }
-         elseif($this->controller == 'home')
-        {
+        } elseif ($this->controller == 'home') {
             require_once BASE . 'views\Home.php';
 
 
-        }
-        elseif($this->controller == '')
-        {
+        } elseif ($this->controller == '') {
             header('Location: \home');
-        }
-        else
-        {
+        } else {
             require_once BASE . '404.html';
 
-            }
         }
+    }
 }

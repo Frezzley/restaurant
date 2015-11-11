@@ -1,7 +1,7 @@
 <?php
 namespace View;
 
-class CreateUser {
+class CreateUser extends View{
   function render()
   {
 

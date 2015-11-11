@@ -1,7 +1,7 @@
 <?php
 namespace View;
 
-class CreateRestaurant
+class CreateRestaurant extends View
 {
     function render()
     {

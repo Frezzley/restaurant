@@ -46,7 +46,7 @@ class User extends Controller
            };
         } else {
             $view = new View\CreateUser();
-            echo $view->render();
+            $view->show($view);
             return $view;
         }
     }
