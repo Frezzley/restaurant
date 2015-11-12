@@ -9,7 +9,7 @@
 namespace View;
 
 
-class EditUser
+class EditUser extends View
 {
     private $vars;
     private $restaurants;

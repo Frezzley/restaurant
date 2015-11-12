@@ -10,11 +10,7 @@
 namespace View;
 
 
-
-
-
-
-class LogIn
+class LogIn extends View
 {
     function render()
     {
@@ -28,7 +24,7 @@ class LogIn
         <input type="password" class="form-control" id="pwd">
     </div>
     <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+        <label><input type="checkbox">Remember me</label>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
 </form>';

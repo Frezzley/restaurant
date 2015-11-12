@@ -17,10 +17,7 @@ require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Show.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Detail.php';
-require_once BASE . 'lib\DbConnection.php';
-require_once BASE . 'lib\DbHandler.php';
-require_once BASE . 'model\Model.php';
-require_once BASE . 'model\Restaurant.php';
+
 
 class Restaurant extends Controller{
 public function create(){
@@ -43,7 +40,8 @@ public function create(){
             };
         } else {
             $view = new View\CreateRestaurant();
-            echo $view->render();
+            //echo $view->render();
+            $view->show($view);
             return $view;
         }
 }
@@ -62,7 +60,8 @@ public function create(){
                     $values = array("Restaurant" => $restaurant, "Error" => $error);
                     $view = new View\EditRestaurant();
                     $view->setVars($values);
-                    echo $view->render();
+                    //echo $view->render();
+                    $view->show($view);
                 } else {
                     header('Location: /restaurant/detail/' . $restaurant->getId());
                     exit;
@@ -71,7 +70,8 @@ public function create(){
                 if ($restaurant != null) {
                     $view = new View\EditRestaurant();
                     $view->setVars(array("Restaurant" => $restaurant));
-                    echo $view->render();
+                    //echo $view->render();
+                    $view->show($view);
                 } else {
                     header('Location: /restaurant/create');
                     exit;
@@ -88,7 +88,8 @@ public function create(){
         $list = $dbHandler->getRestaurants();
         $view = new View\ShowRestaurant();
          $view->setVars($list);
-        echo $view->render();
+        //echo $view->render();
+        $view->show($view);
     }
 
     public function detail($id)
@@ -105,8 +106,8 @@ public function create(){
          */
         $view = new View\DetailRestaurant();
         $view->setVars($restaurant);
-        $view->render();
-
+        //$view->render();
+        $view->show($view);
     }
 
 }

@@ -47,16 +47,16 @@ class Restaurant extends Model
         $this->Price = $Price;
     }
 
-  /* public function __toString()
-    {
-        return $this->name;
-    }*/
+    /* public function __toString()
+      {
+          return $this->name;
+      }*/
 
     function jsonSerialize()
     {
         return array(
-          'id' => $this->id,
-          'name' => $this->name
+            'id' => $this->id,
+            'name' => $this->name
         );
     }
 }

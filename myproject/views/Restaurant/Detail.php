@@ -9,9 +9,10 @@
 namespace View;
 
 
-class DetailRestaurant
+class DetailRestaurant extends View
 {
     private $vars;
+
     public function setVars($params)
     {
         $this->vars = $params;
@@ -20,26 +21,8 @@ class DetailRestaurant
     public function render()
     {
         $restaurant = $this->vars;
-
-
-
-
         /*   $user = $this->vars;*/
-        return "ID: " . $restaurant->getId()  . "<br>" ."Name: " . $restaurant->getName() . "<br>" . "Food: " . $restaurant->getFood();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return "ID: " . $restaurant->getId() . "<br>" . "Name: " . $restaurant->getName() . "<br>" . "Food: " . $restaurant->getFood();
     }
 }
 

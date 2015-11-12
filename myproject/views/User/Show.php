@@ -12,7 +12,8 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 
 
-class ShowUsers
+class ShowUsers extends View
+
 {
     private $vars;
     public $ID;
@@ -23,13 +24,14 @@ class ShowUsers
     {
         $this->vars = $params;
     }
+
     public function render()
     {
         $list = $this->vars;
         ?>
-         <ul class="list-inline">
+        <ul class="list-inline">
         <?php
-                                                                                    $htmlhead = '
+        $htmlhead = '
                                                                                     <div class="container">
                                                                                     <div class="row row-offcanvas row-offcanvas-right">
                                                                                     <div class="col-md-1"></div>
@@ -39,23 +41,26 @@ class ShowUsers
         echo $htmlhead;
 
 
-        foreach ($list as $user) {
-            $ID = $user->getId();
-            $Name = $user->getName();
-            $FirstName = $user->getFirstName();
-            $htmlcontent = '<div>
+    foreach ($list as $user) {
+        $ID = $user->getId();
+        $Name = $user->getName();
+        $FirstName = $user->getFirstName();
+        $htmlcontent = '<div>
                             <h2>' . $ID . ' </h2>
                             <p>' . $FirstName . " " . $Name . '</p>
                             <p><a class="btn btn-default" href=" ' . '/user/edit/' . $ID . '"' . ' role="button">Bearbeiten</a></p>
                             <p><a class="btn btn-default" href=" ' . '/user/detail/' . $ID . '"' . ' role="button">Detail</a></p>
-                            </div>';?>
-            <li class="col-xs-6 col-md-4 col-lg-2">
-                <?php echo $htmlcontent; }?>
-            </li>
-            <?php
-            $htmlfooter = '</div> </div> </div> </div>';
-            echo $htmlfooter;
-            ?>
-            </ul><?php
-        }}
+                            </div>'; ?>
+        <li class="col-xs-6 col-md-4 col-lg-2">
+        <?php echo $htmlcontent;
+    } ?>
+        </li>
+        <?php
+        $htmlfooter = '</div> </div> </div> </div>';
+        echo $htmlfooter;
+        ?>
+        </ul><?php
+    }
+}
+
 ?>

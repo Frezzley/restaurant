@@ -1,12 +1,13 @@
 <?php
 namespace View;
 
-class CreateUser extends View{
-  function render()
-  {
+class CreateUser extends View
+{
+    function render()
+    {
 
 
-      $html = '<html><form method="post" action="/user/create">
+        $html = '<html><form method="post" action="/user/create">
     <div>
     <label for="Firstname">
     Vorname
@@ -54,8 +55,8 @@ class CreateUser extends View{
 </html>';
 
 
-      echo $html;
-  }
+        echo $html;
+    }
 
 
 }

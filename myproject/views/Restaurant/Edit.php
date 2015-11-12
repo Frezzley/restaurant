@@ -8,9 +8,10 @@
  */
 
 namespace View;
-class EditRestaurant
+class EditRestaurant extends View
 {
     private $vars;
+
     public function setVars($params)
     {
         $this->vars = $params;
@@ -18,8 +19,8 @@ class EditRestaurant
 
     function render()
     {
-        $error = array_key_exists("Error",$this->vars) ? $this->vars["Error"]: null;
-        $restaurant = array_key_exists("Restaurant",$this->vars) ? $this->vars["Restaurant"]: null;
+        $error = array_key_exists("Error", $this->vars) ? $this->vars["Error"] : null;
+        $restaurant = array_key_exists("Restaurant", $this->vars) ? $this->vars["Restaurant"] : null;
 
         $html = '<html><form method="post" action="/restaurant/edit/' . $restaurant->getId() . ' ">
    ' . $error . '
@@ -27,14 +28,14 @@ class EditRestaurant
     <label for="Food">
     food:
     </label>
-    <input id="Food" name="Food" value="' . $restaurant->getFood() .'" required>
+    <input id="Food" name="Food" value="' . $restaurant->getFood() . '" required>
     </div>
 
     <div>
     <label for="Name" >
     Name:
     </label>
-    <input id="Name" name="Name" value="' . $restaurant->getName() .'" required>
+    <input id="Name" name="Name" value="' . $restaurant->getName() . '" required>
     </div>
 
     <button type="submit" name="submit-button" value="Submit">
@@ -45,4 +46,5 @@ class EditRestaurant
         echo $html;
     }
 }
+
 ?>

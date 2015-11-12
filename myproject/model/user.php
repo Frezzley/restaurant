@@ -60,7 +60,8 @@ class User extends Model
         $this->DailyPreference = $DailyPreference;
     }
 
-    function jsonSerialize() {
+    function jsonSerialize()
+    {
         // TODO: Implement jsonSerialize() method.
     }
 }

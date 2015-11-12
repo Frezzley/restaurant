@@ -9,9 +9,10 @@
 namespace View;
 
 
-class DetailUser
+class DetailUser extends View
 {
     private $vars;
+
     public function setVars($params)
     {
         $this->vars = $params;
@@ -19,9 +20,9 @@ class DetailUser
 
     public function render()
     {
-       $user = $this->vars;
+        $user = $this->vars;
 
-     /*   $user = $this->vars;*/
-        return "ID: " . $user->getId() . "<br>" ."Vorname: " . $user->getFirstName() . "<br>" ."Nachname: " . $user->getName() . "<br>" ."Preferenzen: " . $user->getPreferences() . "<br>" ."Taegliche Preferenzen: " . $user->getDailyPreference() ;
+        /*   $user = $this->vars;*/
+        return '<div class="col-md-2"></div><div class="col-md-8"> ID: ' . $user->getId() . '<br>' . 'Vorname: ' . $user->getFirstName() . '<br>' . 'Nachname: ' . $user->getName() . '<br>' . 'Preferenzen: ' . $user->getPreferences() . '<br>' . 'Taegliche Preferenzen: ' . $user->getDailyPreference() . '</div>';
     }
 }

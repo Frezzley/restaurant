@@ -12,11 +12,7 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserPreferences.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Login.php';
-require_once BASE . 'lib\DbConnection.php';
-require_once BASE . 'lib\DbHandler.php';
-require_once BASE . 'model\Model.php';
-require_once BASE . 'model\User.php';
-require_once BASE . 'model\Restaurant.php';
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,7 +63,8 @@ class User extends Controller
         $view = new View\DetailUser();
         $view->setVars($user);
         ?><div><?php
-        echo $view->render();
+        //echo $view->render();
+        $view->show($view);
         ?></div><?php
     }
 
@@ -85,7 +82,8 @@ class User extends Controller
                 $values = array("User" => $user, "Error" => $error);
                 $view = new View\EditUser();
                 $view->setVars($values);
-                echo $view->render();
+                $view->show($view);
+                //echo $view->render();
             } else {
                 header('Location: /user/detail/' . $user->getId());
                 exit;
@@ -96,7 +94,8 @@ class User extends Controller
                 $list = $dbHandler->getRestaurants();
 
                 $view->setVars(array("User" => $user),$list);
-                echo $view->render();
+                $view->show($view);
+                //echo $view->render();
             } else {
                 header('Location: /user/create');
                 exit;
@@ -128,9 +127,8 @@ class User extends Controller
 
     public function login()
     {
-
         $view = new View\LogIn();
-        echo $view->render();
-
+        $view->show($view);
+        //echo $view->render();
     }
 }

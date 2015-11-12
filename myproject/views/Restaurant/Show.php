@@ -12,7 +12,7 @@ namespace View;
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
 
 
-class ShowRestaurant
+class ShowRestaurant extends View
 {
     private $vars;
 
@@ -57,9 +57,10 @@ class ShowRestaurant
             }
             ?>
 
-           <!-- <li><input type="button" value="Neu" onclick="window.location.href='/restaurant/create'"/></li>-->
+            <!-- <li><input type="button" value="Neu" onclick="window.location.href='/restaurant/create'"/></li>-->
 
         </ul>
         <?php
 
-    }}
+    }
+}

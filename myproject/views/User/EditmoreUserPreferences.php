@@ -9,7 +9,7 @@
 namespace View;
 
 
-class Editmore
+class Editmore extends View
 {
 
 //public function setVars($params)
@@ -82,6 +82,7 @@ $restaurants = array("auto", "bla2", "42");
     }
 
 }
+
 ?>
 
 
