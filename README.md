@@ -1,3 +1,3 @@
 # restaurant
 
-this programm should help my coworkers and me to determain where we should go out for lunch
+this programm should help my coworkers and me to determine where we should go out for lunch
