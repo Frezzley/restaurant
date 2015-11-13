@@ -146,10 +146,13 @@ public function getRestaurant($id)
         return $this->db->insert_id;
     }
 
-    public function getRestaurants()
+    public function getRestaurants($restaurantName = null)
     {
 
         $sql = "SELECT * FROM restaurant";
+        if ($restaurantName) {
+            $sql .= " WHERE name like \"%{$restaurantName}%\"";
+        }
         $result = $this->db->query($sql);
         //$list = null;
         $listitem = null;
@@ -159,7 +162,7 @@ public function getRestaurant($id)
         if ($result->num_rows > 0) {
             // output data of each row
             foreach ($result as $row){
-                $restaurant = new Restaurant;
+                $restaurant = new Restaurant();
                 $name = $row["Name"];
                 $FirstName = $row["Food"];
                 $ID = $row["Id"];

@@ -10,7 +10,6 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
-require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserPreferences.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Login.php';
 
 
@@ -95,12 +94,22 @@ class User extends Controller
 
                 $view->setVars(array("User" => $user),$list);
                 $view->show($view);
+               // $this->restaurantList();
                 //echo $view->render();
             } else {
                 header('Location: /user/create');
                 exit;
             }
         }
+    }
+
+    public function restaurantList()
+    {
+        $dbHandler = new Lib\DbHandler();
+        $restaurants = $dbHandler->getRestaurants($_GET["term"]);
+
+        echo json_encode($restaurants);
+        return null;
     }
 
     public function index ()

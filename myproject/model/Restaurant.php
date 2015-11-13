@@ -55,8 +55,8 @@ class Restaurant extends Model
     function jsonSerialize()
     {
         return array(
-            'id' => $this->id,
-            'name' => $this->name
+            'value' => $this->id,
+            'label' => $this->name
         );
     }
 }

@@ -9,6 +9,8 @@
 namespace View;
 
 
+use Controller\User;
+
 class EditUser extends View
 {
     private $vars;
@@ -25,10 +27,7 @@ class EditUser extends View
         $error = array_key_exists("Error", $this->vars) ? $this->vars["Error"] : null;
         $user = array_key_exists("User", $this->vars) ? $this->vars["User"] : null;
 
-
         $html = '<form class="form-horizontal" method="post" action="/user/edit/' . $user->getId() . '">
-
-
 <div class="form-group">
     <label for="inputFirstName" class="col-sm-2 control-label">Vorame</label>
     <div class="col-sm-10">
@@ -52,8 +51,12 @@ class EditUser extends View
       <button type="submit" class="btn btn-default">Update</button>
     </div>
   </div>
-</form>';
+  <div>
+    <input type="hidden" name="restaurants[]" id="template-hidden"/>
+    </div>
 
+
+</form>';
         echo $html;
     }
 }

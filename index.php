@@ -19,6 +19,6 @@ define('BASE', realpath($_SERVER["DOCUMENT_ROOT"]) . DS . 'myproject' . DS);
 //require_once ('./myproject/Layout.php');
 require_once ('./myproject/lib/Router.php');
 
-$router = new Router($_SERVER['REQUEST_URI']);
-//$router = new Router($_SERVER['REDIRECT_URL']);
+//$router = new Router($_SERVER['REQUEST_URI']);
+$router = new Router($_SERVER['REDIRECT_URL']);
 

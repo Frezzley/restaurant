@@ -38,10 +38,6 @@ class Router
             require_once BASE . 'controller' . DS . 'Controller.php';
             require_once BASE . 'controller' . DS . ucfirst($this->controller) . '.php';
             $c = "Controller\\" . ucfirst($this->controller);
-            if ($this->controller != 'ajax') {
-                require_once BASE . 'Layout.php';
-                require_once BASE . 'LayoutFooter.php';
-            }
 
             $controllerObject = new $c();
 

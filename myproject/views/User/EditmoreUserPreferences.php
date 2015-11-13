@@ -85,6 +85,3 @@ $restaurants = array("auto", "bla2", "42");
 
 ?>
 
-
-</body>
-</html>

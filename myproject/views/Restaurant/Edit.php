@@ -40,9 +40,7 @@ class EditRestaurant extends View
 
     <button type="submit" name="submit-button" value="Submit">
     Senden!
-    </button>
-    </body>
-    </html>';
+    </button>';
         echo $html;
     }
 }

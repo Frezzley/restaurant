@@ -48,11 +48,7 @@ class CreateUser extends View
     <button type="submit" name="submit-button" value="Submit">
     Senden!
     </button>
-
-
-
-</body>
-</html>';
+';
 
 
         echo $html;

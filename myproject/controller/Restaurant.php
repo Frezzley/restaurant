@@ -48,36 +48,41 @@ public function create(){
     /**
      * @param $id
      */
-    public function edit($id){
+    public function edit($id)
+    {
 
         $dbHandler = new Lib\DbHandler();
         $restaurant = $dbHandler->getRestaurant($id);
-            if (!empty($_POST)) {
-                $restaurant->setFood($_POST['Food']);
-                $restaurant->setName($_POST['Name']);
-                if ($dbHandler->updateRestaurant($restaurant) == false) {
-                    $error = "Error";
-                    $values = array("Restaurant" => $restaurant, "Error" => $error);
-                    $view = new View\EditRestaurant();
-                    $view->setVars($values);
-                    //echo $view->render();
-                    $view->show($view);
-                } else {
-                    header('Location: /restaurant/detail/' . $restaurant->getId());
-                    exit;
-                }
+        if (!empty($_POST)) {
+            $restaurant->setFood($_POST['Food']);
+            $restaurant->setName($_POST['Name']);
+            if ($dbHandler->updateRestaurant($restaurant) == false) {
+                $error = "Error";
+                $values = array("Restaurant" => $restaurant, "Error" => $error);
+                $view = new View\EditRestaurant();
+                $view->setVars($values);
+                //echo $view->render();
+                $view->show($view);
             } else {
-                if ($restaurant != null) {
-                    $view = new View\EditRestaurant();
-                    $view->setVars(array("Restaurant" => $restaurant));
-                    //echo $view->render();
-                    $view->show($view);
-                } else {
-                    header('Location: /restaurant/create');
-                    exit;
+                header('Location: /restaurant/detail/' . $restaurant->getId());
+                exit;
+            }
+        } else {
+            if ($restaurant != null) {
+                $view = new View\EditRestaurant();
+                $view->setVars(array("Restaurant" => $restaurant));
+                //echo $view->render();
+                $view->show($view);
+            } else {
+                header('Location: /restaurant/create');
+                exit;
             }
         }
     }
+
+
+
+
 
 
     public function index ()

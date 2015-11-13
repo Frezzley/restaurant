@@ -24,6 +24,8 @@ $luckywinner = $winner->getName();
 
 $comingup = $list[(rand(0, ((count($list)) - 1)))];
 $forecast = $comingup->getName();
+
+require_once ('./myproject/Layout.php');
 ?>
 
 <div class="container">
@@ -38,3 +40,6 @@ $forecast = $comingup->getName();
     </div>
 
 </div>
+<?php
+require_once ('./myproject/Layoutfooter.php');
+?>

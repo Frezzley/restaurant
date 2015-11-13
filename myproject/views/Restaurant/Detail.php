@@ -22,7 +22,7 @@ class DetailRestaurant extends View
     {
         $restaurant = $this->vars;
         /*   $user = $this->vars;*/
-        return "ID: " . $restaurant->getId() . "<br>" . "Name: " . $restaurant->getName() . "<br>" . "Food: " . $restaurant->getFood();
+        return '<div class="col-md-2"></div><div class="col-md-8"> ID: ' . $restaurant->getId() . '<br>' . 'Name: ' . $restaurant->getName() . '<br>' . 'Food: ' . $restaurant->getFood() . '</div>';
     }
 }
 
