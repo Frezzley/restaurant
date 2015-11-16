@@ -12,6 +12,7 @@ class User extends Model
     private $firstName;
     private $Preferences;
     private $DailyPreference;
+    private $restaurantId;
 
 
     /**
@@ -42,6 +43,22 @@ class User extends Model
     public function setPreferences($Preferences)
     {
         $this->Preferences = $Preferences;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRestaurantId()
+    {
+        return $this->$restaurantId;
+    }
+
+    /**
+     * @param $restaurantId
+     */
+    public function setRestaurant($restaurantId)
+    {
+        $this->$restaurantId = $restaurantId;
     }
 
     /**

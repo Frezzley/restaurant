@@ -13,3 +13,12 @@ $(document).ready(function() {
     };
     $('#inputRestaurant').autocomplete(config);
 });
+
+
+
+
+
+
+
+
+

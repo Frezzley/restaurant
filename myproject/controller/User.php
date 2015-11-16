@@ -75,8 +75,13 @@ class User extends Controller
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
             $user->setPreferences($_POST['Preferences']);
+            $restaurants = "restaurants[]";
+            foreach ($restaurants as $restaurant)
+            {
+                $user->setRestaurantId($_POST[$restaurant]);
+            }
 
-            if ($dbHandler->updateUser($user) == false) {
+            if ($dbHandler->updateUser($user) || $dbHandler->updateUserRestaurants($user) == false) {
                 $error = "Error";
                 $values = array("User" => $user, "Error" => $error);
                 $view = new View\EditUser();

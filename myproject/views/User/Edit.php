@@ -31,19 +31,19 @@ class EditUser extends View
 <div class="form-group">
     <label for="inputFirstName" class="col-sm-2 control-label">Vorame</label>
     <div class="col-sm-10">
-      <input type="text" name="Firstname" class="form-control" id="inputFirstName" placeholder="' . $user->getFirstName() . '">
+      <input type="text" name="Firstname" class="form-control" id="inputFirstName" placeholder="Vorame" value="' . $user->getFirstName() . '">
     </div>
   </div>
   <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <input type="text" name="Lastname" class="form-control" id="inputName" placeholder="' . $user->getName() . '">
+      <input type="text" name="Lastname" class="form-control" id="inputName" placeholder="Nachname" value"' . $user->getName() . '">
     </div>
   </div>
   <div class="form-group">
     <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="' . $user->getPreferences() . '">
+      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value' . $user->getPreferences() . '">
     </div>
   </div>
   <div class="form-group">

@@ -192,6 +192,25 @@ public function getRestaurant($id)
         return true;
     }
 
+    public function updateUserRestaurants($user){
+
+        $id = $user->getId();
+        $restaurantId = $user->getRestaurantId();
+        $sql = "INSERT INTO user_restaurant ( user, restaurant) VALUES ('{$id}', '{$restaurantId}')";
+
+        if ($this->db->query($sql) === FALSE) {
+            return false;
+        }
+        return true;
+
+    }
+
+
+
+
+
+
+
 
     public function __destruct() {
         $this->db->close();
