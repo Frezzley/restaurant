@@ -89,8 +89,8 @@
       <file leaf-file-name="Edit.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myproject/views/Restaurant/Edit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.85858583">
-              <caret line="55" column="2" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.6353535">
+              <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
               <folding>
                 <marker date="1447748831980" expanded="true" signature="486:1282" placeholder="..." />
                 <marker date="1447748831980" expanded="true" signature="486:1304" placeholder="..." />
@@ -709,12 +709,12 @@
       <workItem from="1447312674023" duration="4478000" />
       <workItem from="1447398126548" duration="10272000" />
       <workItem from="1447657411146" duration="3910000" />
-      <workItem from="1447746240969" duration="1956000" />
+      <workItem from="1447746240969" duration="2407000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256551000" />
+    <option name="totallyTimeSpent" value="257002000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -726,7 +726,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1176" extended-state="1" />
+    <frame x="-8" y="-8" width="1924" height="1176" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1286,8 +1286,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/views/Restaurant/Edit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85858583">
-          <caret line="55" column="2" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.6353535">
+          <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
           <folding>
             <marker date="1447748831980" expanded="true" signature="486:1282" placeholder="..." />
             <marker date="1447748831980" expanded="true" signature="486:1304" placeholder="..." />
