@@ -54,7 +54,8 @@ class Router
 
 
         } elseif ($this->controller == '') {
-            header('Location: \home');
+            //header('Location: \home')
+                require_once BASE . 'views\Home.php';
         } else {
             require_once BASE . '404.html';
 

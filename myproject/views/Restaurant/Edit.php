@@ -22,25 +22,33 @@ class EditRestaurant extends View
         $error = array_key_exists("Error", $this->vars) ? $this->vars["Error"] : null;
         $restaurant = array_key_exists("Restaurant", $this->vars) ? $this->vars["Restaurant"] : null;
 
-        $html = '<html><form method="post" action="/restaurant/edit/' . $restaurant->getId() . ' ">
+        $html = '<html><form class="form-horizontal" method="post" action="/restaurant/edit/' . $restaurant->getId() . ' ">
    ' . $error . '
-
-    <label for="Food">
+<div class="form-group">
+    <label for="Food" class="col-sm-2 control-label">
     food:
     </label>
-    <input id="Food" name="Food" value="' . $restaurant->getFood() . '" required>
+    <div class="col-sm-10">
+    <input id="Food" class="form-control" name="Food" value="' . $restaurant->getFood() . '" required>
+    </div>
     </div>
 
-    <div>
-    <label for="Name" >
+    <div class="form-group">
+    <label for="Name" class="col-sm-2 control-label">
     Name:
     </label>
-    <input id="Name" name="Name" value="' . $restaurant->getName() . '" required>
+    <div class="col-sm-10">
+    <input id="Name" class="form-control" name="Name" value="' . $restaurant->getName() . '" required>
+    </div>
     </div>
 
+<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
     <button type="submit" name="submit-button" value="Submit">
     Senden!
-    </button>';
+    </button>
+     </div>
+    <div>';
         echo $html;
     }
 }

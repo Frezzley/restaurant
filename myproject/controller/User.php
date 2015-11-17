@@ -125,7 +125,8 @@ class User extends Controller
         $list = $dbHandler->getUsers();
         $view = new View\ShowUsers();
         $view->setVars($list);
-        echo $view->render();
+             $view->show($view);
+     //   echo $view->render();
     }
 
     public function editmore($ID){

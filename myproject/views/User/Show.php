@@ -31,13 +31,12 @@ class ShowUsers extends View
         ?>
         <ul class="list-inline">
         <?php
-        $htmlhead = '
-                                                                                    <div class="container">
-                                                                                    <div class="row row-offcanvas row-offcanvas-right">
-                                                                                    <div class="col-md-1"></div>
-                                                                                    <div class="col-xs-12 col-sm-12 col-md-10">
-                                                                                    <p class="pull-right visible-xs"></p>
-                                                                                    <div class="row">';
+        $htmlhead = ' <div class="container">
+                      <div class="row row-offcanvas row-offcanvas-right">
+                      <div class="col-md-1"></div>
+                      <div class="col-xs-12 col-sm-12 col-md-10">
+                      <p class="pull-right visible-xs"></p>
+                      <div class="row">';
         echo $htmlhead;
 
 
