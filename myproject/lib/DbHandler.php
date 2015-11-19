@@ -195,14 +195,13 @@ public function getRestaurant($id)
     public function updateUserRestaurants($user){
 
         $id = $user->getId();
-        $restaurantId = $user->getRestaurantId();
-        $sql = "INSERT INTO user_restaurant ( user, restaurant) VALUES ('{$id}', '{$restaurantId}')";
+        $preferedRestaurantId = $user->getPreferedRestaurantId();
+        $sql = "INSERT INTO user_restaurant ( user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}')";
 
         if ($this->db->query($sql) === FALSE) {
             return false;
         }
         return true;
-
     }
 
 

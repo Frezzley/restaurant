@@ -16,19 +16,17 @@ class Router
 
     public function __construct($params)
     {
+        //User/restaurantList?term=migr
         $parts = array_filter(explode('/', $params));
-
+        $parts2 = explode('?', $parts[2]);
+        $parts[2] = $parts2[0];
+        if ($parts2[1] != null){
+        $get = $parts2[1];
+        }
         $this->controller = !empty($parts[1]) ? $parts[1] : "home";
         $this->function = !empty($parts[2]) ? $parts[2] : "index";
-        if ($this->controller == 'ajax') {
 
-            $variables = array_filter(explode('/', $parts[2]));
-            $input = $variables[2];
-            if ($input != null) {
-                echo $input;
-            }
 
-        }
         $this->id = !empty($parts[3]) ? $parts[3] : null;
         require_once BASE . 'lib\DbHandler.php';
         require_once BASE . 'lib\DbConnection.php';

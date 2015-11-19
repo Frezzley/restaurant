@@ -37,13 +37,13 @@ class EditUser extends View
   <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <input type="text" name="Lastname" class="form-control" id="inputName" placeholder="Nachname" value"' . $user->getName() . '">
+      <input type="text" name="Lastname" class="form-control" id="inputName" placeholder="Nachname" value="' . $user->getName() . '">
     </div>
   </div>
   <div class="form-group">
     <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value' . $user->getPreferences() . '">
+      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value="' . $user->getPreferences() . '">
     </div>
   </div>
   <div class="form-group">
@@ -51,8 +51,10 @@ class EditUser extends View
       <button type="submit" class="btn btn-default">Update</button>
     </div>
   </div>
-  <div>
-    <input type="hidden" name="restaurants[]" id="template-hidden"/>
+  <div class="content">
+  <ul id="content">
+  </ul>
+    <input type="hidden"  id="template-hidden"/>
     </div>
 
 
