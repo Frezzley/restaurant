@@ -33,7 +33,7 @@ $restaurants = array("auto", "bla2", "42");
       //  $ID = $restaurant->getId();
 
    //     $Name = $restaurant->getName();
-        echo $Name;
+     //   echo $Name;
         ?>
 
 <ul>
@@ -78,10 +78,7 @@ $restaurants = array("auto", "bla2", "42");
     ?>  </ul>
     </div>
     <?php
-
     }
-
 }
-
 ?>
 

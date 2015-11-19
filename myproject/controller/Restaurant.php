@@ -80,11 +80,6 @@ public function create(){
         }
     }
 
-
-
-
-
-
     public function index ()
     {
         $dbHandler = new Lib\DbHandler();
@@ -114,5 +109,4 @@ public function create(){
         //$view->render();
         $view->show($view);
     }
-
 }

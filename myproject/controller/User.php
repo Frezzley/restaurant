@@ -75,11 +75,12 @@ class User extends Controller
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
             $user->setPreferences($_POST['Preferences']);
-            $restaurants = "restaurants[]";
-            foreach ($restaurants as $restaurant)
-            {
-                $user->setRestaurantId($_POST[$restaurant]);
-            }
+
+
+            $user->setPreferedRestaurantId($_POST['restaurants[]']);
+
+            $dbHandler->updateUser($user);
+            $dbHandler->updateUserRestaurants($user);
 
             if ($dbHandler->updateUser($user) || $dbHandler->updateUserRestaurants($user) == false) {
                 $error = "Error";
@@ -114,7 +115,7 @@ class User extends Controller
         $restaurants = $dbHandler->getRestaurants($_GET["term"]);
 
         echo json_encode($restaurants);
-        return null;
+        die;
     }
 
     public function index ()
