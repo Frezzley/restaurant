@@ -192,24 +192,21 @@ public function getRestaurant($id)
         return true;
     }
 
-    public function updateUserRestaurants($user){
-
+    public function updateUserRestaurants($user)
+    {
         $id = $user->getId();
-        $preferedRestaurantId = $user->getPreferedRestaurantId();
-        $sql = "INSERT INTO user_restaurant ( user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}')";
+        $preferedRestaurantIds = $user->getPreferedRestaurantId();
+   
+        }
+
+        foreach ($preferedRestaurantIds as $preferedRestaurantId){
+
 
         if ($this->db->query($sql) === FALSE) {
             return false;
-        }
+        }}
         return true;
     }
-
-
-
-
-
-
-
 
     public function __destruct() {
         $this->db->close();

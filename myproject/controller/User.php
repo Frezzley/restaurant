@@ -77,12 +77,12 @@ class User extends Controller
             $user->setPreferences($_POST['Preferences']);
 
 
-            $user->setPreferedRestaurantId($_POST['restaurants[]']);
+            $user->setPreferedRestaurantId($_POST['restaurant']);
 
-            $dbHandler->updateUser($user);
-            $dbHandler->updateUserRestaurants($user);
+          //  $dbHandler->updateUser($user);
+          //  $dbHandler->updateUserRestaurants($user);
 
-            if ($dbHandler->updateUser($user) || $dbHandler->updateUserRestaurants($user) == false) {
+            if ($dbHandler->updateUser($user) == false || $dbHandler->updateUserRestaurants($user) == false) {
                 $error = "Error";
                 $values = array("User" => $user, "Error" => $error);
                 $view = new View\EditUser();

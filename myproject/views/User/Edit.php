@@ -53,7 +53,9 @@ class EditUser extends View
   </div>
   <div id="content">
   <ul>
-    <li  id="li-template-hidden"><button type="button" id="clickMe" class="btn btn-error" onclick="doFunction();>Löschen</button></li>
+    <li  id="li-template-hidden">
+
+    </li>
     </ul>
     <input type="hidden"  id="template-hidden"/>
     </div>
