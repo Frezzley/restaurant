@@ -45,9 +45,9 @@ class DbHandler
         $Preferences = $user->getPreferences();
 
         /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id};";
-
-        if ($this->db->query($sql) === FALSE) {
+        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
+        $sql .= $this->updateUserRestaurants($user);
+        if ($this->db->multi_query($sql) === FALSE) {
             return false;
         }
         return true;
@@ -192,26 +192,22 @@ public function getRestaurant($id)
         return true;
     }
 
-    public function updateUserRestaurants($user)
+    private function updateUserRestaurants($user)
     {
         $id = $user->getId();
-        $preferedRestaurantIds = $user->getPreferedRestaurantId();
-   
-        }
-
-        foreach ($preferedRestaurantIds as $preferedRestaurantId){
-
-
-        if ($this->db->query($sql) === FALSE) {
-            return false;
-        }}
-        return true;
+        $preferedRestaurantIds = $user->getPreferedRestaurantIds();
+        $sql = "DELETE FROM user_restaurant WHERE user = {$id}; ";
+        foreach ($preferedRestaurantIds as $preferedRestaurantId) {
+            $sql .= "INSERT INTO user_restaurant (user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}'); ";
+        };
+        return $sql;
     }
 
-    public function __destruct() {
+
+    public function __destruct()
+    {
         $this->db->close();
         $this->db = null;
     }
-
 }
 ?>

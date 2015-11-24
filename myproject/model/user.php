@@ -12,7 +12,7 @@ class User extends Model
     private $firstName;
     private $Preferences;
     private $DailyPreference;
-    private $PreferedRestaurantId = array();
+    private $PreferedRestaurantIds = array();
     private $restaurants = array();
 
 
@@ -79,14 +79,14 @@ class User extends Model
         $this->DailyPreference = $DailyPreference;
     }
 
-    public function setPreferedRestaurantId(array $list)
+    public function setPreferedRestaurantIds(array $list)
     {
-        $this->PreferedRestaurantId = $list;
+        $this->PreferedRestaurantIds = $list;
     }
 
-    public function getPreferedRestaurantId()
+    public function getPreferedRestaurantIds()
     {
-        return $this->PreferedRestaurantId;
+        return $this->PreferedRestaurantIds;
     }
 
     function jsonSerialize()
