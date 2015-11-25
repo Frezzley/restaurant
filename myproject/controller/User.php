@@ -96,7 +96,8 @@ class User extends Controller
         } else {
             if ($user != null) {
                 $view = new View\EditUser();
-                $list = $dbHandler->getRestaurants();
+              //  $list = $dbHandler->getRestaurants();
+                $list = $dbHandler->getUserRestaurant($id);
 
                 $view->setVars(array("User" => $user),$list);
                 $view->show($view);

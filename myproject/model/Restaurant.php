@@ -52,6 +52,11 @@ class Restaurant extends Model
           return $this->name;
       }*/
 
+    public function getRestaurantName()
+    {
+        return $this->name;
+    }
+
     function jsonSerialize()
     {
         return array(

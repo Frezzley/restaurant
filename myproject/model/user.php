@@ -84,9 +84,21 @@ class User extends Model
         $this->PreferedRestaurantIds = $list;
     }
 
-    public function getPreferedRestaurantIds()
+   /* public function getPreferedRestaurantIds()
     {
         return $this->PreferedRestaurantIds;
+    }
+
+    public function setRestaurantIds($RestaurantIds = array())
+    {
+        $this->restaurants = $RestaurantIds;
+    }
+
+   */
+
+    public function getRestaurants()
+    {
+        return $this->restaurants;
     }
 
     function jsonSerialize()

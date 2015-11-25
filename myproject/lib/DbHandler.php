@@ -203,6 +203,31 @@ public function getRestaurant($id)
         return $sql;
     }
 
+    public function getUserRestaurant($id)
+    {
+        $sql = "select restaurant from user_restaurant where user = {$id}";
+        $result = $this->db->query($sql);
+        //$list = null;
+        $listitem = null;
+        $list = array();
+        if ($result->num_rows > 0) {
+            // output data of each row
+            $user = $this->getUser($id);
+            foreach ($result as $row) {
+               $restaurantId = $row['restaurant'];
+                $restaurant = $this->getRestaurant($restaurantId);
+              //  $restaurantName = $restaurant['name'];
+     //            $restaurantName = $this->getRestaurantName($restaurant);
+             //   $list = array($restaurantId => $restaurantName);
+                $list[] = $restaurantId;
+                // return $restaurantList;
+            }
+     //       $user->setRestaurantIds($list);
+            return($list);
+        }
+    }
+
+
 
     public function __destruct()
     {

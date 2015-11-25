@@ -41,7 +41,7 @@ class EditUser extends View
     </div>
   </div>
   <div class="form-group">
-    <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant</label>
+    <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant hinzufuegen</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value="' . $user->getPreferences() . '">
     </div>
@@ -53,16 +53,30 @@ class EditUser extends View
   </div>
   <div id="content">
   <ul>
-    <li  id="li-template-hidden">
-
-    </li>
-    </ul>
-    <input type="hidden"  id="template-hidden"/>
+    <li  id="li-template-hidden"></li>
+    ';
+    $htmlmiddle = '</ul>';
+        $htmlbottom = ' <input type="hidden"  id="template-hidden"/>
     </div>
 
 
 </form>';
         echo $html;
+        foreach ($this->restaurants as $restaurant) {
+            $li = '<li class="restaurant" value="';
+            $li .= '">';
+            $li .= $restaurant;
+            $li .= "</li>";
+            echo $li;
+        }
+        echo $htmlmiddle;
+        foreach ($this->restaurants as $restaurant) {
+            $input = '<input type="hidden" class="restaurant" value="';
+            $input .= $restaurant;
+            $input .= '" name="restaurant[]">';
+            echo $input;
+        }
+        echo $htmlbottom;
     }
 }
 

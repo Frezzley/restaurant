@@ -9,8 +9,6 @@ define('DS', DIRECTORY_SEPARATOR);
 // define the application path
 define('ROOT', dirname(dirname(__FILE__)));
 
-
-
 define('BASE', realpath($_SERVER["DOCUMENT_ROOT"]) . DS . 'myproject' . DS);
 
 // start to dispatch
@@ -21,4 +19,3 @@ require_once ('./myproject/lib/Router.php');
 
 $router = new Router($_SERVER['REQUEST_URI']);
 //$router = new Router($_SERVER['REDIRECT_URL']);
-
