@@ -214,17 +214,35 @@ public function getRestaurant($id)
             // output data of each row
             $user = $this->getUser($id);
             foreach ($result as $row) {
-               $restaurantId = $row['restaurant'];
-                $restaurant = $this->getRestaurant($restaurantId);
+                $restaurantId = $row['restaurant'];
+                // $restaurant = $this->getRestaurant($restaurantId)
+
+                $sql = "SELECT * FROM restaurant WHERE Id = {$restaurantId}";
+                $result = $this->db->query($sql);
+
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    foreach ($result as $row) {
+                        $restaurant = new Restaurant();
+                        $name = $row["Name"];
+                        // $restaurant->setName($name);
+                       // $list[$restaurantId] = $name;
+
+                        $chosenRestaurants = array("ID" => $restaurantId, "Name" => $name);
+                        $list[] = $chosenRestaurants;
+                        //$list[] = $restaurantId;
               //  $restaurantName = $restaurant['name'];
      //            $restaurantName = $this->getRestaurantName($restaurant);
              //   $list = array($restaurantId => $restaurantName);
-                $list[] = $restaurantId;
                 // return $restaurantList;
             }
-     //       $user->setRestaurantIds($list);
-            return($list);
+                    //       $user->setRestaurantIds($list);
+
+                }
+            }
         }
+        return ($list);
     }
 
 

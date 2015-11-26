@@ -84,7 +84,7 @@ class User extends Model
         $this->PreferedRestaurantIds = $list;
     }
 
-   /* public function getPreferedRestaurantIds()
+    public function getPreferedRestaurantIds()
     {
         return $this->PreferedRestaurantIds;
     }
@@ -94,7 +94,7 @@ class User extends Model
         $this->restaurants = $RestaurantIds;
     }
 
-   */
+
 
     public function getRestaurants()
     {
