@@ -53,8 +53,9 @@ class EditUser extends View
   </div>
   <div id="content">
   <ul>
-    <li  id="li-template-hidden"></li>
+    <li  id="li-template-hidden"> <button type="button" class="btn btn-default btn-lg remove" value="Loeschen"></li>
     ';
+
     $htmlmiddle = '</ul>';
         $htmlbottom = ' <input type="hidden"  id="template-hidden"/>
     </div>
@@ -63,16 +64,23 @@ class EditUser extends View
 </form>';
         echo $html;
         foreach ($this->restaurants as $restaurant) {
-            $li = '<li class="restaurant">';
-            $li .= $restaurant["Name"];
-            $li .= "</li>";
-            echo $li;
-        }
+                $li = '<li class="restaurant" data-id="';
+                $li .= $restaurant["ID"];
+                $li .= '">';
+                $li .= $restaurant["Name"];
+                $li .= "</br>";
+                $li .= '<button type="button" class="btn btn-default btn-lg remove" value="Loeschen">';
+                $li .= "</li>";
+                echo $li;
+
+            }
         echo $htmlmiddle;
         foreach ($this->restaurants as $restaurant) {
             $input = '<input type="hidden" class="restaurant" value="';
             $input .= $restaurant["ID"];
-            $input .= '" name="restaurant[]">';
+            $input .= '" name="restaurant[]" data-id="';
+            $input .= $restaurant["ID"];
+            $input .= '">';
             echo $input;
         }
         echo $htmlbottom;
