@@ -2,7 +2,6 @@ $(document).ready(function () {
     var config = {
         source: '/User/restaurantList',
         minLength: 2,
-
         select: function (event, ui) {
            // $('input[name="restaurant"]')
             var restaurantexists = "false";
@@ -22,7 +21,7 @@ $(document).ready(function () {
                 //template.val(ui.item.label);
                 template.val(ui.item.value);
                 template.attr('name', 'restaurant[]');
-                template.add('#data-id',ui.item.value);
+                template.add('data-id ='.ui.item.value);
                 // template.attr('readonly', true);
                 appendItem(ui.item.label);
                 //template.val(ui.item.label);
@@ -35,12 +34,13 @@ $(document).ready(function () {
                 // $('#inputRestaurant').removeAttr('value');
             }
                $('#inputRestaurant').val("");
-               // $("#inputRestaurant").find("input[type=text], textarea").val("");
+                // $("#inputRestaurant").find("input[type=text], textarea").val("");
                 $('#inputRestaurant').value('');
                 //document.getElementById("inputRestaurant").reset();
             }
     };
     $('#inputRestaurant').autocomplete(config);
+    $(".btn.btn-default.btn-lg.remove").on('click', deleteItem);
 });
 
 var appendItem = function (text) {
@@ -54,32 +54,62 @@ var appendItem = function (text) {
 //    template.text(text);
     //  $(this).text("").val("");$('#id-template-hidden').parent().append(template);
 }
+
+var deleteItem = function () {
+    //console.log("function  start")
+    var button = $(this);
+    var dataId = button.parent().data("id");
+    button.parent().remove();
+  //  $(this).parent().remove();
+
+    //console.log($("input[type='hidden']"));
+    //console.log(dataId);
+
+    $("input[type=hidden]").each(function () {
+    var InputId = $("input[type='hidden']").data("id");
+
+        if (InputId == dataId) {
+           // $("input[type='hidden']").data("id").remove();
+            $(this).remove();
+
+
+        }
+    })
+}
+
+
 //  }
 //
 
-$(document).ready(function(){
+//$(document).ready(function(){
     //$(".btn.btn-default.btn-lg.remove").on(function(){
     $(".btn.btn-default.btn-lg.remove").on('click', function() {
+        //  $(img).bind('click', function(){
+        var className = $(this).attr('data-id');
+        var allElems = $('".' + className + '"').not(this);
+        //});
+        console.log(className);
+        // $(".btn.btn-default.btn-lg.remove").click(function(){
+        $(this).parent().remove();
+        //var x = document.getElementById("myBtn").getAttribute("onclick")
+        console.log($(this).val($(this).attr('data-id')));
+        var id = $(this).val($(this).attr('data-id'))
 
-        $(".btn.btn-default.btn-lg.remove").click(function(){
-            $(this).parent().remove();
-            //var x = document.getElementById("myBtn").getAttribute("onclick")
-            console.log($(this).val( $(this).attr('data-id')));
-            var id =$(this).val( $(this).attr('data-id'))
+        console.log($(this).attr('data-id'));
+        var did = $(this).attr('data-id-');
 
-            console.log($(this).attr('data-id'));
-            var did =$(this).attr('data-id');
+        console.log($("input").attr('data-id'));
 
-            console.log($("input").attr('data-id'));
+        var element = document.getElementById("data-id");
+        //   element.outerHTML = "";
+        delete element;
 
-            var element = document.getElementById("data-id");
-         //   element.outerHTML = "";
-            delete element;
-
-            var list = document.getElementsByClassName("restaurant");
-            for(var i = list.length - 1; 0 <= i; i--)
-                if(list[i] && list[i].parentElement)
-                    list[i].parentElement.removeChild(list[i]);
+        var list = document.getElementsByClassName("restaurant");
+        for (var i = list.length - 1; 0 <= i; i--) {
+            if (list[i] && list[i].parentElement) {
+                list[i].parentElement.removeChild(list[i]);
+            }
+        }
             //console.log($(this).parent().getAttribute('data-id'));
             //var attr = $(this).parent().getAttribute('data-id');
             //console.log(attr);
@@ -105,6 +135,8 @@ $(document).ready(function(){
           //  });
 
         $('data-id').data("3");
-        $("input").remove('data-id=3');
-    });
+        $("input").remove('*data-id=3');
+
+        jQuery('#data-id=3').remove();
+   // });
 });
