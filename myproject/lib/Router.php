@@ -48,12 +48,13 @@ class Router
             //require_once BASE . 'LayoutFooter.php';
 
         } elseif ($this->controller == 'home') {
-            require_once BASE . 'views\Home.php';
+           // require_once BASE . 'views\Home.php';
+            require_once BASE . 'controller\Home.php';
 
 
         } elseif ($this->controller == '') {
             //header('Location: \home')
-                require_once BASE . 'views\Home.php';
+            require_once BASE . 'controller\Home.php';
         } else {
             require_once BASE . '404.html';
 

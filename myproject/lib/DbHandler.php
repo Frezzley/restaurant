@@ -91,11 +91,13 @@ class DbHandler
                $name = $row["LastName"];
                 $FirstName = $row["FirstName"];
                 $ID = $row["Id"];
+                $restaurantIDs = $this->getUserRestaurant($ID);
               //  $getDailyPreference = $row["Daily_Preference"];
               //  $Preferences = $row["Preferences"];
                 $user->setName($name);
                 $user->setFirstName($FirstName);
                 $user->setId($ID);
+                $user->setPreferedRestaurantIds($restaurantIDs);
                // $user->setPreferences($Preferences);
                // $user->setDailyPreference($getDailyPreference);
                 $list[]= $user;

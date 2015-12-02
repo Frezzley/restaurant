@@ -74,7 +74,7 @@ class User extends Controller
         if (!empty($_POST)) {
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
-            $user->setPreferences($_POST['Preferences']);
+            //$user->setPreferences($_POST['Preferences']);
 
 
             $user->setPreferedRestaurantIds($_POST['restaurant']);
@@ -147,5 +147,11 @@ class User extends Controller
         $view = new View\LogIn();
         $view->show($view);
         //echo $view->render();
+    }
+
+    public function getAllUserpreferences(){
+        $dbHandler = new Lib\DbHandler();
+        $userlist = $dbHandler->getUsers();
+
     }
 }
