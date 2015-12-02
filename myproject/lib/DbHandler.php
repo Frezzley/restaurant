@@ -6,6 +6,7 @@ require_once BASE . 'lib\DbConnection.php';
 use Model\User;
 use Model\Restaurant;
 
+
 /**
  * Created by IntelliJ IDEA.
  * User: adi
@@ -31,7 +32,7 @@ class DbHandler
         $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
 
         if ($this->db->query($sql) === FALSE) {
-           return false;
+            return false;
         }
 
         return $this->db->insert_id;
@@ -61,22 +62,26 @@ class DbHandler
         if ($result->num_rows > 0) {
             $newuser = new User();
             while ($row = $result->fetch_assoc()) {
+
+                $restaurantIDs = $this->getUserRestaurant($row['Id']);
                 $newuser->setId($row['Id']);
-               $newuser->setFirstName($row['FirstName']);
+                $newuser->setFirstName($row['FirstName']);
                 $newuser->setName($row['LastName']);
                 $newuser->setDailyPreference($row["Daily_Preference"]);
                 $newuser->setPreferences($row["Preferences"]);
+                $newuser->setPreferedRestaurantIds($restaurantIDs);
             }
         }
         return $newuser;
     }
+
     /**
      * @return null
      */
     public function getUsers()
     {
 
-      //  $sql = "SELECT Id, FirstName, LastName FROM user";
+        //  $sql = "SELECT Id, FirstName, LastName FROM user";
         $sql = "SELECT * FROM user";
         $result = $this->db->query($sql);
         //$list = null;
@@ -86,55 +91,41 @@ class DbHandler
 
         if ($result->num_rows > 0) {
             // output data of each row
-            foreach ($result as $row){
-            $user = new User;
-               $name = $row["LastName"];
+            foreach ($result as $row) {
+                $user = new User;
+                $name = $row["LastName"];
                 $FirstName = $row["FirstName"];
                 $ID = $row["Id"];
-                $restaurantIDs = $this->getUserRestaurant($ID);
-              //  $getDailyPreference = $row["Daily_Preference"];
-              //  $Preferences = $row["Preferences"];
+                $restaurantIdList = $this->getUserRestaurant($ID);//
                 $user->setName($name);
                 $user->setFirstName($FirstName);
                 $user->setId($ID);
-                $user->setPreferedRestaurantIds($restaurantIDs);
-               // $user->setPreferences($Preferences);
-               // $user->setDailyPreference($getDailyPreference);
-                $list[]= $user;
+                $user->setPreferedRestaurantIds($restaurantIdList);//
+                $list[] = $user;
             }
         }
         return $list;
-      /*      while($row = $result->fetch_assoc()) {
-             //   echo "Id: " . $row["Id"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
-               // $listitem [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
-                //$listitem = [$row['Id']] =  $row["FirstName"]. " " . $row["LastName"];
-               // array_push($list, $listitem);
-               // $listitem = null;
-            }
-        } else {
-            echo "0 results";
-            $listitem = null;
-        }
-        return $list;*/
     }
 
-public function getRestaurant($id)
-{
-    $sql = "select * from restaurant where id = {$id}";
-    $result = $this->db->query($sql);
-    $newrestaurant = null;
-    if ($result->num_rows > 0) {
-        $newrestaurant = new Restaurant();
-        while ($row = $result->fetch_assoc()) {
-            $newrestaurant->setId($row['Id']);
-            $newrestaurant->setName($row['Name']);
-            $newrestaurant->setFood($row['Food']);
-            $newrestaurant->setPrice($row['Price']);
+    public function getRestaurant($id)
+    {
+        //$sql = "select * from restaurant where Id = {$id}";
+        $sql = "USE restaurant; SELECT * FROM restaurant;";
+        $result = $this->db->query($sql);
+        $newrestaurant = null;
+        if ($result->num_rows > 0) {
+            $newrestaurant = new Restaurant();
+            while ($row = $result->fetch_assoc()) {
+                $newrestaurant->setId($row['Id']);
+                $newrestaurant->setName($row['Name']);
+                $newrestaurant->setFood($row['Food']);
+                $newrestaurant->setPrice($row['Price']);
+            }
         }
+        return $newrestaurant;
     }
-    return $newrestaurant;
-}
-    public function createRestaurant (Restaurant $restaurant)
+
+    public function createRestaurant(Restaurant $restaurant)
     {
         $newFood = $restaurant->getFood();
         $newName = $restaurant->getName();
@@ -163,7 +154,7 @@ public function getRestaurant($id)
 
         if ($result->num_rows > 0) {
             // output data of each row
-            foreach ($result as $row){
+            foreach ($result as $row) {
                 $restaurant = new Restaurant();
                 $name = $row["Name"];
                 $FirstName = $row["Food"];
@@ -173,7 +164,7 @@ public function getRestaurant($id)
                 $restaurant->setFood($FirstName);
                 $restaurant->setId($ID);
 
-                $list[]= $restaurant;
+                $list[] = $restaurant;
             }
         }
         return $list;
@@ -207,46 +198,19 @@ public function getRestaurant($id)
 
     public function getUserRestaurant($id)
     {
-        $sql = "select restaurant from user_restaurant where user = {$id}";
+        $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
         $result = $this->db->query($sql);
-        //$list = null;
-        $listitem = null;
         $list = array();
+        $chosenRestaurants = array();
         if ($result->num_rows > 0) {
-            // output data of each row
-            $user = $this->getUser($id);
             foreach ($result as $row) {
-                $restaurantId = $row['restaurant'];
-                // $restaurant = $this->getRestaurant($restaurantId)
-
-                $sql = "SELECT * FROM restaurant WHERE Id = {$restaurantId}";
-                $result = $this->db->query($sql);
-
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    foreach ($result as $row) {
-                        $restaurant = new Restaurant();
-                        $name = $row["Name"];
-                        // $restaurant->setName($name);
-                       // $list[$restaurantId] = $name;
-
-                        $chosenRestaurants = array("ID" => $restaurantId, "Name" => $name);
-                        $list[] = $chosenRestaurants;
-                        //$list[] = $restaurantId;
-              //  $restaurantName = $restaurant['name'];
-     //            $restaurantName = $this->getRestaurantName($restaurant);
-             //   $list = array($restaurantId => $restaurantName);
-                // return $restaurantList;
-            }
-                    //       $user->setRestaurantIds($list);
-
-                }
+                $chosenRestaurants['Id'] = $row['Id'];
+                $chosenRestaurants['Name'] = $row['Name'];
+                $list[] = $chosenRestaurants;
             }
         }
-        return ($list);
+        return $list;
     }
-
 
 
     public function __destruct()
@@ -255,4 +219,5 @@ public function getRestaurant($id)
         $this->db = null;
     }
 }
+
 ?>

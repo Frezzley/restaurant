@@ -35,8 +35,6 @@ class Home extends Controller
 
     public function defaultValues()
     {
-
-
         $forecast = "Migros";
 
         $dbHandler = new Lib\DbHandler();
@@ -100,7 +98,7 @@ class Home extends Controller
            $restaurants = $user->getPreferedRestaurantIds();
            $restaurantID = array();
            foreach ($restaurants as $restaurant) {
-               $restaurantID[] .= $restaurant[ID];
+               $restaurantID[] .= $restaurant["Id"];
 
            }
            $allRestaurantIDs =  array_intersect($restaurantID,$allRestaurantIDs);
@@ -116,8 +114,12 @@ private function calculateWinner($allIdsInCommon){
     $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
     $dbHandler = new Lib\DbHandler();
     $winner = $dbHandler->getRestaurant($winnerId);
-   // $winnerName = $winner->getName();
-    $winnerName = "Migros";
+    $winnerName = $winner->getName();
+
+    }
+    else
+    {
+        $winnerName = "Migros";
     }
     return $winnerName;
 }

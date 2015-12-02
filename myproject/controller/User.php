@@ -77,7 +77,8 @@ class User extends Controller
             //$user->setPreferences($_POST['Preferences']);
 
 
-            $user->setPreferedRestaurantIds($_POST['restaurant']);
+           // $user->setPreferedRestaurantIds($_POST['restaurant']);
+            $user->updatePreferedRestaurantIds($_POST['restaurant']);
 
           //  $dbHandler->updateUser($user);
           //  $dbHandler->updateUserRestaurants($user);
