@@ -18,11 +18,13 @@ class DbHandler
     /**
      * @var $db mysqli
      */
-    private $db;
+    private static $db;
 
     public function __construct()
     {
-        $this->db = DbConnection::getConnection();
+        if(!self::$db) {
+            $this->db = DbConnection::getConnection();
+        }
     }
 
     public function createUser(User $user)
@@ -109,8 +111,10 @@ class DbHandler
 
     public function getRestaurant($id)
     {
+
         //$sql = "select * from restaurant where Id = {$id}";
-        $sql = "USE restaurant; SELECT * FROM restaurant;";
+        $sql = "SELECT * FROM restaurant;";
+      //  $sql = "USE restaurant; SELECT * FROM restaurant;";
         $result = $this->db->query($sql);
         $newrestaurant = null;
         if ($result->num_rows > 0) {

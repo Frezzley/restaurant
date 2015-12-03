@@ -23,9 +23,9 @@ class Home extends Controller
     public function index()
     {
 
-       $allIdsInCommon = $this->findRestaurandsInCommon();
-       $winner =  $this->calculateWinner($allIdsInCommon);
-       if (winner == null)
+      $allIdsInCommon = $this->findRestaurandsInCommon();
+       $winner =  $this->calculateWinner("3");
+       if ($winner == null)
        {
            $winner = $this->defaultValues();
        }
@@ -113,7 +113,7 @@ private function calculateWinner($allIdsInCommon){
 
     $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
     $dbHandler = new Lib\DbHandler();
-    $winner = $dbHandler->getRestaurant($winnerId);
+        $winner = $dbHandler->getRestaurant($winnerId);
     $winnerName = $winner->getName();
 
     }
