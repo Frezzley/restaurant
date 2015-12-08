@@ -18,210 +18,224 @@ class DbHandler
     /**
      * @var $db mysqli
      */
-    private static $db;
 
-    public function __construct()
-    {
-        if(!self::$db) {
-            $this->db = DbConnection::getConnection();
-        }
-    }
 
-    public function createUser(User $user)
-    {
-        $newFirst = $user->getFirstName();
-        $newLast = $user->getName();
-        $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
+    public $dbConnectionstatus;
 
-        if ($this->db->query($sql) === FALSE) {
-            return false;
-        }
+    private static $dbConnection;
 
-        return $this->db->insert_id;
-    }
 
-    public function updateUser(User $user)
-    {
-        $id = $user->getId();
-        $name = $user->getName();
-        $firstName = $user->getFirstName();
-        $Preferences = $user->getPreferences();
-
-        /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
-        $sql .= $this->updateUserRestaurants($user);
-        if ($this->db->multi_query($sql) === FALSE) {
-            return false;
-        }
-        return true;
-    }
-
-    public function getUser($id)
-    {
-        $sql = "select * from user where id = {$id}";
-        $result = $this->db->query($sql);
-        $newuser = null;
-        if ($result->num_rows > 0) {
-            $newuser = new User();
-            while ($row = $result->fetch_assoc()) {
-
-                $restaurantIDs = $this->getUserRestaurant($row['Id']);
-                $newuser->setId($row['Id']);
-                $newuser->setFirstName($row['FirstName']);
-                $newuser->setName($row['LastName']);
-                $newuser->setDailyPreference($row["Daily_Preference"]);
-                $newuser->setPreferences($row["Preferences"]);
-                $newuser->setPreferedRestaurantIds($restaurantIDs);
-            }
-        }
-        return $newuser;
-    }
-
-    /**
-     * @return null
-     */
-    public function getUsers()
+    public static function getDbHandler()
     {
 
-        //  $sql = "SELECT Id, FirstName, LastName FROM user";
-        $sql = "SELECT * FROM user";
-        $result = $this->db->query($sql);
-        //$list = null;
-        $listitem = null;
-        $list = array();
-        //$listitem = array();
+         if(self::$dbHelper == null) {
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            foreach ($result as $row) {
-                $user = new User;
-                $name = $row["LastName"];
-                $FirstName = $row["FirstName"];
-                $ID = $row["Id"];
-                $restaurantIdList = $this->getUserRestaurant($ID);//
-                $user->setName($name);
-                $user->setFirstName($FirstName);
-                $user->setId($ID);
-                $user->setPreferedRestaurantIds($restaurantIdList);//
-                $list[] = $user;
-            }
-        }
-        return $list;
+             static::$dbHelper = new dbHelper();}
+        return static::$dbHelper;
     }
 
-    public function getRestaurant($id)
-    {
+    protected function __construct() {}
+    private function __clone(){}
 
-        //$sql = "select * from restaurant where Id = {$id}";
-        $sql = "SELECT * FROM restaurant;";
-      //  $sql = "USE restaurant; SELECT * FROM restaurant;";
-        $result = $this->db->query($sql);
-        $newrestaurant = null;
-        if ($result->num_rows > 0) {
-            $newrestaurant = new Restaurant();
-            while ($row = $result->fetch_assoc()) {
-                $newrestaurant->setId($row['Id']);
-                $newrestaurant->setName($row['Name']);
-                $newrestaurant->setFood($row['Food']);
-                $newrestaurant->setPrice($row['Price']);
-            }
-        }
-        return $newrestaurant;
-    }
+                                                public function createUser(User $user)
+                                                {
+                                                    $newFirst = $user->getFirstName();
+                                                    $newLast = $user->getName();
+                                                    $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
 
-    public function createRestaurant(Restaurant $restaurant)
-    {
-        $newFood = $restaurant->getFood();
-        $newName = $restaurant->getName();
-        $newPrice = $restaurant->getPrice();
-        $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
+                                                    if ($this->db->query($sql) === FALSE) {
+                                                        return false;
+                                                    }
 
-        if ($this->db->query($sql) === FALSE) {
-            return false;
-        }
+                                                    return $this->db->insert_id;
+                                                }
 
-        return $this->db->insert_id;
-    }
+                                                public function updateUser(User $user)
+                                                {
+                                                    $id = $user->getId();
+                                                    $name = $user->getName();
+                                                    $firstName = $user->getFirstName();
+                                                    $Preferences = $user->getPreferences();
 
-    public function getRestaurants($restaurantName = null)
-    {
+                                                    /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+                                                    $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
+                                                    $sql .= $this->updateUserRestaurants($user);
+                                                    if ($this->db->multi_query($sql) === FALSE) {
+                                                        return false;
+                                                    }
+                                                    return true;
+                                                }
 
-        $sql = "SELECT * FROM restaurant";
-        if ($restaurantName) {
-            $sql .= " WHERE name like \"%{$restaurantName}%\"";
-        }
-        $result = $this->db->query($sql);
-        //$list = null;
-        $listitem = null;
-        $list = array();
+                                                public function getUser($id)
+                                                {
+                                                    $sql = "select * from user where id = {$id}";
+                                                    $result = $this->db->query($sql);
+                                                    $newuser = null;
+                                                    if ($result->num_rows > 0) {
+                                                        $newuser = new User();
+                                                        while ($row = $result->fetch_assoc()) {
+
+                                                            $restaurantIDs = $this->getUserRestaurant($row['Id']);
+                                                            $newuser->setId($row['Id']);
+                                                            $newuser->setFirstName($row['FirstName']);
+                                                            $newuser->setName($row['LastName']);
+                                                            $newuser->setDailyPreference($row["Daily_Preference"]);
+                                                            $newuser->setPreferences($row["Preferences"]);
+                                                            $newuser->setPreferedRestaurantIds($restaurantIDs);
+                                                        }
+                                                    }
+                                                    return $newuser;
+                                                }
+
+                                                /**
+                                                 * @return null
+                                                 */
+                                                public function getUsers()
+                                                {
+
+                                                    //  $sql = "SELECT Id, FirstName, LastName FROM user";
+                                                    $sql = "SELECT * FROM user";
+                                                    $result = $this->db->query($sql);
+                                                    //$list = null;
+                                                    $listitem = null;
+                                                    $list = array();
+                                                    //$listitem = array();
+
+                                                    if ($result->num_rows > 0) {
+                                                        // output data of each row
+                                                        foreach ($result as $row) {
+                                                            $user = new User;
+                                                            $name = $row["LastName"];
+                                                            $FirstName = $row["FirstName"];
+                                                            $ID = $row["Id"];
+                                                            $restaurantIdList = $this->getUserRestaurant($ID);//
+                                                            $user->setName($name);
+                                                            $user->setFirstName($FirstName);
+                                                            $user->setId($ID);
+                                                            $user->setPreferedRestaurantIds($restaurantIdList);//
+                                                            $list[] = $user;
+                                                        }
+                                                    }
+                                                    return $list;
+                                                }
+
+                                                public function getRestaurant($id)
+                                                {
+
+                                                    //$sql = "select * from restaurant where Id = {$id}";
+                                                    $sql = "SELECT * FROM restaurant;";
+                                                  //  $sql = "USE restaurant; SELECT * FROM restaurant;";
+                                                    $result = $this->db->query($sql);
+                                                    $newrestaurant = null;
+                                                    if ($result->num_rows > 0) {
+                                                        $newrestaurant = new Restaurant();
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            $newrestaurant->setId($row['Id']);
+                                                            $newrestaurant->setName($row['Name']);
+                                                            $newrestaurant->setFood($row['Food']);
+                                                            $newrestaurant->setPrice($row['Price']);
+                                                        }
+                                                    }
+                                                    return $newrestaurant;
+                                                }
+
+                                                public function createRestaurant(Restaurant $restaurant)
+                                                {
+                                                    $newFood = $restaurant->getFood();
+                                                    $newName = $restaurant->getName();
+                                                    $newPrice = $restaurant->getPrice();
+                                                    $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
+
+                                                    if ($this->db->query($sql) === FALSE) {
+                                                        return false;
+                                                    }
+
+                                                    return $this->db->insert_id;
+                                                }
+
+                                                public function getRestaurants($restaurantName = null)
+                                                {
+
+                                                    $sql = "SELECT * FROM restaurant";
+                                                    if ($restaurantName) {
+                                                        $sql .= " WHERE name like \"%{$restaurantName}%\"";
+                                                    }
+                                                    $result = $this->db->query($sql);
+                                                    //$list = null;
+                                                    $listitem = null;
+                                                    $list = array();
 
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            foreach ($result as $row) {
-                $restaurant = new Restaurant();
-                $name = $row["Name"];
-                $FirstName = $row["Food"];
-                $ID = $row["Id"];
+                                                    if ($result->num_rows > 0) {
+                                                        // output data of each row
+                                                        foreach ($result as $row) {
+                                                            $restaurant = new Restaurant();
+                                                            $name = $row["Name"];
+                                                            $FirstName = $row["Food"];
+                                                            $ID = $row["Id"];
 
-                $restaurant->setName($name);
-                $restaurant->setFood($FirstName);
-                $restaurant->setId($ID);
+                                                            $restaurant->setName($name);
+                                                            $restaurant->setFood($FirstName);
+                                                            $restaurant->setId($ID);
 
-                $list[] = $restaurant;
-            }
-        }
-        return $list;
-    }
+                                                            $list[] = $restaurant;
+                                                        }
+                                                    }
+                                                    return $list;
+                                                }
 
-    public function updateRestaurant(Restaurant $restaurant)
-    {
-        $id = $restaurant->getId();
-        $name = $restaurant->getName();
-        $food = $restaurant->getFood();
+                                                public function updateRestaurant(Restaurant $restaurant)
+                                                {
+                                                    $id = $restaurant->getId();
+                                                    $name = $restaurant->getName();
+                                                    $food = $restaurant->getFood();
 
-        /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-        $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
+                                                    /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+                                                    $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
 
-        if ($this->db->query($sql) === FALSE) {
-            return false;
-        }
-        return true;
-    }
+                                                    if ($this->db->query($sql) === FALSE) {
+                                                        return false;
+                                                    }
+                                                    return true;
+                                                }
 
-    private function updateUserRestaurants($user)
-    {
-        $id = $user->getId();
-        $preferedRestaurantIds = $user->getPreferedRestaurantIds();
-        $sql = "DELETE FROM user_restaurant WHERE user = {$id}; ";
-        foreach ($preferedRestaurantIds as $preferedRestaurantId) {
-            $sql .= "INSERT INTO user_restaurant (user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}'); ";
-        };
-        return $sql;
-    }
+                                                private  function updateUserRestaurants($user)
+                                                {
+                                                    $id = $user->getId();
+                                                    $preferedRestaurantIds = $user->getPreferedRestaurantIds();
+                                                    $sql = "DELETE FROM user_restaurant WHERE user = {$id}; ";
+                                                    foreach ($preferedRestaurantIds as $preferedRestaurantId) {
+                                                        $sql .= "INSERT INTO user_restaurant (user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}'); ";
+                                                    };
+                                                    return $sql;
+                                                }
 
-    public function getUserRestaurant($id)
-    {
-        $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
-        $result = $this->db->query($sql);
-        $list = array();
-        $chosenRestaurants = array();
-        if ($result->num_rows > 0) {
-            foreach ($result as $row) {
-                $chosenRestaurants['Id'] = $row['Id'];
-                $chosenRestaurants['Name'] = $row['Name'];
-                $list[] = $chosenRestaurants;
-            }
-        }
-        return $list;
-    }
+                                                public function getUserRestaurant($id)
+                                                {
+                                                    $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
+                                                    $result = $this->db->query($sql);
+                                                    $list = array();
+                                                    $chosenRestaurants = array();
+                                                    if ($result->num_rows > 0) {
+                                                        foreach ($result as $row) {
+                                                            $chosenRestaurants['Id'] = $row['Id'];
+                                                            $chosenRestaurants['Name'] = $row['Name'];
+                                                            $list[] = $chosenRestaurants;
+                                                        }
+                                                    }
+                                                    return $list;
+                                                }
 
 
-    public function __destruct()
-    {
-        $this->db->close();
-        $this->db = null;
-    }
+                                                public function __destruct()
+                                                {
+                                                    $this->db->close();
+                                                    $this->db = null;
+                                                }
+     //   }
+     //   return self::$dbConnection;
+  //  }
+
 }
 
 ?>
