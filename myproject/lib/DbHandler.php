@@ -46,6 +46,7 @@ class DbHandler
                                                     if (static::$dbHelper->query($sql) === FALSE) {
                                                         return false;
                                                     }
+
                                                     return static::$dbHelper->insert_id;
                                                 }
 
@@ -120,6 +121,7 @@ class DbHandler
 
                                                 public function getRestaurant($id)
                                                 {
+
                                                     //$sql = "select * from restaurant where Id = {$id}";
                                                     $sql = "SELECT * FROM restaurant;";
                                                   //  $sql = "USE restaurant; SELECT * FROM restaurant;";
@@ -147,11 +149,13 @@ class DbHandler
                                                     if (static::$dbHelper->query($sql) === FALSE) {
                                                         return false;
                                                     }
+
                                                     return static::$dbHelper->insert_id;
                                                 }
 
                                                 public function getRestaurants($restaurantName = null)
                                                 {
+
                                                     $sql = "SELECT * FROM restaurant";
                                                     if ($restaurantName) {
                                                         $sql .= " WHERE name like \"%{$restaurantName}%\"";
@@ -160,6 +164,7 @@ class DbHandler
                                                     //$list = null;
                                                     $listitem = null;
                                                     $list = array();
+
 
                                                     if ($result->num_rows > 0) {
                                                         // output data of each row
