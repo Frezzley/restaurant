@@ -24,7 +24,7 @@ class Home extends Controller
     {
 
       $allIdsInCommon = $this->findRestaurandsInCommon();
-       $winner =  $this->calculateWinner("3");
+       $winner =  $this->calculateWinner($allIdsInCommon);
        if ($winner == null)
        {
            $winner = $this->defaultValues();
@@ -38,7 +38,8 @@ class Home extends Controller
         $forecast = "Migros";
 
        // $dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
+       // $dbHandler = Lib\DbHandler::getDbHandler();
         $list = $dbHandler->getRestaurants();
         $winner = $list[(rand(0, ((count($list)) - 1)))];
         $luckywinner = $winner->getName();
@@ -54,7 +55,7 @@ class Home extends Controller
     public function getAllUserpreferences()
     {
         //$dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $restaurantID = array();
         $userlist = $dbHandler->getUsers();
         $numberOfUsers = count($userlist);
@@ -88,20 +89,20 @@ class Home extends Controller
     private function findRestaurandsInCommon()
     {
         //$dbHandler = new Lib\
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
 
         $allRestaurantIDs = array();
         $userlist = $dbHandler->getUsers();
 
         $restaurants = $dbHandler->getRestaurants();
         foreach ($restaurants as $restaurant) {
-            $allRestaurantIDs[] .= $restaurant->getId();
+            $allRestaurantIDs[] = $restaurant->getId();
         }
        foreach ($userlist as $user) {
            $restaurants = $user->getPreferedRestaurantIds();
            $restaurantID = array();
            foreach ($restaurants as $restaurant) {
-               $restaurantID[] .= $restaurant["Id"];
+               $restaurantID[] = $restaurant["Id"];
 
            }
            $allRestaurantIDs =  array_intersect($restaurantID,$allRestaurantIDs);
@@ -116,7 +117,7 @@ private function calculateWinner($allIdsInCommon){
 
     $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
     //$dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $winner = $dbHandler->getRestaurant($winnerId);
     $winnerName = $winner->getName();
 

@@ -21,220 +21,217 @@ class DbHandler
 
 
     public $dbConnectionstatus;
-
     private static $dbConnection;
-
+    private static $dbHelper;
 
     public static function getDbHandler()
     {
 
-         if(self::$dbHelper == null) {
+        if (self::$dbHelper == null) {
 
-             static::$dbHelper = new dbHelper();}
+            static::$dbHelper = new static();
+            static::$dbConnection = DbConnection::getConnection();
+        }
         return static::$dbHelper;
     }
 
-    protected function __construct() {}
-    private function __clone(){}
+    private function __construct() {}
 
-                                                public function createUser(User $user)
-                                                {
-                                                    $newFirst = $user->getFirstName();
-                                                    $newLast = $user->getName();
-                                                    $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
+    private function __clone() {}
 
-                                                    if (static::$dbHelper->query($sql) === FALSE) {
-                                                        return false;
-                                                    }
+    public function createUser(User $user)
+    {
+        $newFirst = $user->getFirstName();
+        $newLast = $user->getName();
+        $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
 
-                                                    return static::$dbHelper->insert_id;
-                                                }
+        if (static::$dbConnection->query($sql) === FALSE) {
+            return false;
+        }
+        return static::$dbConnection->insert_id;
+    }
 
-                                                public function updateUser(User $user)
-                                                {
-                                                    $id = $user->getId();
-                                                    $name = $user->getName();
-                                                    $firstName = $user->getFirstName();
-                                                    $Preferences = $user->getPreferences();
+    public function updateUser(User $user)
+    {
+        $id = $user->getId();
+        $name = $user->getName();
+        $firstName = $user->getFirstName();
+        $Preferences = $user->getPreferences();
 
-                                                    /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-                                                    $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
-                                                    $sql .= static::$dbHelper->updateUserRestaurants($user);
-                                                    if (static::$dbHelper->multi_query($sql) === FALSE) {
-                                                        return false;
-                                                    }
-                                                    return true;
-                                                }
+        /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
+        $sql .= $this->updateUserRestaurants($user);
+        if (static::$dbConnection->multi_query($sql) === FALSE) {
+            return false;
+        }
+        return true;
+    }
 
-                                                public function getUser($id)
-                                                {
-                                                    $sql = "select * from user where id = {$id}";
-                                                    $result = static::$dbHelper->query($sql);
-                                                    $newuser = null;
-                                                    if ($result->num_rows > 0) {
-                                                        $newuser = new User();
-                                                        while ($row = $result->fetch_assoc()) {
+    public function getUser($id)
+    {
+        $sql = "select * from user where id = {$id}";
+        $result = static::$dbConnection->query($sql);
+        $newuser = null;
+        if ($result->num_rows > 0) {
+            $newuser = new User();
+            while ($row = $result->fetch_assoc()) {
 
-                                                            $restaurantIDs = static::$dbHelper->getUserRestaurant($row['Id']);
-                                                            $newuser->setId($row['Id']);
-                                                            $newuser->setFirstName($row['FirstName']);
-                                                            $newuser->setName($row['LastName']);
-                                                            $newuser->setDailyPreference($row["Daily_Preference"]);
-                                                            $newuser->setPreferences($row["Preferences"]);
-                                                            $newuser->setPreferedRestaurantIds($restaurantIDs);
-                                                        }
-                                                    }
-                                                    return $newuser;
-                                                }
+                $restaurantIDs = $this->getUserRestaurant($row['Id']);
+                $newuser->setId($row['Id']);
+                $newuser->setFirstName($row['FirstName']);
+                $newuser->setName($row['LastName']);
+                $newuser->setDailyPreference($row["Daily_Preference"]);
+                $newuser->setPreferences($row["Preferences"]);
+                $newuser->setPreferedRestaurantIds($restaurantIDs);
+            }
+        }
+        return $newuser;
+    }
 
-                                                /**
-                                                 * @return null
-                                                 */
-                                                public function getUsers()
-                                                {
+    /**
+     * @return null
+     */
+    public function getUsers()
+    {
 
-                                                    //  $sql = "SELECT Id, FirstName, LastName FROM user";
-                                                    $sql = "SELECT * FROM user";
-                                                    $result = static::$dbHelper->query($sql);
-                                                    //$list = null;
-                                                    $listitem = null;
-                                                    $list = array();
-                                                    //$listitem = array();
+        //  $sql = "SELECT Id, FirstName, LastName FROM user";
+        $sql = "SELECT * FROM user";
+        $result = static::$dbConnection->query($sql);
+        //$list = null;
+        $listitem = null;
+        $list = array();
+        //$listitem = array();
 
-                                                    if ($result->num_rows > 0) {
-                                                        // output data of each row
-                                                        foreach ($result as $row) {
-                                                            $user = new User;
-                                                            $name = $row["LastName"];
-                                                            $FirstName = $row["FirstName"];
-                                                            $ID = $row["Id"];
-                                                            $restaurantIdList = static::$dbHelper->getUserRestaurant($ID);//
-                                                            $user->setName($name);
-                                                            $user->setFirstName($FirstName);
-                                                            $user->setId($ID);
-                                                            $user->setPreferedRestaurantIds($restaurantIdList);//
-                                                            $list[] = $user;
-                                                        }
-                                                    }
-                                                    return $list;
-                                                }
+        if ($result->num_rows > 0) {
+            // output data of each row
+            foreach ($result as $row) {
+                $user = new User;
+                $name = $row["LastName"];
+                $FirstName = $row["FirstName"];
+                $ID = $row["Id"];
+                $restaurantIdList = $this->getUserRestaurant($ID);
+                $user->setName($name);
+                $user->setFirstName($FirstName);
+                $user->setId($ID);
+                $user->setPreferedRestaurantIds($restaurantIdList);//
+                $list[] = $user;
+            }
+        }
+        return $list;
+    }
 
-                                                public function getRestaurant($id)
-                                                {
+    public function getRestaurant($id)
+    {
+        $sql = "select * from restaurant where Id = {$id}";
+       // $sql = "SELECT * FROM restaurant;";
+        //  $sql = "USE restaurant; SELECT * FROM restaurant;";
+        $result = static::$dbConnection->query($sql);
+        $newrestaurant = null;
+        if ($result->num_rows > 0) {
+            $newrestaurant = new Restaurant();
+            while ($row = $result->fetch_assoc()) {
+                $newrestaurant->setId($row['Id']);
+                $newrestaurant->setName($row['Name']);
+                $newrestaurant->setFood($row['Food']);
+                $newrestaurant->setPrice($row['Price']);
+            }
+        }
+        return $newrestaurant;
+    }
 
-                                                    //$sql = "select * from restaurant where Id = {$id}";
-                                                    $sql = "SELECT * FROM restaurant;";
-                                                  //  $sql = "USE restaurant; SELECT * FROM restaurant;";
-                                                    $result = static::$dbHelper->query($sql);
-                                                    $newrestaurant = null;
-                                                    if ($result->num_rows > 0) {
-                                                        $newrestaurant = new Restaurant();
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            $newrestaurant->setId($row['Id']);
-                                                            $newrestaurant->setName($row['Name']);
-                                                            $newrestaurant->setFood($row['Food']);
-                                                            $newrestaurant->setPrice($row['Price']);
-                                                        }
-                                                    }
-                                                    return $newrestaurant;
-                                                }
+    public function createRestaurant(Restaurant $restaurant)
+    {
+        $newFood = $restaurant->getFood();
+        $newName = $restaurant->getName();
+        $newPrice = $restaurant->getPrice();
+        $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
 
-                                                public function createRestaurant(Restaurant $restaurant)
-                                                {
-                                                    $newFood = $restaurant->getFood();
-                                                    $newName = $restaurant->getName();
-                                                    $newPrice = $restaurant->getPrice();
-                                                    $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
+        if (static::$dbConnection->query($sql) === FALSE) {
+            return false;
+        }
+        return static::$dbConnection->insert_id;
+    }
 
-                                                    if (static::$dbHelper->query($sql) === FALSE) {
-                                                        return false;
-                                                    }
+    public function getRestaurants($restaurantName = null)
+    {
+        $sql = "SELECT * FROM restaurant";
+        if ($restaurantName) {
+            $sql .= " WHERE name like \"%{$restaurantName}%\"";
+        }
+        $result = static::$dbConnection->query($sql);
+        //$list = null;
+        $listitem = null;
+        $list = array();
 
-                                                    return static::$dbHelper->insert_id;
-                                                }
+        if ($result->num_rows > 0) {
+            // output data of each row
+            foreach ($result as $row) {
+                $restaurant = new Restaurant();
+                $name = $row["Name"];
+                $FirstName = $row["Food"];
+                $ID = $row["Id"];
 
-                                                public function getRestaurants($restaurantName = null)
-                                                {
+                $restaurant->setName($name);
+                $restaurant->setFood($FirstName);
+                $restaurant->setId($ID);
 
-                                                    $sql = "SELECT * FROM restaurant";
-                                                    if ($restaurantName) {
-                                                        $sql .= " WHERE name like \"%{$restaurantName}%\"";
-                                                    }
-                                                    $result = static::$dbHelper->query($sql);
-                                                    //$list = null;
-                                                    $listitem = null;
-                                                    $list = array();
+                $list[] = $restaurant;
+            }
+        }
+        return $list;
+    }
 
+    public function updateRestaurant(Restaurant $restaurant)
+    {
+        $id = $restaurant->getId();
+        $name = $restaurant->getName();
+        $food = $restaurant->getFood();
 
-                                                    if ($result->num_rows > 0) {
-                                                        // output data of each row
-                                                        foreach ($result as $row) {
-                                                            $restaurant = new Restaurant();
-                                                            $name = $row["Name"];
-                                                            $FirstName = $row["Food"];
-                                                            $ID = $row["Id"];
+        /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
+        $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
 
-                                                            $restaurant->setName($name);
-                                                            $restaurant->setFood($FirstName);
-                                                            $restaurant->setId($ID);
+        if (static::$dbConnection->query($sql) === FALSE) {
+            return false;
+        }
+        return true;
+    }
 
-                                                            $list[] = $restaurant;
-                                                        }
-                                                    }
-                                                    return $list;
-                                                }
+    private function updateUserRestaurants($user)
+    {
+        $id = $user->getId();
+        $preferedRestaurantIds = $user->getPreferedRestaurantIds();
+        $sql = "DELETE FROM user_restaurant WHERE user = {$id}; ";
+        foreach ($preferedRestaurantIds as $preferedRestaurantId) {
+            $sql .= "INSERT INTO user_restaurant (user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}'); ";
+        };
+        return $sql;
+    }
 
-                                                public function updateRestaurant(Restaurant $restaurant)
-                                                {
-                                                    $id = $restaurant->getId();
-                                                    $name = $restaurant->getName();
-                                                    $food = $restaurant->getFood();
+    public function getUserRestaurant($id)
+    {
+        $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
+        $result = static::$dbConnection->query($sql);
+        $list = array();
+        $chosenRestaurants = array();
+        if ($result->num_rows > 0) {
+            foreach ($result as $row) {
+                $chosenRestaurants['Id'] = $row['Id'];
+                $chosenRestaurants['Name'] = $row['Name'];
+                $list[] = $chosenRestaurants;
+            }
+        }
+        return $list;
+    }
 
-                                                    /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-                                                    $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
-
-                                                    if (static::$dbHelper->query($sql) === FALSE) {
-                                                        return false;
-                                                    }
-                                                    return true;
-                                                }
-
-                                                private  function updateUserRestaurants($user)
-                                                {
-                                                    $id = $user->getId();
-                                                    $preferedRestaurantIds = $user->getPreferedRestaurantIds();
-                                                    $sql = "DELETE FROM user_restaurant WHERE user = {$id}; ";
-                                                    foreach ($preferedRestaurantIds as $preferedRestaurantId) {
-                                                        $sql .= "INSERT INTO user_restaurant (user, restaurant) VALUES ('{$id}', '{$preferedRestaurantId}'); ";
-                                                    };
-                                                    return $sql;
-                                                }
-
-                                                public function getUserRestaurant($id)
-                                                {
-                                                    $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
-                                                    $result = static::$dbHelper->query($sql);
-                                                    $list = array();
-                                                    $chosenRestaurants = array();
-                                                    if ($result->num_rows > 0) {
-                                                        foreach ($result as $row) {
-                                                            $chosenRestaurants['Id'] = $row['Id'];
-                                                            $chosenRestaurants['Name'] = $row['Name'];
-                                                            $list[] = $chosenRestaurants;
-                                                        }
-                                                    }
-                                                    return $list;
-                                                }
-
-
-                                                public function __destruct()
-                                                {
-                                                    static::$dbHelper->close();
-                                                    static::$dbHelper = null;
-                                                }
-     //   }
-     //   return self::$dbConnection;
-  //  }
+/*
+    public function __destruct()
+    {
+        static::$dbHelper->close();
+        static::$dbHelper = null;
+    }*/
+    //   }
+    //   return self::$dbConnection;
+    //  }
 
 }
 

@@ -5,6 +5,9 @@ $(document).ready(function () {
         select: function (event, ui) {
             var restaurantexists = "false";
             $('.restaurant').each(function (index, item) {
+                console.log(item);
+                console.log(index);
+
                 if (ui.item.value == $(item).val()) {
                     restaurantexists = "true";
                 }
@@ -14,13 +17,14 @@ $(document).ready(function () {
                 template.addClass('restaurant');
                 template.val(ui.item.value);
                 template.attr('name', 'restaurant[]');
-                template.add('data-id ='.ui.item.value);
+              //  template.add('data-id ='.ui.item.value);
+                template.attr('data-id', ui.item.value);
                 appendItem(ui.item.label);
                 template.removeAttr("id");
                 $('#template-hidden').parent().append(template);
             }
             $('#inputRestaurant').val("");
-            $('#inputRestaurant').value('');
+  //          $('#inputRestaurant').value('');
         }
     };
     $('#inputRestaurant').autocomplete(config);

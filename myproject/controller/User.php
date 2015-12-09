@@ -33,7 +33,7 @@ class User extends Controller
              * @var $dbHandler DbHandler
              */
             //$dbHandler = new Lib\DbHandler();
-            $dbHandler = Lib\DbHandler::getInstance();
+            $dbHandler = Lib\DbHandler::getDbHandler();
             $result = $dbHandler->createUser($user);
            if($result)
            {
@@ -50,7 +50,7 @@ class User extends Controller
     public function detail($id)
     {
         //$dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $user = $dbHandler->getUser($id);
         if(empty($user))
         {
@@ -72,17 +72,18 @@ class User extends Controller
     public function edit($id)
     {
         //$dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
 
         $user = $dbHandler->getUser($id);
         if (!empty($_POST)) {
             $user->setFirstName($_POST['Firstname']);
             $user->setName($_POST['Lastname']);
             //$user->setPreferences($_POST['Preferences']);
-
-
+            if (!empty($_POST['restaurant'])) {
+                $user->setPreferedRestaurantIds($_POST['restaurant']);
+            }
            // $user->setPreferedRestaurantIds($_POST['restaurant']);
-            $user->updatePreferedRestaurantIds($_POST['restaurant']);
+     //       $user->updatePreferedRestaurantIds($_POST['restaurant']);
 
           //  $dbHandler->updateUser($user);
           //  $dbHandler->updateUserRestaurants($user);
@@ -118,21 +119,16 @@ class User extends Controller
     public function restaurantList()
     {
       //  $dbHandler = new Lib\DbHandler();
-
-
-
-        $dbHandler = Lib\DbHandler::getInstance();
-
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $restaurants = $dbHandler->getRestaurants($_GET["term"]);
-
         echo json_encode($restaurants);
         die;
     }
 
     public function index ()
     {
-       // $dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getDbHandler();
 
         //objekte in ein array
         $list = $dbHandler->getUsers();
@@ -143,8 +139,8 @@ class User extends Controller
     }
 
     public function editmore($ID){
-       // $dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         //objekte in ein array
         $user = $dbHandler->getUser($ID);
         $restaurants = $dbHandler->getRestaurants();
@@ -163,7 +159,7 @@ class User extends Controller
 
     public function getAllUserpreferences(){
        // $dbHandler = new Lib\DbHandler();
-        $dbHandler = Lib\DbHandler::getInstance();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $userlist = $dbHandler->getUsers();
 
     }

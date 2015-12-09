@@ -1,5 +1,8 @@
 <?php
 // Ensure we have session
+/*phpinfo();
+die;
+*/
 if(session_id() === ""){
     session_start();
 }

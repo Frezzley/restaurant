@@ -62,6 +62,8 @@ class EditUser extends View
 
 
 </form>';
+
+
         echo $html;
         foreach ($this->restaurants as $restaurant) {
                 $li = '<li class="restaurant" data-id="';
@@ -77,9 +79,9 @@ class EditUser extends View
         echo $htmlmiddle;
         foreach ($this->restaurants as $restaurant) {
             $input = '<input type="hidden" class="restaurant" value="';
-            $input .= $restaurant["ID"];
+            $input .= $restaurant["Id"];
             $input .= '" name="restaurant[]" data-id="';
-            $input .= $restaurant["ID"];
+            $input .= $restaurant["Id"];
             $input .= '">';
             echo $input;
         }
