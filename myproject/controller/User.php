@@ -32,7 +32,8 @@ class User extends Controller
             /**
              * @var $dbHandler DbHandler
              */
-            $dbHandler = new Lib\DbHandler();
+            //$dbHandler = new Lib\DbHandler();
+            $dbHandler = Lib\DbHandler::getInstance();
             $result = $dbHandler->createUser($user);
            if($result)
            {
@@ -48,7 +49,8 @@ class User extends Controller
 
     public function detail($id)
     {
-        $dbHandler = new Lib\DbHandler();
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $user = $dbHandler->getUser($id);
         if(empty($user))
         {
@@ -69,7 +71,9 @@ class User extends Controller
 
     public function edit($id)
     {
-        $dbHandler = new Lib\DbHandler();
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
+
         $user = $dbHandler->getUser($id);
         if (!empty($_POST)) {
             $user->setFirstName($_POST['Firstname']);
@@ -113,7 +117,12 @@ class User extends Controller
 
     public function restaurantList()
     {
-        $dbHandler = new Lib\DbHandler();
+      //  $dbHandler = new Lib\DbHandler();
+
+
+
+        $dbHandler = Lib\DbHandler::getInstance();
+
         $restaurants = $dbHandler->getRestaurants($_GET["term"]);
 
         echo json_encode($restaurants);
@@ -122,7 +131,8 @@ class User extends Controller
 
     public function index ()
     {
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
 
         //objekte in ein array
         $list = $dbHandler->getUsers();
@@ -133,7 +143,8 @@ class User extends Controller
     }
 
     public function editmore($ID){
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         //objekte in ein array
         $user = $dbHandler->getUser($ID);
         $restaurants = $dbHandler->getRestaurants();
@@ -151,7 +162,8 @@ class User extends Controller
     }
 
     public function getAllUserpreferences(){
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $userlist = $dbHandler->getUsers();
 
     }

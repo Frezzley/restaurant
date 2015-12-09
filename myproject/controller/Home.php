@@ -37,7 +37,8 @@ class Home extends Controller
     {
         $forecast = "Migros";
 
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $list = $dbHandler->getRestaurants();
         $winner = $list[(rand(0, ((count($list)) - 1)))];
         $luckywinner = $winner->getName();
@@ -52,7 +53,8 @@ class Home extends Controller
 
     public function getAllUserpreferences()
     {
-        $dbHandler = new Lib\DbHandler();
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $restaurantID = array();
         $userlist = $dbHandler->getUsers();
         $numberOfUsers = count($userlist);
@@ -85,7 +87,8 @@ class Home extends Controller
 
     private function findRestaurandsInCommon()
     {
-        $dbHandler = new Lib\DbHandler();
+        //$dbHandler = new Lib\
+        $dbHandler = Lib\DbHandler::getInstance();
 
         $allRestaurantIDs = array();
         $userlist = $dbHandler->getUsers();
@@ -112,7 +115,8 @@ private function calculateWinner($allIdsInCommon){
     If ($numberOfRestaurants > 0){
 
     $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
-    $dbHandler = new Lib\DbHandler();
+    //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $winner = $dbHandler->getRestaurant($winnerId);
     $winnerName = $winner->getName();
 

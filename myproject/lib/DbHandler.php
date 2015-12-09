@@ -43,11 +43,10 @@ class DbHandler
                                                     $newLast = $user->getName();
                                                     $sql = "INSERT INTO user (LastName, FirstName) VALUES ('{$newLast}', '{$newFirst}')";
 
-                                                    if ($this->db->query($sql) === FALSE) {
+                                                    if (static::$dbHelper->query($sql) === FALSE) {
                                                         return false;
                                                     }
-
-                                                    return $this->db->insert_id;
+                                                    return static::$dbHelper->insert_id;
                                                 }
 
                                                 public function updateUser(User $user)
@@ -59,8 +58,8 @@ class DbHandler
 
                                                     /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
                                                     $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
-                                                    $sql .= $this->updateUserRestaurants($user);
-                                                    if ($this->db->multi_query($sql) === FALSE) {
+                                                    $sql .= static::$dbHelper->updateUserRestaurants($user);
+                                                    if (static::$dbHelper->multi_query($sql) === FALSE) {
                                                         return false;
                                                     }
                                                     return true;
@@ -69,13 +68,13 @@ class DbHandler
                                                 public function getUser($id)
                                                 {
                                                     $sql = "select * from user where id = {$id}";
-                                                    $result = $this->db->query($sql);
+                                                    $result = static::$dbHelper->query($sql);
                                                     $newuser = null;
                                                     if ($result->num_rows > 0) {
                                                         $newuser = new User();
                                                         while ($row = $result->fetch_assoc()) {
 
-                                                            $restaurantIDs = $this->getUserRestaurant($row['Id']);
+                                                            $restaurantIDs = static::$dbHelper->getUserRestaurant($row['Id']);
                                                             $newuser->setId($row['Id']);
                                                             $newuser->setFirstName($row['FirstName']);
                                                             $newuser->setName($row['LastName']);
@@ -95,7 +94,7 @@ class DbHandler
 
                                                     //  $sql = "SELECT Id, FirstName, LastName FROM user";
                                                     $sql = "SELECT * FROM user";
-                                                    $result = $this->db->query($sql);
+                                                    $result = static::$dbHelper->query($sql);
                                                     //$list = null;
                                                     $listitem = null;
                                                     $list = array();
@@ -108,7 +107,7 @@ class DbHandler
                                                             $name = $row["LastName"];
                                                             $FirstName = $row["FirstName"];
                                                             $ID = $row["Id"];
-                                                            $restaurantIdList = $this->getUserRestaurant($ID);//
+                                                            $restaurantIdList = static::$dbHelper->getUserRestaurant($ID);//
                                                             $user->setName($name);
                                                             $user->setFirstName($FirstName);
                                                             $user->setId($ID);
@@ -121,11 +120,10 @@ class DbHandler
 
                                                 public function getRestaurant($id)
                                                 {
-
                                                     //$sql = "select * from restaurant where Id = {$id}";
                                                     $sql = "SELECT * FROM restaurant;";
                                                   //  $sql = "USE restaurant; SELECT * FROM restaurant;";
-                                                    $result = $this->db->query($sql);
+                                                    $result = static::$dbHelper->query($sql);
                                                     $newrestaurant = null;
                                                     if ($result->num_rows > 0) {
                                                         $newrestaurant = new Restaurant();
@@ -146,25 +144,22 @@ class DbHandler
                                                     $newPrice = $restaurant->getPrice();
                                                     $sql = "INSERT INTO restaurant ( Name, Food, Price) VALUES ('{$newName}', '{$newFood}', '{$newPrice}')";
 
-                                                    if ($this->db->query($sql) === FALSE) {
+                                                    if (static::$dbHelper->query($sql) === FALSE) {
                                                         return false;
                                                     }
-
-                                                    return $this->db->insert_id;
+                                                    return static::$dbHelper->insert_id;
                                                 }
 
                                                 public function getRestaurants($restaurantName = null)
                                                 {
-
                                                     $sql = "SELECT * FROM restaurant";
                                                     if ($restaurantName) {
                                                         $sql .= " WHERE name like \"%{$restaurantName}%\"";
                                                     }
-                                                    $result = $this->db->query($sql);
+                                                    $result = static::$dbHelper->query($sql);
                                                     //$list = null;
                                                     $listitem = null;
                                                     $list = array();
-
 
                                                     if ($result->num_rows > 0) {
                                                         // output data of each row
@@ -193,7 +188,7 @@ class DbHandler
                                                     /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
                                                     $sql = "UPDATE restaurant SET Name = '{$name}', Food = '{$food}' WHERE Id = {$id};";
 
-                                                    if ($this->db->query($sql) === FALSE) {
+                                                    if (static::$dbHelper->query($sql) === FALSE) {
                                                         return false;
                                                     }
                                                     return true;
@@ -213,7 +208,7 @@ class DbHandler
                                                 public function getUserRestaurant($id)
                                                 {
                                                     $sql = "select re.Id, re.Name from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
-                                                    $result = $this->db->query($sql);
+                                                    $result = static::$dbHelper->query($sql);
                                                     $list = array();
                                                     $chosenRestaurants = array();
                                                     if ($result->num_rows > 0) {
@@ -229,8 +224,8 @@ class DbHandler
 
                                                 public function __destruct()
                                                 {
-                                                    $this->db->close();
-                                                    $this->db = null;
+                                                    static::$dbHelper->close();
+                                                    static::$dbHelper = null;
                                                 }
      //   }
      //   return self::$dbConnection;

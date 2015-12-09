@@ -31,7 +31,8 @@ public function create(){
             /**
              * @var $dbHandler DbHandler
             */
-            $dbHandler = new Lib\DbHandler();
+            //$dbHandler = new Lib\DbHandler();
+            $dbHandler = Lib\DbHandler::getInstance();
             $result = $dbHandler->createRestaurant($restaurant);
             if($result)
             {
@@ -51,7 +52,8 @@ public function create(){
     public function edit($id)
     {
 
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $restaurant = $dbHandler->getRestaurant($id);
         if (!empty($_POST)) {
             $restaurant->setFood($_POST['Food']);
@@ -82,8 +84,8 @@ public function create(){
 
     public function index ()
     {
-        $dbHandler = new Lib\DbHandler();
-
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         //objekte in ein array
         $list = $dbHandler->getRestaurants();
         $view = new View\ShowRestaurant();
@@ -94,7 +96,8 @@ public function create(){
 
     public function detail($id)
     {
-        $dbHandler = new Lib\DbHandler();
+       // $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getInstance();
         $restaurant = $dbHandler->getRestaurant($id);
         if(empty($restaurant))
         {
