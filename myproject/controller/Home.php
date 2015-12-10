@@ -22,13 +22,15 @@ class Home extends Controller
 
     public function index()
     {
-
-      $allIdsInCommon = $this->findRestaurandsInCommon();
-       $winner =  $this->calculateWinner($allIdsInCommon);
-       if ($winner == null)
-       {
-           $winner = $this->defaultValues();
-       }
+        if (date(N) == "1") {
+            $winner = "Lenzos";
+        } else {
+            $allIdsInCommon = $this->findRestaurandsInCommon();
+            $winner = $this->calculateWinner($allIdsInCommon);
+            if ($winner == null) {
+                $winner = $this->defaultValues();
+            }
+        }
         $view = new View\Home();
         echo $view->render($winner);
     }
@@ -37,7 +39,7 @@ class Home extends Controller
     {
         $forecast = "Migros";
 
-       // $dbHandler = new Lib\DbHandler();
+        // $dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
        // $dbHandler = Lib\DbHandler::getDbHandler();
         $list = $dbHandler->getRestaurants();
