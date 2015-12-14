@@ -30,6 +30,7 @@ $(document).ready(function () {
     $('#inputRestaurant').autocomplete(config);
     $(".btn.btn-default.btn-lg.remove").on('click', deleteItem);
 });
+
 var appendItem = function (text,value) {
     var ul = $('#content ul');
     var template = ul.find('li:first').clone(true).appendTo(ul);
@@ -42,9 +43,13 @@ var appendItem = function (text,value) {
 var deleteItem = function () {
     var button = $(this);
     var dataId = button.parent().data("id");
+    console.log(dataId);
     button.parent().remove();
     $("input[type=hidden]").each(function () {
-        var InputId = $("input[type='hidden']").data("id");
+       // var InputId = $("input[type='hidden']").data("id");
+        console.log($(this));
+        console.log($(this).data("id"));
+        var InputId = $(this).data("id");
         if (InputId == dataId) {
             $(this).remove();
         }
