@@ -25,7 +25,7 @@ class Home
 
         <div class="container">
             <div class="jumbotron">
-                <h1>Today, we are eating <?php echo $luckywinner ?> <!--(Tendency)--></h1>
+                <h1>Today, we are eating at <?php echo $luckywinner ?> <!--(Tendency)--></h1>
 
                 <p>Coming up...</p>
 

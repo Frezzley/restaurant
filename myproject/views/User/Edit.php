@@ -67,7 +67,7 @@ class EditUser extends View
         echo $html;
         foreach ($this->restaurants as $restaurant) {
                 $li = '<li class="restaurant" data-id="';
-                $li .= $restaurant["ID"];
+                $li .= $restaurant["Id"];
                 $li .= '">';
                 $li .= $restaurant["Name"];
                 $li .= "</br>";

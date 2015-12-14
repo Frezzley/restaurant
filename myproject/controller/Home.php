@@ -102,12 +102,15 @@ class Home extends Controller
         }
        foreach ($userlist as $user) {
            $restaurants = $user->getPreferedRestaurantIds();
+           if ($user->getisPresentId() == "true") {
+
            $restaurantID = array();
            foreach ($restaurants as $restaurant) {
                $restaurantID[] = $restaurant["Id"];
 
            }
-           $allRestaurantIDs =  array_intersect($restaurantID,$allRestaurantIDs);
+           $allRestaurantIDs = array_intersect($restaurantID, $allRestaurantIDs);
+       }
        }
         return $allRestaurantIDs;
    }
@@ -117,7 +120,7 @@ private function calculateWinner($allIdsInCommon){
     $winnnerName = null;
     If ($numberOfRestaurants > 0){
 
-    $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
+    $winnerId = $allIdsInCommon[(rand(1, $numberOfRestaurants))];
     //$dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         $winner = $dbHandler->getRestaurant($winnerId);

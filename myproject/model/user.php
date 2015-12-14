@@ -14,6 +14,7 @@ class User extends Model
     private $DailyPreference;
     private $PreferedRestaurantIds = array();
     private $restaurants = array();
+    private $isPresentId;
 
 
     /**
@@ -94,12 +95,21 @@ class User extends Model
         $this->restaurants = $RestaurantIds;
     }
 
+    public function getIsPresentId()
+    {
+        return $this->isPresentId;
+    }
 
+    public function setIsPresentId($isPresentId)
+    {
+        $this->isPresentId = $isPresentId;
+    }
 
     public function getRestaurants()
     {
         return $this->restaurants;
     }
+
 
     function jsonSerialize()
     {

@@ -57,9 +57,10 @@ class DbHandler
         $name = $user->getName();
         $firstName = $user->getFirstName();
         $Preferences = $user->getPreferences();
+        $present = $user->getIsPresentId();
 
         /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
-        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}' WHERE Id = {$id}; ";
+        $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}', IsPresent = '{$present}'  WHERE Id = {$id}; ";
         $sql .= $this->updateUserRestaurants($user);
         if (static::$dbConnection->multi_query($sql) === FALSE) {
             return false;
@@ -83,6 +84,7 @@ class DbHandler
                 $newuser->setDailyPreference($row["Daily_Preference"]);
                 $newuser->setPreferences($row["Preferences"]);
                 $newuser->setPreferedRestaurantIds($restaurantIDs);
+                $newuser->setIsPresentId($row["IsPresent"]);
             }
         }
         return $newuser;
@@ -109,11 +111,13 @@ class DbHandler
                 $name = $row["LastName"];
                 $FirstName = $row["FirstName"];
                 $ID = $row["Id"];
+                $isPresentId = $row["IsPresent"];
                 $restaurantIdList = $this->getUserRestaurant($ID);
                 $user->setName($name);
                 $user->setFirstName($FirstName);
                 $user->setId($ID);
-                $user->setPreferedRestaurantIds($restaurantIdList);//
+                $user->setPreferedRestaurantIds($restaurantIdList);
+                $user->setisPresentId($isPresentId);//
                 $list[] = $user;
             }
         }
@@ -232,7 +236,23 @@ class DbHandler
     //   }
     //   return self::$dbConnection;
     //  }
+public function getIsPresentIds(){
+$sql = "SELECT * FROM user where IsPresent = 'true'";
+$result = static::$dbConnection->query($sql);
+$listitem = null;
+$list = array();
+if ($result->num_rows > 0) {
+    // output data of each row
+foreach ($result as $row) {
+$user = new User;
 
+//
+$list[] = $Id;
+}
+}
+return $list;
+
+}
 }
 
 ?>

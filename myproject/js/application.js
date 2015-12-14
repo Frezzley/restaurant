@@ -19,7 +19,7 @@ $(document).ready(function () {
                 template.attr('name', 'restaurant[]');
               //  template.add('data-id ='.ui.item.value);
                 template.attr('data-id', ui.item.value);
-                appendItem(ui.item.label);
+                appendItem(ui.item.label,ui.item.value);
                 template.removeAttr("id");
                 $('#template-hidden').parent().append(template);
             }
@@ -30,11 +30,12 @@ $(document).ready(function () {
     $('#inputRestaurant').autocomplete(config);
     $(".btn.btn-default.btn-lg.remove").on('click', deleteItem);
 });
-var appendItem = function (text) {
+var appendItem = function (text,value) {
     var ul = $('#content ul');
     var template = ul.find('li:first').clone(true).appendTo(ul);
     template.removeAttr("type");
     template.addClass('restaurant');
+    template.attr('data-id',value);
     template.append(text);
     template.removeAttr("id");
 }

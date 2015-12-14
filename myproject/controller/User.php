@@ -163,4 +163,27 @@ class User extends Controller
         $userlist = $dbHandler->getUsers();
 
     }
+
+    public function getIsPresentIds()
+    {
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $isPresentlist = $dbHandler->getIsPresentIds();
+    }
+
+    public function activeButton($id)
+    {
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $user = $dbHandler->getUser($id);
+        $present = $user->getIsPresentId();
+
+        if ($present == "true"){
+            $present = "false";
+        } else {
+            $present = "true";
+        }
+        $user->setIsPresentId($present);
+        $dbHandler->updateUser($user);
+        header('Location: /user/');
+
+    }
 }

@@ -44,16 +44,23 @@ class ShowUsers extends View
         $ID = $user->getId();
         $Name = $user->getName();
         $FirstName = $user->getFirstName();
-        $htmlcontent = '<div>
-                            <h2>' . $ID . ' </h2>
-                            <p>' . $FirstName . " " . $Name . '</p>
-                            <p><a class="btn btn-default" href=" ' . '/user/edit/' . $ID . '"' . ' role="button">Bearbeiten</a></p>
-                            <p><a class="btn btn-default" href=" ' . '/user/detail/' . $ID . '"' . ' role="button">Detail</a></p>
+        $IsActive = $user->getIsPresentID();
+        $htmlcontent = '<div class="row">
+                            <h2 class="col-sm-4">' . $ID . ' </h2>';
+         if($IsActive == "true") {
+             $htmlcontent .= '     <p class="col-sm-8" ><a class="btn btn-success" href = " ' . '/user/activeButton/' . $ID . '"' . ' role = "button" > Present</a ></p >';
+             } else{
+             $htmlcontent .= '     <p class="col-sm-8" ><a class="btn btn-danger" href = " ' . '/user/activeButton/' . $ID . '"' . ' role = "button" > Not Present</a ></p >';
+         }
+        $htmlcontent .= '   <p class="col-sm-12">' . $FirstName . " " . $Name . '</p>
+                            <p class="col-sm-12"><a class="btn btn-default" href=" ' . '/user/edit/' . $ID . '"' . ' role="button">Bearbeiten</a></p>
+                            <p class="col-sm-12"><a class="btn btn-default" href=" ' . '/user/detail/' . $ID . '"' . ' role="button">Detail</a></p>
                             </div>'; ?>
         <li class="col-xs-6 col-md-4 col-lg-2">
-        <?php echo $htmlcontent;
+        <?php echo $htmlcontent; ?>
+        </li> <?php
     } ?>
-        </li>
+
         <?php
         $htmlfooter = '</div> </div> </div> </div>';
         echo $htmlfooter;
