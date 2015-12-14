@@ -95,12 +95,12 @@ class User extends Model
         $this->restaurants = $RestaurantIds;
     }
 
-    public function getIsPresentId()
+    public function getIsPresentStatus()
     {
         return $this->isPresentId;
     }
 
-    public function setIsPresentId($isPresentId)
+    public function setIsPresentStatus($isPresentId)
     {
         $this->isPresentId = $isPresentId;
     }

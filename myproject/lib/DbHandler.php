@@ -57,7 +57,7 @@ class DbHandler
         $name = $user->getName();
         $firstName = $user->getFirstName();
         $Preferences = $user->getPreferences();
-        $present = $user->getIsPresentId();
+        $present = $user->getIsPresentStatus();
 
         /*$sql = "UPDATE user SET lastname='Doe' WHERE id=2";*/
         $sql = "UPDATE user SET LastName = '{$name}', FirstName = '{$firstName}', Preferences = '{$Preferences}', IsPresent = '{$present}'  WHERE Id = {$id}; ";
@@ -84,7 +84,7 @@ class DbHandler
                 $newuser->setDailyPreference($row["Daily_Preference"]);
                 $newuser->setPreferences($row["Preferences"]);
                 $newuser->setPreferedRestaurantIds($restaurantIDs);
-                $newuser->setIsPresentId($row["IsPresent"]);
+                $newuser->setIsPresentStatus($row["IsPresent"]);
             }
         }
         return $newuser;
@@ -117,7 +117,7 @@ class DbHandler
                 $user->setFirstName($FirstName);
                 $user->setId($ID);
                 $user->setPreferedRestaurantIds($restaurantIdList);
-                $user->setisPresentId($isPresentId);//
+                $user->setIsPresentStatus($isPresentId);//
                 $list[] = $user;
             }
         }

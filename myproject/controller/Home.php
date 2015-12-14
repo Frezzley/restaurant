@@ -102,7 +102,7 @@ class Home extends Controller
         }
        foreach ($userlist as $user) {
            $restaurants = $user->getPreferedRestaurantIds();
-           if ($user->getisPresentId() == "true") {
+           if ($user->getisPresentStatus() == "true") {
 
            $restaurantID = array();
            foreach ($restaurants as $restaurant) {

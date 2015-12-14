@@ -174,14 +174,14 @@ class User extends Controller
     {
         $dbHandler = Lib\DbHandler::getDbHandler();
         $user = $dbHandler->getUser($id);
-        $present = $user->getIsPresentId();
+        $present = $user->getIsPresentStatus();
 
         if ($present == "true"){
             $present = "false";
         } else {
             $present = "true";
         }
-        $user->setIsPresentId($present);
+        $user->setIsPresentStatus($present);
         $dbHandler->updateUser($user);
         header('Location: /user/');
 

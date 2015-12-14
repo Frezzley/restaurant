@@ -44,7 +44,7 @@ class ShowUsers extends View
         $ID = $user->getId();
         $Name = $user->getName();
         $FirstName = $user->getFirstName();
-        $IsActive = $user->getIsPresentID();
+        $IsActive = $user->getIsPresentStatus();
         $htmlcontent = '<div class="row">
                             <h2 class="col-sm-4">' . $ID . ' </h2>';
          if($IsActive == "true") {
