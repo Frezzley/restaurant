@@ -112,4 +112,32 @@ public function create(){
         //$view->render();
         $view->show($view);
     }
+    public function getHistory(){
+        $dbHandler = Lib\DbHandler::getDbHandler();
+       $history = $dbHandler->getHistory();
+        return $history;
+
+    }
+
+    public function getTodaysRestaurant(){
+        $history = $this->getHistory();
+        $restaurant = array('exists' => 'false');
+        foreach ($history as $day ){
+            if ((date('Y-m-d')) == ($day['date'])){
+                $restaurant = array('exists' => 'true', 'name' => $day['restaurantName']);
+
+
+            }
+
+        }
+        return $restaurant;
+
+    }
+
+public function createNewWinner($id){
+    $date = date('Y-m-d');
+    $dbHandler = Lib\DbHandler::getDbHandler();
+    $dbHandler->writeHistory($id,$date);
+
+}
 }

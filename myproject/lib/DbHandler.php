@@ -35,9 +35,13 @@ class DbHandler
         return static::$dbHelper;
     }
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 
     public function createUser(User $user)
     {
@@ -127,7 +131,7 @@ class DbHandler
     public function getRestaurant($id)
     {
         $sql = "select * from restaurant where Id = {$id}";
-       // $sql = "SELECT * FROM restaurant;";
+        // $sql = "SELECT * FROM restaurant;";
         //  $sql = "USE restaurant; SELECT * FROM restaurant;";
         $result = static::$dbConnection->query($sql);
         $newrestaurant = null;
@@ -227,32 +231,68 @@ class DbHandler
         return $list;
     }
 
-/*
-    public function __destruct()
-    {
-        static::$dbHelper->close();
-        static::$dbHelper = null;
-    }*/
+    /*
+        public function __destruct()
+        {
+            static::$dbHelper->close();
+            static::$dbHelper = null;
+        }*/
     //   }
     //   return self::$dbConnection;
     //  }
-public function getIsPresentIds(){
-$sql = "SELECT * FROM user where IsPresent = 'true'";
-$result = static::$dbConnection->query($sql);
-$listitem = null;
-$list = array();
-if ($result->num_rows > 0) {
-    // output data of each row
-foreach ($result as $row) {
-$user = new User;
-
+    public function getIsPresentIds()
+    {
+        $sql = "SELECT * FROM user where IsPresent = 'true'";
+        $result = static::$dbConnection->query($sql);
+        $listitem = null;
+        $list = array();
+        if ($result->num_rows > 0) {
+            // output data of each row
+            foreach ($result as $row) {
+                $user = new User;
+                $Id = $user->getId();
 //
-$list[] = $Id;
-}
-}
-return $list;
+                $list[] = $Id;
+            }
+        }
+        return $list;
 
+
+    }
+
+    public function gethistory()
+    {
+
+        $sql = "select hist.id, re.Name, re.Id, hist.date from history hist inner join restaurant re on hist.restaurantId=re.Id;";
+        $result = static::$dbConnection->query($sql);
+        $list = array();
+        $history = array();
+        if ($result->num_rows > 0) {
+            foreach ($result as $row) {
+                $history['historyId'] = $row['id'];
+                $history['restaurantName'] = $row['Name'];
+                $history['restaurant'] = $row['Id'];
+                $history['date'] = $row['date'];
+
+                $list[] = $history;
+            }
+        }
+        return $list;
+    }
+
+public function writeHistory($id, $date){
+
+    $sql = "INSERT INTO history (restaurantId, date) VALUES ('{$id}', '{$date}'); ";
+    if (static::$dbConnection->query($sql) === FALSE) {
+        return false;
+    }
 }
+    public function deleteHistory($date=""){
+        $sql = "Delete from history where date = '{$date}';";
+        static::$dbConnection->query($sql);
+
+    }
+
 }
 
 ?>

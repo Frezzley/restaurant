@@ -7,6 +7,7 @@ use Lib;
 
 require_once BASE . 'views' . DS . 'Home.php';
 require_once BASE . 'lib' . DS . 'DbHandler.php';
+    require_once BASE . 'controller' . DS . 'Restaurant.php';
 
 
 
@@ -22,13 +23,20 @@ class Home extends Controller
 
     public function index()
     {
-        if (date(N) == "1") {
-            $winner = "Lenzos";
+        $restaurant = new Restaurant();
+        $TodaysRestaurant = $restaurant->getTodaysRestaurant();
+        if ($TodaysRestaurant['exists'] == "true") {
+            $winner = $TodaysRestaurant['name'];
         } else {
-            $allIdsInCommon = $this->findRestaurandsInCommon();
-            $winner = $this->calculateWinner($allIdsInCommon);
-            if ($winner == null) {
-                $winner = $this->defaultValues();
+
+            if (date(N) == "1") {
+                $winner = "Lenzos";
+            } else {
+                $allIdsInCommon = $this->findRestaurandsInCommon();
+                $winner = $this->calculateWinner($allIdsInCommon);
+                if ($winner == null) {
+                    $winner = $this->defaultValues();
+                }
             }
         }
         $view = new View\Home();
@@ -120,17 +128,23 @@ private function calculateWinner($allIdsInCommon){
     $winnnerName = null;
     If ($numberOfRestaurants > 0){
 
-    $winnerId = $allIdsInCommon[(rand(1, $numberOfRestaurants))];
+    $winnerId = $allIdsInCommon[(rand(0, $numberOfRestaurants -1))];
     //$dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         $winner = $dbHandler->getRestaurant($winnerId);
     $winnerName = $winner->getName();
 
+        $restaurant = new Restaurant;
+        $restaurant->createNewWinner($winnerId);
     }
     else
     {
         $winnerName = "Migros";
+        $restaurant = new Restaurant;
+        $restaurant->createNewWinner("2");
     }
+
+
     return $winnerName;
 }
     function Create_Table()
@@ -138,5 +152,30 @@ private function calculateWinner($allIdsInCommon){
 
     }
 
-     function create(){}}
+     function create(){}
+
+
+    public function change()
+    {
+
+        $date = date('Y-m-d');
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $dbHandler->deleteHistory($date);
+        header('Location: /home/');
+    }
+
+    public function detail()
+    {
+
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $list = $dbHandler->getHistory();
+        //$view = new View\ShowHistory();
+        $view = new View\ShowHistory();
+        $view->setVars($list);
+        //echo $view->render();
+        $view->show($view);
+
+    }
+
+}
 
