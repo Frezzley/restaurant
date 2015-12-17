@@ -9,7 +9,7 @@
 namespace View;
 
 //require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Detail.php';
-require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
+//require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
 
 
 class ShowHistory extends View
@@ -26,41 +26,29 @@ class ShowHistory extends View
         $list = $this->vars;
 
         ?>
-        <ul class="list-inline">
+
             <?php
-            $htmlhead = '
+            $htmltop = '
 <body>
 <div class="container">
-    <div class="row row-offcanvas row-offcanvas-right">
-    <div class="col-md-1"></div>
-        <div class="col-xs-12 col-sm-12 col-md-10">
-            <div class="row">';
-            echo $htmlhead;
-            echo ' <div class="introduction"> Hier finden Sie alle bei uns Registrierten Restaurants. </div>';
+    <div class="row row-offcanvas row-offcanvas-right">';
 
-            foreach ($list as $restaurant) {
+            $htmltop .= ' <div class="introduction"> Hier finden Sie eine Liste mit den Orten, wo wir gegessen haben. </div><ul>';
+            $html = "";
+            foreach ($list as $day) {
                 ?>
-                <li><?php
+                <?php
                     //  print_r($list);
-                    $ID = $restaurant->getId();
-                    $Name = $restaurant->getName();
-                    $htmlcontent = '<div>
-                    <h2>' . $ID . ' </h2>
+                    $date = $day['date'];
+                    $Name = $day['restaurantName'];
+                    $html = '
+                    <li>' . $date . ' ' . $Name . '</li>'. $html;
 
-                    <p>' . $Name . '</p>
-
-                    <p><a class="btn btn-default" href=" ' . '/restaurant/edit/' . $ID . '"' . ' role="button">Bearbeiten</a></p>
-                    <p><a class="btn btn-default" href=" ' . '/restaurant/detail/' . $ID . '"' . ' role="button">Detail</a></p>
-                </div>';
-                    ?>
-                <li class="col-xs-6 col-md-4 col-lg-2"><?php echo $htmlcontent; ?></li><?php
             }
-            ?>
 
-            <!-- <li><input type="button" value="Neu" onclick="window.location.href='/restaurant/create'"/></li>-->
+        $html = $html . '</ul>';
 
-        </ul>
-        <?php
-
+    echo $htmltop . $html;
     }
 }
+?>

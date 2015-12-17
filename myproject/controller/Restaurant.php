@@ -125,8 +125,6 @@ public function create(){
         foreach ($history as $day ){
             if ((date('Y-m-d')) == ($day['date'])){
                 $restaurant = array('exists' => 'true', 'name' => $day['restaurantName']);
-
-
             }
 
         }

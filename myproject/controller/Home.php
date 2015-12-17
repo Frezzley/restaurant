@@ -8,6 +8,8 @@ use Lib;
 require_once BASE . 'views' . DS . 'Home.php';
 require_once BASE . 'lib' . DS . 'DbHandler.php';
     require_once BASE . 'controller' . DS . 'Restaurant.php';
+require_once BASE . 'views' . DS . 'History.php';
+
 
 
 
