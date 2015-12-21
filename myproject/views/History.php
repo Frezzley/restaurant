@@ -23,7 +23,8 @@ class ShowHistory extends View
 
     public function render()
     {
-        $list = $this->vars;
+        $list = $this->vars['list'];
+        $id = $this->vars['id'];
 
         ?>
 
@@ -41,8 +42,17 @@ class ShowHistory extends View
                     //  print_r($list);
                     $date = $day['date'];
                     $Name = $day['restaurantName'];
-                    $html = '
-                    <li>' . $date . ' ' . $Name . '</li>'. $html;
+                    $htmlstart = '
+                    <li>' . $date . ' ' . $Name;
+
+
+                     $htmlmiddle ='<p><a class="btn btn-default" href=" ' . '/restaurant/historyedit/' . $day['historyId'] . '"' . ' role="button">Bearbeiten</a></p>';
+
+
+
+                $htmlend = '</li>'. $html;
+
+                $html = $htmlstart . $htmlmiddle . $htmlend;
 
             }
 

@@ -17,10 +17,13 @@ require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Create.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Show.php';
 require_once BASE . 'views' . DS . 'Restaurant' . DS . 'Detail.php';
+require_once BASE . 'views' . DS . 'Restaurant' . DS . 'historyedit.php';
 
 
-class Restaurant extends Controller{
-public function create(){
+class Restaurant extends Controller
+{
+    public function create()
+    {
 
         if (!empty($_POST)) {
             $restaurant = new Model\Restaurant();
@@ -30,12 +33,11 @@ public function create(){
             $restaurant->setPrice($_POST['Price']);
             /**
              * @var $dbHandler DbHandler
-            */
+             */
             //$dbHandler = new Lib\DbHandler();
             $dbHandler = Lib\DbHandler::getDbHandler();
             $result = $dbHandler->createRestaurant($restaurant);
-            if($result)
-            {
+            if ($result) {
                 header('Location: /restaurant/detail/' . $result);
                 exit;
             };
@@ -45,14 +47,15 @@ public function create(){
             $view->show($view);
             return $view;
         }
-}
+    }
+
     /**
      * @param $id
      */
     public function edit($id)
     {
 
-       // $dbHandler = new Lib\DbHandler();
+        // $dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         $restaurant = $dbHandler->getRestaurant($id);
         if (!empty($_POST)) {
@@ -82,25 +85,24 @@ public function create(){
         }
     }
 
-    public function index ()
+    public function index()
     {
-       // $dbHandler = new Lib\DbHandler();
+        // $dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         //objekte in ein array
         $list = $dbHandler->getRestaurants();
         $view = new View\ShowRestaurant();
-         $view->setVars($list);
+        $view->setVars($list);
         //echo $view->render();
         $view->show($view);
     }
 
     public function detail($id)
     {
-       // $dbHandler = new Lib\DbHandler();
+        // $dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         $restaurant = $dbHandler->getRestaurant($id);
-        if(empty($restaurant))
-        {
+        if (empty($restaurant)) {
             header('Location: /restaurant/create');
             exit;
         }
@@ -112,18 +114,21 @@ public function create(){
         //$view->render();
         $view->show($view);
     }
-    public function getHistory(){
+
+    public function getHistory()
+    {
         $dbHandler = Lib\DbHandler::getDbHandler();
-       $history = $dbHandler->getHistory();
+        $history = $dbHandler->getHistory();
         return $history;
 
     }
 
-    public function getTodaysRestaurant(){
+    public function getTodaysRestaurant()
+    {
         $history = $this->getHistory();
         $restaurant = array('exists' => 'false');
-        foreach ($history as $day ){
-            if ((date('Y-m-d')) == ($day['date'])){
+        foreach ($history as $day) {
+            if ((date('Y-m-d')) == ($day['date'])) {
                 $restaurant = array('exists' => 'true', 'name' => $day['restaurantName']);
             }
 
@@ -132,10 +137,33 @@ public function create(){
 
     }
 
-public function createNewWinner($id){
-    $date = date('Y-m-d');
-    $dbHandler = Lib\DbHandler::getDbHandler();
-    $dbHandler->writeHistory($id,$date);
+    public function createNewWinner($id)
+    {
+        $date = date('Y-m-d');
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $dbHandler->writeHistory($id, $date);
 
-}
+    }
+
+    public function historyEdit($id)
+    {
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        //objekte in ein array
+        $list = $dbHandler->getRestaurants();
+        $vars = array('list' => $list, 'id' => $id);
+        $view = new View\historyedit();
+        $view->setVars($vars);
+        //echo $view->render();
+        $view->show($view);
+    }
+
+    public function changeHistoryRestaurant($restaurantToChange)
+    {
+        $parts = array_filter(explode(',', $restaurantToChange));
+        $restaurantId = $parts[0];
+        $historyId = $parts[1];
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        $dbHandler -> updateHistory($restaurantId,$historyId);
+        header('Location: /home/detail');
+    }
 }

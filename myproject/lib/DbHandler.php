@@ -293,6 +293,13 @@ public function writeHistory($id, $date){
 
     }
 
+    public function updateHistory($restaurantId,$historyId){
+
+        $sql = "UPDATE history SET restaurantId={$restaurantId} WHERE id= {$historyId};";
+
+        static::$dbConnection->query($sql);
+    }
+
 }
 
 ?>
