@@ -34,7 +34,8 @@ class ShowHistory extends View
 <div class="container">
     <div class="row row-offcanvas row-offcanvas-right">';
 
-            $htmltop .= ' <div class="introduction"> Hier finden Sie eine Liste mit den Orten, wo wir gegessen haben. </div><ul>';
+
+            $htmltop .= ' <div class="introduction"> Hier finden Sie eine Liste mit den Orten, wo wir gegessen haben. </div><ul class="list-group">';
             $html = "";
             foreach ($list as $day) {
                 ?>
@@ -43,7 +44,7 @@ class ShowHistory extends View
                     $date = $day['date'];
                     $Name = $day['restaurantName'];
                     $htmlstart = '
-                    <li>' . $date . ' ' . $Name;
+                    <li class="list-group-item"> <p>' . $date . ' ' . $Name . '<p>';
 
 
                      $htmlmiddle ='<p><a class="btn btn-default" href=" ' . '/restaurant/historyedit/' . $day['historyId'] . '"' . ' role="button">Bearbeiten</a></p>';

@@ -43,7 +43,7 @@ class EditUser extends View
   <div class="form-group">
     <label for="inputRestaurant" class="col-sm-2 control-label">Restaurant hinzufuegen</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value="' . $user->getPreferences() . '">
+      <input type="text" class="form-control" name="Preferences" id="inputRestaurant" placeholder="Restaurant" value="">
     </div>
   </div>
   <div class="form-group">
@@ -53,10 +53,10 @@ class EditUser extends View
   </div>
   <div id="content">
   <ul>
-    <li  id="li-template-hidden"> <button type="button" class="btn btn-default btn-lg remove" value="Loeschen"></li>
+    <li id="li-template-hidden"> <button type="button" class="btn btn-default btn-lg remove hide" value="Loeschen"></li>
     ';
 
-    $htmlmiddle = '</ul>';
+        $htmlmiddle = '</ul>';
         $htmlbottom = ' <input type="hidden"  id="template-hidden"/>
     </div>
 
@@ -66,16 +66,17 @@ class EditUser extends View
 
         echo $html;
         foreach ($this->restaurants as $restaurant) {
-                $li = '<li class="restaurant" data-id="';
-                $li .= $restaurant["Id"];
-                $li .= '">';
-                $li .= $restaurant["Name"];
-                $li .= "</br>";
-                $li .= '<button type="button" class="btn btn-default btn-lg remove" value="Loeschen">';
-                $li .= "</li>";
-                echo $li;
+            $li = '<li class="restaurant" data-id="';
+            $li .= $restaurant["Id"];
+            $li .= '">';
+            $li .= '<div class="col-sm-10">';
+            $li .= $restaurant["Name"];
+            $li .= '</div>';
+            $li .= '<button type="button" class="btn btn-default btn-lg remove col-sm-1" value="Loeschen">';
+            $li .= "</li>";
+            echo $li;
 
-            }
+        }
         echo $htmlmiddle;
         foreach ($this->restaurants as $restaurant) {
             $input = '<input type="hidden" class="restaurant" value="';

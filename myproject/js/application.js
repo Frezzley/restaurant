@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var config = {
         source: '/User/restaurantList',
         minLength: 2,
@@ -19,26 +20,39 @@ $(document).ready(function () {
                 template.attr('name', 'restaurant[]');
               //  template.add('data-id ='.ui.item.value);
                 template.attr('data-id', ui.item.value);
+                //console.log(template)
                 appendItem(ui.item.label,ui.item.value);
                 template.removeAttr("id");
+                //template.children().removeClass("hide");
+                //$(template>".btn").removeClass("hide");
+
+                console.log(template.children());
                 $('#template-hidden').parent().append(template);
             }
             $('#inputRestaurant').val("");
-  //          $('#inputRestaurant').value('');
+           // $('#inputRestaurant').value('');
         }
     };
     $('#inputRestaurant').autocomplete(config);
     $(".btn.btn-default.btn-lg.remove").on('click', deleteItem);
+
 });
 
 var appendItem = function (text,value) {
     var ul = $('#content ul');
     var template = ul.find('li:first').clone(true).appendTo(ul);
+    var div = '<div class="col-sm-10">';
+    div += text;
+    div += '</div>';
+    template.prepend(div);
     template.removeAttr("type");
     template.addClass('restaurant');
     template.attr('data-id',value);
-    template.append(text);
+
     template.removeAttr("id");
+    template.removeClass("hide");
+    template.find(".btn").removeClass("hide");
+    template.find(".btn").addClass('col-sm-1');
 }
 var deleteItem = function () {
     var button = $(this);
