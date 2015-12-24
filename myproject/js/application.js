@@ -18,10 +18,10 @@ $(document).ready(function () {
                 template.addClass('restaurant');
                 template.val(ui.item.value);
                 template.attr('name', 'restaurant[]');
-              //  template.add('data-id ='.ui.item.value);
+                //  template.add('data-id ='.ui.item.value);
                 template.attr('data-id', ui.item.value);
                 //console.log(template)
-                appendItem(ui.item.label,ui.item.value);
+                appendItem(ui.item.label, ui.item.value);
                 template.removeAttr("id");
                 //template.children().removeClass("hide");
                 //$(template>".btn").removeClass("hide");
@@ -30,15 +30,16 @@ $(document).ready(function () {
                 $('#template-hidden').parent().append(template);
             }
             $('#inputRestaurant').val("");
-           // $('#inputRestaurant').value('');
+            //$('#inputRestaurant').value('')
+                return false;
         }
     };
     $('#inputRestaurant').autocomplete(config);
-    $(".btn.btn-default.btn-lg.remove").on('click', deleteItem);
+    $(".btn.btn-default.remove").on('click', deleteItem);
 
 });
 
-var appendItem = function (text,value) {
+var appendItem = function (text, value) {
     var ul = $('#content ul');
     var template = ul.find('li:first').clone(true).appendTo(ul);
     var div = '<div class="col-sm-10">';
@@ -47,12 +48,12 @@ var appendItem = function (text,value) {
     template.prepend(div);
     template.removeAttr("type");
     template.addClass('restaurant');
-    template.attr('data-id',value);
+    template.attr('data-id', value);
 
     template.removeAttr("id");
     template.removeClass("hide");
     template.find(".btn").removeClass("hide");
-    template.find(".btn").addClass('col-sm-1');
+    template.find(".btn").addClass('col-sm-2');
 }
 var deleteItem = function () {
     var button = $(this);
@@ -60,7 +61,7 @@ var deleteItem = function () {
     console.log(dataId);
     button.parent().remove();
     $("input[type=hidden]").each(function () {
-       // var InputId = $("input[type='hidden']").data("id");
+        // var InputId = $("input[type='hidden']").data("id");
         console.log($(this));
         console.log($(this).data("id"));
         var InputId = $(this).data("id");

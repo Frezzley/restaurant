@@ -25,7 +25,7 @@ class CreateUser extends View
     </div>
     <input  class="form-control" id="Lastname" name="Lastname" required>
     </div>
-
+<!--
     <div class="form-group">
     <label for="Preferences">
     Preferenzen
@@ -43,7 +43,7 @@ class CreateUser extends View
     </div>
     <input  class="form-control" id="DailyPreference" name="DailyPreference" required>
     </div>
-
+-->
 <div class="form-group">
     <button class="btn btn-default" type="submit" name="submit-button" value="Submit">
     Senden!

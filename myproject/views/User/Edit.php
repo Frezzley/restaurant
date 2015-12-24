@@ -53,7 +53,7 @@ class EditUser extends View
   </div>
   <div id="content">
   <ul>
-    <li id="li-template-hidden"> <button type="button" class="btn btn-default btn-lg remove hide" value="Loeschen"></li>
+    <li id="li-template-hidden"> <button type="button" class="btn btn-default remove hide" value="Loeschen">Löschen</button></li>
     ';
 
         $htmlmiddle = '</ul>';
@@ -72,7 +72,7 @@ class EditUser extends View
             $li .= '<div class="col-sm-10">';
             $li .= $restaurant["Name"];
             $li .= '</div>';
-            $li .= '<button type="button" class="btn btn-default btn-lg remove col-sm-1" value="Loeschen">';
+            $li .= '<button type="button" class="btn btn-default remove col-sm-2" value="Loeschen">Löschen</button>';
             $li .= "</li>";
             echo $li;
 

@@ -23,6 +23,6 @@ class DetailUser extends View
         $user = $this->vars;
 
         /*   $user = $this->vars;*/
-        return '<div class="col-md-2"></div><div class="col-md-8"> ID: ' . $user->getId() . '<br>' . 'Vorname: ' . $user->getFirstName() . '<br>' . 'Nachname: ' . $user->getName() . '<br>' . 'Preferenzen: ' . $user->getPreferences() . '<br>' . 'Taegliche Preferenzen: ' . $user->getDailyPreference() . '</div>';
+        return '<div class="col-md-2"></div><div class="col-md-8"> ID: ' . $user->getId() . '<br>' . 'Vorname: ' . $user->getFirstName() . '<br>' . 'Nachname: ' . $user->getName() . '<br>' /*. 'Preferenzen: ' . $user->getPreferences() . '<br>' . 'Taegliche Preferenzen: ' . $user->getDailyPreference()*/ . '</div>';
     }
 }
