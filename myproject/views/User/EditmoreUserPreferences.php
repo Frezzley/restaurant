@@ -12,17 +12,17 @@ namespace View;
 class Editmore extends View
 {
 
-//public function setVars($params)
-//{
-//$this->vars = $params;
-//}
-
+    public function setVars($user, $restaurants)
+    {
+        $this->user = $user;
+        $this->restaurants = $restaurants;
+    }
 public function render(/*$user, $restaurants*/)
 {
 
-$restaurants = array("auto", "bla2", "42");
-   $this->restaurants = $restaurants;
-//$list = $this->vars;
+    $restaurants = $this->restaurants;
+    $user = $this->user;
+
 
 ?> <ul class="list-inline">
     <?php
@@ -57,10 +57,10 @@ $restaurants = array("auto", "bla2", "42");
     </li>
     <li>
     <div class="col-md-12">
-        <div class="dropdown"> <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Wie oft möchtest du da hin gehen>
+        <div class="dropdown"> <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Wie oft mï¿½chtest du da hin gehen>
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">Täglich</a></li>
+                <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">Tï¿½glich</a></li>
                 <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">jeden 2. Tag</a></li>
                 <li role="presentation" ><a role="menuitem" tabindex="-1" href="#">jeden 3. Tag</a></li>
                 <li role="presentation" class="col-md-2"><a role="menuitem" tabindex="-1" href="#">2x pro Woche</a></li>

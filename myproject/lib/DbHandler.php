@@ -280,26 +280,48 @@ class DbHandler
         return $list;
     }
 
-public function writeHistory($id, $date){
+    public function writeHistory($id, $date)
+    {
 
-    $sql = "INSERT INTO history (restaurantId, date) VALUES ('{$id}', '{$date}'); ";
-    if (static::$dbConnection->query($sql) === FALSE) {
-        return false;
+        $sql = "INSERT INTO history (restaurantId, date) VALUES ('{$id}', '{$date}'); ";
+        if (static::$dbConnection->query($sql) === FALSE) {
+            return false;
+        }
     }
-}
-    public function deleteHistory($date=""){
+
+    public function deleteHistory($date = "")
+    {
         $sql = "Delete from history where date = '{$date}';";
         static::$dbConnection->query($sql);
 
     }
 
-    public function updateHistory($restaurantId,$historyId){
+    public function updateHistory($restaurantId, $historyId)
+    {
 
         $sql = "UPDATE history SET restaurantId={$restaurantId} WHERE id= {$historyId};";
 
         static::$dbConnection->query($sql);
     }
 
-}
 
+    public function getCriterias()
+    {
+        $sql = "select * from criterias";
+        $result = static::$dbConnection->query($sql);
+        $criteria = array();
+        if ($result->num_rows > 0) {
+            foreach ($result as $row) {
+                $criteria['Id'] = $row['Id'];
+                $criteria['Name'] = $row['Name'];
+                $criteria['EvaluationId'] = $row['EvaluationId'];
+
+
+                $list[] = $criteria;
+            }
+        }
+        return $list;
+    }
+
+}
 ?>

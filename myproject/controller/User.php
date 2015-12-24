@@ -11,6 +11,8 @@ require_once BASE . 'views' . DS . 'User' . DS . 'Detail.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Edit.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Show.php';
 require_once BASE . 'views' . DS . 'User' . DS . 'Login.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserCriterias.php';
+require_once BASE . 'views' . DS . 'User' . DS . 'EditmoreUserPreferences.php';
 
 
 /**
@@ -146,9 +148,21 @@ class User extends Controller
         $restaurants = $dbHandler->getRestaurants();
 
         $view = new View\Editmore();
-        echo $view->render($user, $restaurants);
+        $view->setVars($user, $restaurants);
+        echo $view->render();
     }
 
+    public function editcriterias($ID){
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        //objekte in ein array
+        $user = $dbHandler->getUser($ID);
+        $criterias = $dbHandler->getCriterias();
+
+        $view = new View\EditmoreUserCriterias();
+        $view->setVars($user, $criterias);
+        echo $view->render();
+    }
 
     public function login()
     {

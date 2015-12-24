@@ -12,14 +12,15 @@ namespace View;
 class EditmoreUserCriterias extends View
 {
 
-//public function setVars($params)
-//{
-//$this->vars = $params;
-//}
-
-    public function render($user, $criterias)
+    public function setVars($user, $criterias)
     {
-        $this->$criterias = $criterias;
+        $this->user = $user;
+        $this->criterias = $criterias;
+    }
+
+    public function render()
+    {
+        $criterias = $this->criterias;
 //$list = $this->vars;
 
         ?>
@@ -29,43 +30,25 @@ class EditmoreUserCriterias extends View
             foreach ($criterias as $criteria) {
                 ?>
                 <li>
-
-                    <ul>
-                        <li>Distanz
-                            <form>
+                    <div class="row">
+                            <div class="col-sm-12">
                                 <?php
-                                // echo Criteria[criteria];
-                                echo criteria ?>
-                                <ul>
-                                    <li><input type="radio" name="restaurant_rating" value="criteria[criteria][rating]">
-                                    </li>
-                                    criteria[][]
-                                </ul>
-                            </form>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" id="menu1" type="button"
-                                        data-toggle="dropdown">Wie oft möchtest du da hin gehen
-                                    <span class="caret"></span></button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Not important</a>
-                                    </li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">a bit
-                                            important</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">neutral</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">important</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">very important</a>
-                                    </li>
-                                </ul>
+                                echo $criteria["Name"];
+                                ?>
+                                <div class="input-group">
+                                    <input type="radio"  name="<?php echo $criteria["Name"]; ?>" value="1"><label> Not important</label>
+                                    <input type="radio"  name="<?php echo $criteria["Name"]; ?>" value="2"><label>a bit important</label>
+                                    <input type="radio"  name="<?php echo $criteria["Name"]; ?>" value="3"><label> neutral</label>
+                                    <input type="radio"  name="<?php echo $criteria["Name"]; ?>" value="4"><label> important</label>
+                                    <input type="radio"  name="<?php echo $criteria["Name"]; ?>" value="5"><label>very important</label>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-
+                        </div>
                 </li>
             <?php } ?>
         </ul>
         <?php
+
     }
 }
 
