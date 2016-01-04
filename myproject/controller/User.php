@@ -164,6 +164,18 @@ class User extends Controller
         echo $view->render();
     }
 
+    public function editpreferences($ID){
+        //$dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getDbHandler();
+        //objekte in ein array
+        $user = $dbHandler->getUser($ID);
+        $preferences = $dbHandler->getPreferences($ID);
+
+        $view = new View\Editmore();
+        $view->setVars($user, $preferences);
+        echo $view->render();
+    }
+
     public function login()
     {
         $view = new View\LogIn();

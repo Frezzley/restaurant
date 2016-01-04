@@ -323,5 +323,23 @@ class DbHandler
         return $list;
     }
 
+    public function getPreferences($id)
+    {
+
+        $sql = "select * from  restaurant re inner JOIN user_restaurant ur on re.Id = ur.restaurant where ur.user = {$id}";
+        $result = static::$dbConnection->query($sql);
+        $list = array();
+        $Restaurants = array();
+        if ($result->num_rows > 0) {
+            foreach ($result as $row) {
+                $Restaurants['Id'] = $row['Id'];
+                $Restaurants['Name'] = $row['Name'];
+                $Restaurants['rating'] = $row['rating'];
+                $list[] = $Restaurants;
+            }
+        }
+        return $list;
+    }
+
 }
 ?>

@@ -21,7 +21,7 @@ class ajax
 
     public function restaurantList()
     {
-        $dbHandler = new Lib\DbHandler();
+        $dbHandler = Lib\DbHandler::getDbHandler();
         $restaurants = $dbHandler->getRestaurants();
 
         /*   $restaurants = array(
