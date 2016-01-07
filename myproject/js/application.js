@@ -31,7 +31,7 @@ $(document).ready(function () {
             }
             $('#inputRestaurant').val("");
             //$('#inputRestaurant').value('')
-                return false;
+            return false;
         }
     };
     $('#inputRestaurant').autocomplete(config);

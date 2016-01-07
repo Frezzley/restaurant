@@ -152,7 +152,7 @@ class User extends Controller
         echo $view->render();
     }
 
-    public function editcriterias($ID){
+ /*   public function editcriterias($ID){
         //$dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
         //objekte in ein array
@@ -163,17 +163,27 @@ class User extends Controller
         $view->setVars($user, $criterias);
         echo $view->render();
     }
-
+*/
     public function editpreferences($ID){
         //$dbHandler = new Lib\DbHandler();
         $dbHandler = Lib\DbHandler::getDbHandler();
-        //objekte in ein array
         $user = $dbHandler->getUser($ID);
+     /*   if (!empty($_POST)) {
+            $user->setFirstName($_POST['Firstname']);
+            $user->setName($_POST['Lastname']);
+            //$user->setPreferences($_POST['Preferences']);
+            if (!empty($_POST['restaurant'])) {
+                $user->setPreferedRestaurantIds($_POST['restaurant']);
+            }*/
+        //objekte in ein array
+
+        $criterias = $dbHandler->getCriterias();
         $preferences = $dbHandler->getPreferences($ID);
 
         $view = new View\Editmore();
-        $view->setVars($user, $preferences);
-        echo $view->render();
+        $view->setVars($user, $preferences, $criterias);
+        //echo $view->render();
+        $view->show($view);
     }
 
     public function login()
